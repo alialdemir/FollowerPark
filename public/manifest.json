@@ -1,0 +1,40 @@
+{
+    "author": "Ali Aldemir",
+    "background": {
+        "scripts": [
+            "main.js"
+        ]
+    },
+    "browser_action": {
+        "default_title": "FollowerPark"
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-bfWzfxE6viwRJzKroi9VJpG8JQm1iw3+o0Fc2fA3/jE=' object-src 'self'",
+    "description": "Follow (or unfollow) users on Instagram",
+    "icons": {
+        "128": "./logo.png"
+    },
+    "manifest_version": 2,
+    "name": "FollowerPark",
+    "permissions": [
+        "background",
+        "storage",
+        "tabs",
+        "cookies",
+        "identity",
+        "unlimitedStorage",
+        "webRequest",
+        "webRequestBlocking",
+        "*://*.instagram.com/"
+    ],
+    "short_name": "FollowerPark",
+    "version": "1.0.0",
+    "content_scripts": [{
+        "matches": [
+            "https://*/*"
+        ],
+        "js": [
+            "main.js"
+        ],
+        "all_frames": true
+    }]
+}
