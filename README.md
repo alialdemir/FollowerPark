@@ -1,4 +1,5 @@
-# modern
+# FollowerPark
+It automates the process of following and removing users via Instagram.
 
 ## Project setup
 ```
