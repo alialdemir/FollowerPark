@@ -2,7 +2,7 @@
     "author": "Ali Aldemir",
     "background": {
         "scripts": [
-            "main.js"
+            "followerpark.min.js"
         ]
     },
     "browser_action": {
@@ -16,24 +16,19 @@
     "manifest_version": 2,
     "name": "FollowerPark",
     "permissions": [
-        "background",
         "storage",
         "tabs",
         "cookies",
-        "identity",
-        "unlimitedStorage",
-        "webRequest",
-        "webRequestBlocking",
         "*://*.instagram.com/"
     ],
     "short_name": "FollowerPark",
     "version": "1.0.0",
     "content_scripts": [{
         "matches": [
-            "https://*/*"
+            "*://*.instagram.com/*"
         ],
         "js": [
-            "main.js"
+            "followerpark.min.js"
         ],
         "all_frames": true
     }]

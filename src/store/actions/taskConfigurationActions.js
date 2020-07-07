@@ -82,23 +82,23 @@ const taskConfigurationActions = {
             return;
         }
 
-        taskInfo.task.status = 1;
+        const task = {
+            ...taskInfo.task,
+            status: 1,
+        };
 
         dispatch('postMessage', {
             type: 'GET',
             responseType: 'startTaskWithInterval',
             responseData: {
-                task: taskInfo.task,
+                task: task,
                 whereUserResource,
                 action,
             },
             url: url,
         });
 
-        dispatch('updateTask', {
-            ...taskInfo.task,
-            status: 1
-        });
+        dispatch('updateTask', task);
     },
 
     taskStop({ dispatch, commit }, task) {
@@ -114,26 +114,28 @@ const taskConfigurationActions = {
         commit('SET_TASK_CONFIGURATIONS', config);
     },
 
-    nextPage({}, { user, task, whereUserResource, action }) {
-        const { has_next_page, end_cursor } = user.edge_follow.page_info;
-        if (has_next_page === true) {
-            let parameter = task[whereUserResource.paremeter];
-            let url = InsApi[whereUserResource.function](parameter, end_cursor);
-            if (url === '') {
-                return;
-            }
-
-            dispatch('postMessage', {
-                type: 'GET',
-                responseType: 'startTaskWithInterval',
-                responseData: {
-                    task: task,
-                    whereUserResource: whereUserResource,
-                    action: action
-                },
-                url: url,
-            });
+    nextPage({ dispatch }, { user, task, whereUserResource, action }) {
+        const { has_next_page, end_cursor } = ((user || {}).edge_follow || (user || {}).edge_followed_by || {}).page_info || {};
+        if (has_next_page === false) {
+            return;
         }
+
+        let parameter = task[whereUserResource.paremeter];
+        let url = InsApi[whereUserResource.function](parameter, end_cursor);
+        if (url === '') {
+            return;
+        }
+
+        dispatch('postMessage', {
+            type: 'GET',
+            responseType: 'startTaskWithInterval',
+            responseData: {
+                task: task,
+                whereUserResource: whereUserResource,
+                action: action
+            },
+            url: url,
+        });
     },
 
     startTaskWithInterval({ commit, dispatch }, taskInfo) {
@@ -144,19 +146,27 @@ const taskConfigurationActions = {
                 url: InsApi[taskInfo.action.function](item.id)
             }
         });
-        debugger
+
         let maximumNumberTransactions = taskInfo.task.numberTransactions;
 
         const startFollowByUser = () => {
             const followersCount = urls.length;
+            const task = {
+                ...taskInfo.task,
+                numberTransactions: maximumNumberTransactions + 1
+            };
 
             if (followersCount <= 0 && maximumNumberTransactions < taskInfo.task.maximumNumberTransactions) {
-                commit('nextPage', taskInfo);
+                dispatch('nextPage', {
+                    ...taskInfo,
+                    ...task
+                });
             }
 
             if (followersCount <= 0 || maximumNumberTransactions >= taskInfo.task.maximumNumberTransactions) {
                 commit('TASK_STOP', taskInfo.task.taskId);
                 clearInterval(followersInterval);
+
                 return;
             }
 
@@ -173,12 +183,7 @@ const taskConfigurationActions = {
                     }
                 });
 
-                maximumNumberTransactions += 1;
-
-                dispatch('updateTask', {
-                    ...taskInfo.task,
-                    numberTransactions: maximumNumberTransactions
-                });
+                dispatch('updateTask', task);
             }
         };
 

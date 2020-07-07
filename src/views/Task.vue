@@ -11,8 +11,8 @@
     <vs-table stripe :data="tasks">
       <template slot="thead">
         <vs-th style="width:50px"></vs-th>
-        <vs-th>Action</vs-th>
         <vs-th>Status</vs-th>
+        <vs-th>Action</vs-th>
         <vs-th>Resource</vs-th>
         <vs-th>Total</vs-th>
       </template>
@@ -42,13 +42,13 @@
                     @click="popupActivo4 = true; selectedTask = item"
                   >Detail</vs-button>
                 </vs-dropdown-item>
-                <vs-dropdown-item @click="$store.dispatch('deleteTask',item.taskId)" divider>
+                <vs-dropdown-item divider>
                   <vs-button
                     size="small"
                     color="danger"
                     :disabled="item.status !== 0"
                     type="flat"
-                    @click="$store.dispatch('deleteTask',item.taskId)"
+                    @click="deleteTask(item)"
                   >Delete</vs-button>
                 </vs-dropdown-item>
               </vs-dropdown-menu>
@@ -95,6 +95,7 @@ export default {
 
     ...mapGetters(['taskActions', 'resources'])
   },
+
   methods: {
     changeTaskStatus(task) {
       if (task.status === 0) {
@@ -110,6 +111,29 @@ export default {
 
     closeCardAnimation(card) {
       card.removeRefreshAnimation(3000);
+    },
+
+    deleteTask(task) {
+      this.selectedTask = task;
+
+      this.$vs.dialog({
+        type: 'confirm',
+        'accept-text': 'Delete',
+        color: 'danger',
+        title: `Delete task?`,
+        text: 'Are you sure you want to delete the task?',
+        accept: this.deleteTaskAccept
+      });
+    },
+
+    deleteTaskAccept() {
+      this.$vs.notify({
+        color: 'success',
+        title: 'Deleted task',
+        text: 'The selected task was successfully deleted'
+      });
+
+      this.$store.dispatch('deleteTask', this.selectedTask.taskId);
     }
   },
 
@@ -117,8 +141,9 @@ export default {
     this.$vs.loading({
       text: 'Connecting to your Instagram account...'
     });
+
     setTimeout(() => {
-      this.$store.dispatch('messageListener'); //loading
+      this.$store.dispatch('messageListener');
       this.$store.dispatch('getCurrentUser');
       this.$store.dispatch('initDatabase');
 

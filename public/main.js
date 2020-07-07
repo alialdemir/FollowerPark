@@ -11,7 +11,7 @@ if ((location.host || '').indexOf('instagram') !== -1) {
        window.parent.postMessage(message, '*');
    };
 
-   postMessage({ type: 'scu', data: window._sharedData.config });
+   postMessage({ type: 'scu', data: ((window || {})._sharedData || {}).config || {} });
 
    window.addEventListener('message', async(event) => {
        const { type, url, responseType, responseData } = ((event || {}).data || {});
