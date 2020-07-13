@@ -1,7 +1,11 @@
 # FollowerPark
 It automates the process of following and unfollow users via Instagram.
 
-Install the chrome plugin to run. https://chrome.google.com/webstore/detail/followerpark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0
+Install the chrome plugin to run.
+
+```
+https://chrome.google.com/webstore/detail/followerpark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0
+```
 
 ## Project setup
 ```
