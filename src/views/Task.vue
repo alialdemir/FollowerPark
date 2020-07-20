@@ -72,7 +72,7 @@
       <fp-task-tabs
         :task="selectedTask"
         :logs="$store.state.logs"
-        @getLog="$store.dispatch('getLog', selectedTask.taskId)"
+        @getLog="$store.dispatch('getLog', selectedTask.id)"
       />
     </vs-popup>
   </vx-card>
@@ -133,7 +133,7 @@ export default {
         text: 'The selected task was successfully deleted'
       });
 
-      this.$store.dispatch('deleteTask', this.selectedTask.taskId);
+      this.$store.dispatch('deleteTask', this.selectedTask.id);
     }
   },
 
@@ -143,18 +143,12 @@ export default {
     });
 
     setTimeout(() => {
-      this.$store.dispatch('messageListener');
-      this.$store.dispatch('getCurrentUser');
-      this.$store.dispatch('initDatabase');
-
-      setTimeout(() => {
-        this.$store.dispatch('getTask', {
-          whereUserResources: this.$store.state.whereUserResources,
-          taskActions: this.$store.state.taskActions
-        });
-        this.$vs.loading.close();
-      }, 500);
-    }, 500);
+      this.$store.dispatch('getTask', {
+        whereUserResources: this.$store.state.whereUserResources,
+        taskActions: this.$store.state.taskActions
+      });
+      this.$vs.loading.close();
+    }, 1000);
   }
 };
 </script>

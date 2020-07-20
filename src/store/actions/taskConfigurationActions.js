@@ -58,10 +58,20 @@ const getObjBywhereUserResource = (item, resultObject, actionId) => {
 const taskConfigurationActions = {
 
     taskStart({ dispatch }, taskInfo) {
-        if (!taskInfo || !taskInfo.task.taskId) {
+        if (!taskInfo || !taskInfo.task.id) {
             return;
         }
+        /*
 
+                dispatch('postMessage', {
+                    type: 'dm',
+
+                    "thread_id": "340282366841710300949128180005640725437",
+                    "text": "vuejs",
+                    url: '',
+                });
+
+                return;*/
         const action = taskInfo
             .taskActions
             .filter(item => item.id === taskInfo.task.action)
@@ -102,7 +112,7 @@ const taskConfigurationActions = {
     },
 
     taskStop({ dispatch, commit }, task) {
-        commit('TASK_STOP', task.taskId);
+        commit('TASK_STOP', task.id);
 
         dispatch('updateTask', {
             ...task,
@@ -110,9 +120,6 @@ const taskConfigurationActions = {
         });
     },
 
-    setTaskConfigurations({ commit }, config) {
-        commit('SET_TASK_CONFIGURATIONS', config);
-    },
 
     nextPage({ dispatch }, { user, task, whereUserResource, action }) {
         const { has_next_page, end_cursor } = ((user || {}).edge_follow || (user || {}).edge_followed_by || {}).page_info || {};
@@ -121,6 +128,10 @@ const taskConfigurationActions = {
         }
 
         let parameter = task[whereUserResource.paremeter];
+        if (!parameter) {
+            return;
+        }
+
         let url = InsApi[whereUserResource.function](parameter, end_cursor);
         if (url === '') {
             return;
@@ -151,20 +162,23 @@ const taskConfigurationActions = {
 
         const startFollowByUser = () => {
             const followersCount = urls.length;
+
+            maximumNumberTransactions += 1;
+
             const task = {
                 ...taskInfo.task,
-                numberTransactions: maximumNumberTransactions + 1
+                numberTransactions: maximumNumberTransactions
             };
 
             if (followersCount <= 0 && maximumNumberTransactions < taskInfo.task.maximumNumberTransactions) {
                 dispatch('nextPage', {
                     ...taskInfo,
-                    ...task
+                    task
                 });
             }
 
             if (followersCount <= 0 || maximumNumberTransactions >= taskInfo.task.maximumNumberTransactions) {
-                commit('TASK_STOP', taskInfo.task.taskId);
+                commit('TASK_STOP', taskInfo.task.id);
                 clearInterval(followersInterval);
 
                 return;
@@ -179,7 +193,7 @@ const taskConfigurationActions = {
                     responseData: {
                         ...item,
                         actionId: taskInfo.action.id,
-                        taskId: taskInfo.task.taskId
+                        id: taskInfo.task.id
                     }
                 });
 
@@ -192,30 +206,43 @@ const taskConfigurationActions = {
 
         commit('TASK_START', {
             interval: followersInterval,
-            taskId: taskInfo.task.taskId
+            id: taskInfo.task.id
 
         });
     },
 
-    async followByUserResource({ dispatch }, { username, whereUserResourceId }) {
+    followByUserResource({ dispatch }, { username, whereUserResourceId }) {
         if (!username) {
             return;
         }
 
         const url = InsApi.getProfileByUsername(username);
-        const response = await fetch(url);
-        const data = await response.json();
+        dispatch('postMessage', {
+            type: 'GET',
+            url: url,
+            responseType: 'setUserIdTaskConfigurations',
+            responseData: {
+                whereUserResourceId
+            }
+        });
+    },
 
-        const user = (((data || {}).graphql || {}).user || {});
-        const userId = user.id;
-        if (!userId) {
+    setUserIdTaskConfigurations({ dispatch }, data) {
+        if (!data || data.user) {
             return;
         }
 
+        const user = (((data || {}).graphql || {}).user || {});
+        const userId = user.id || '';
+
         dispatch('setTaskConfigurations', {
             userId,
-            postsShortCode: getPostsShortCode(whereUserResourceId, user)
+            postsShortCode: getPostsShortCode(data.whereUserResourceId, user)
         });
+    },
+
+    setTaskConfigurations({ commit }, config) {
+        commit('SET_TASK_CONFIGURATIONS', config);
     },
 }
 

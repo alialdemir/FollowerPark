@@ -2,11 +2,19 @@
 
  const currentUserActions = {
 
-     getCurrentUser({ dispatch }) {
+     getCurrentUser({}) {
          followerParkIframe.setAttribute('id', 'FollowerParkIframe');
          followerParkIframe.style.display = 'none';
+         /*
+         followerParkIframe.style.position = 'fixed';
+         followerParkIframe.style.height = '736px';
+         followerParkIframe.style.width = '414px';
+         followerParkIframe.style.left = '0';
+         followerParkIframe.style.top = '0';
+         followerParkIframe.style.zIndex = '99999'; *
+         */
 
-         followerParkIframe.src = 'https://www.instagram.com/p/B2cFIzbHf5I/embed';
+         followerParkIframe.src = 'http://www.instagram.com/';
          document.body.appendChild(followerParkIframe);
      },
 

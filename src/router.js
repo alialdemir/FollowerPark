@@ -45,6 +45,18 @@ const router = new Router({
                         import ('./views/Task.vue')
                 },
                 {
+                    path: '/user-lists',
+                    name: 'UserLists',
+                    component: () =>
+                        import ('./views/UserLists.vue')
+                },
+                {
+                    path: '/direct-messages',
+                    name: 'DirectMessages',
+                    component: () =>
+                        import ('./views/DirectMessages.vue')
+                },
+                {
                     path: '/index.html',
                     name: 'task',
                     component: () =>

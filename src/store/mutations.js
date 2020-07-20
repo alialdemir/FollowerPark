@@ -1,6 +1,8 @@
 import taskConfigurationsMutations from './mutations/taskConfigurationsMutations';
 import indexedDMutations from './mutations/indexedDMutations';
 import logMutations from './mutations/logMutations';
+import userListsMutations from './mutations/userListsMutations';
+import directMessagesMutations from './mutations/directMessagesMutations';
 import { updateField } from 'vuex-map-fields';
 
 const mutations = {
@@ -8,7 +10,8 @@ const mutations = {
     ...taskConfigurationsMutations,
     ...indexedDMutations,
     ...logMutations,
-
+    ...userListsMutations,
+    ...directMessagesMutations,
 
     // /////////////////////////////////////////////
     // COMPONENTS

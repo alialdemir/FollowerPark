@@ -194,24 +194,23 @@ const myStates = {
     }, {
         id: 2,
         text: 'Mutual',
-        icon: 'UserMinusIcon',
+        icon: 'ShuffleIcon',
         disabled: false
     }, {
         id: 3,
         text: 'One sided',
-        icon: 'user-circle',
-        disabled: false
-    }, {
-        id: 4,
-        text: 'Hidden',
-        icon: 'hide',
+        icon: 'UserIcon',
         disabled: false
     }, {
         id: 5,
         text: 'List of blocks',
-        icon: 'block',
+        icon: 'UsersIcon',
         disabled: false
     }, ],
+
+    // Lists
+    myUserLists: [],
+    directMessages: []
 }
 
 // /////////////////////////////////////////////

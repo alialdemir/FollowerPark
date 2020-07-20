@@ -1,48 +1,33 @@
+import { getItems } from './indexedDBAction';
+
+const dbName = 'Logs';
+
 const logDBAction = {
 
-    addNewLog({}, log) {
-        let tx = window.db.transaction(['Logs'], 'readwrite');
-        let store = tx.objectStore('Logs');
-
-        store.add(log);
-
-        tx.onerror = (event) => console.log('error storing note ' + event.target.errorCode);
+    addNewLog({ dispatch }, log) {
+        dispatch('addDb', {
+            dbName,
+            ...log,
+        });
     },
 
-    getLog({ commit }, taskId) {
-        var trans = window.db.transaction(["Logs"], "readwrite");
-        var store = trans.objectStore("Logs");
+    async getLog({ commit }, id) {
+        const logs = await getItems(dbName);
 
-        var keyRange = IDBKeyRange.lowerBound(0);
-        var cursorRequest = store.openCursor(keyRange);
-        var logs = [];
-        cursorRequest.onsuccess = function(e) {
-            var result = e.target.result;
-            if (!!result == false) {
-                commit('SET_LOGS', logs.filter(log => log.taskId === taskId).reverse());
-                return;
-            }
-
-            logs.push({
-                ...result.value,
-                logId: result.key
-            })
-
-            result.continue();
-        };
+        commit('SET_LOGS', logs.filter(log => log.id === id).reverse());
     },
 
-    updateLog({}, log) {
-        window.db
-            .transaction(['Logs'], "readwrite")
-            .objectStore('Logs')
-            .put({...log }, log.logId);
+    updateLog({ dispatch }, log) {
+        dispatch('updateDb', {
+            dbName,
+            ...log,
+        });
     },
 
-    deleteLog({}, taskId) {
-        var range = IDBKeyRange.bound(taskId, taskId + "\uffff");
-        var trans = window.db.transaction(["Logs"], "readwrite");
-        var store = trans.objectStore("Logs");
+    deleteLog({}, id) {
+        var range = IDBKeyRange.bound(id, id + "\uffff");
+        var trans = window.db.transaction([dbName], "readwrite");
+        var store = trans.objectStore(dbName);
 
         var index = store.index("taskId");
         index.openCursor(range).onsuccess = function(e) {

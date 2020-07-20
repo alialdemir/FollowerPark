@@ -1,5 +1,35 @@
 let dbReq;
 
+export function getItems(dbName) {
+    return new Promise((resolve) => {
+        const store = window
+            .db
+            .transaction([dbName], "readwrite")
+            .objectStore(dbName);
+
+        const keyRange = IDBKeyRange.lowerBound(0);
+        const cursorRequest = store.openCursor(keyRange);
+
+        const items = [];
+
+        cursorRequest.onsuccess = function(e) {
+            const result = e.target.result;
+            if (!!result == false) {
+                resolve(items.reverse());
+
+                return;
+            }
+
+            items.push({
+                ...result.value,
+                id: result.key
+            })
+
+            result.continue();
+        };
+    });
+};
+
 const indexedDBAction = {
 
     initDatabase() {
@@ -7,103 +37,59 @@ const indexedDBAction = {
         dbReq.onupgradeneeded = function(event) {
             window.db = event.target.result;
 
-            if (!window.db.objectStoreNames.contains('Tasks')) { // if there's no "books" store
+            if (!window.db.objectStoreNames.contains('Tasks')) {
                 window.db.createObjectStore('Tasks', { autoIncrement: true });
-            };
+            }
 
-            if (!window.db.objectStoreNames.contains('Logs')) { // if there's no "books" store
+            if (!window.db.objectStoreNames.contains('Logs')) {
                 const objectStore = window.db.createObjectStore('Logs', { keyPath: "id", autoIncrement: true });
-                objectStore.createIndex("taskId", "taskId", { unique: false });
-            };
+                objectStore.createIndex("taskId", "id", { unique: false });
+            }
+
+            if (!window.db.objectStoreNames.contains('UserLists')) {
+                window.db.createObjectStore('UserLists', { autoIncrement: true });
+            }
+
+            if (!window.db.objectStoreNames.contains('DirectMessages')) {
+                window.db.createObjectStore('DirectMessages', { autoIncrement: true });
+            }
+
         }
 
         dbReq.onsuccess = (event) => window.db = event.target.result;
         dbReq.onerror = (event) => console.log('error opening database ' + event.target.errorCode);
     },
 
-    addNewTask({}, task) {
-        let tx = window.db.transaction(['Tasks'], 'readwrite');
-        let store = tx.objectStore('Tasks');
+    addDb({}, item) {
+        let tx = window.db.transaction([item.dbName], 'readwrite');
+        let store = tx.objectStore(item.dbName);
 
-        store.add({
-            ...task,
-            status: 0
-        });
+        delete item.dbName;
+        delete item.id;
+
+        store.add(item);
 
         tx.onerror = (event) => console.log('error storing note ' + event.target.errorCode);
     },
 
-    getTask({ commit, dispatch }, { whereUserResources, taskActions }) {
-        const trans = window.db.transaction(["Tasks"], "readwrite");
-        const store = trans.objectStore("Tasks");
+    updateDb({}, item) {
+        const trans = window.db.transaction([item.dbName], "readwrite");
+        const store = trans.objectStore(item.dbName);
 
-        const keyRange = IDBKeyRange.lowerBound(0);
-        const cursorRequest = store.openCursor(keyRange);
-        const tasks = [];
-        cursorRequest.onsuccess = function(e) {
-            const result = e.target.result;
-            if (!!result == false) {
-                commit('SET_TASK', tasks.reverse());
+        delete item.dbName;
 
-                setTimeout(() => {
-                    const activeTasks = tasks.filter((item) => item.status === 1);
-                    for (let i = 0; i < activeTasks.length; i++) {
-                        const task = activeTasks[i];
-
-                        dispatch('taskStart', {
-                            task,
-                            whereUserResources,
-                            taskActions
-                        });
-                    }
-
-                }, 1000);
-
-                return;
-            }
-
-            tasks.push({
-                ...result.value,
-                taskId: result.key
-            })
-
-            result.continue();
-        };
+        store.put({...item }, item.id);
     },
 
-    updateTask({ commit }, task) {
-        const trans = window.db.transaction(["Tasks"], "readwrite");
-        const store = trans.objectStore("Tasks");
-        store.put({...task }, task.taskId);
-
-        const keyRange = IDBKeyRange.lowerBound(0);
-        const cursorRequest = store.openCursor(keyRange);
-        const tasks = [];
-        cursorRequest.onsuccess = function(e) {
-            const result = e.target.result;
-            if (!!result == false) {
-                commit('SET_TASK', tasks.reverse());
-                return;
-            }
-
-            tasks.push({
-                ...result.value,
-                taskId: result.key
-            })
-
-            result.continue();
-        };
-    },
-
-    deleteTask({ commit, dispatch }, taskId) {
+    deleteDb({}, item) {
         window.db
-            .transaction(["Tasks"], "readwrite")
-            .objectStore("Tasks")
-            .delete(taskId);
+            .transaction([item.dbName], "readwrite")
+            .objectStore(item.dbName)
+            .delete(item.id);
+    },
 
-        commit('DELETE_TASK', taskId);
-        dispatch('deleteLog', taskId);
-    }
+
+
 }
 
 export default indexedDBAction

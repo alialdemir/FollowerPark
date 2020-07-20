@@ -9,13 +9,19 @@
 import currentUserAction from './actions/currentUserAction';
 import indexedDBAction from './actions/indexedDBAction';
 import logAction from './actions/logAction';
+import userListsActions from './actions/userListsActions';
 import taskConfigurationActions from './actions/taskConfigurationActions';
+import taskDBAction from './actions/taskDBAction';
+import directMessagesAction from './actions/directMessagesAction';
 
 const actions = {
     ...currentUserAction,
     ...taskConfigurationActions,
     ...indexedDBAction,
     ...logAction,
+    ...userListsActions,
+    ...taskDBAction,
+    ...directMessagesAction,
 
     // /////////////////////////////////////////////
     // COMPONENTS

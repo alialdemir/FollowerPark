@@ -23,7 +23,7 @@
           color="warning"
           type="filled"
           target="_blank"
-          href="https://contestpark.com/"
+          href="https://chrome.google.com/webstore/detail/followerpark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0"
         >GET IT FOR FREE</vs-button>
 
         <router-link tag="div" to="/" class="vx-logo cursor-pointer mx-auto flex items-center">

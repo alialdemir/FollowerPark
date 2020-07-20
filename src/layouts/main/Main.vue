@@ -283,6 +283,12 @@ export default {
         : this.navbarColor;
     this.updateNavbarColor(color);
     this.setNavMenuVisibility(this.$store.state.mainLayoutType);
+
+    setTimeout(() => {
+      this.$store.dispatch('messageListener');
+      this.$store.dispatch('getCurrentUser');
+      this.$store.dispatch('initDatabase');
+    }, 500);
   }
 };
 </script>

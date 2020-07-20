@@ -56,3 +56,10 @@ export function follow(userId) {
 export function unfollow(userId) {
     return `${insUrl}/web/friendships/${userId}/unfollow/`;
 }
+
+export function createGroupThread(userId) {
+    return {
+        url: `${insUrl}/direct_v2/web/create_group_thread/`,
+        data: `recipient_users=%5B%22${userId}%22%5D`
+    };
+}

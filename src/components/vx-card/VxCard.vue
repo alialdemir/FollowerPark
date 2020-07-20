@@ -51,7 +51,7 @@
               @click="addCard"
               type="filled"
               v-if="actionButtons || addCardAction"
-            >Create Task</vs-button>
+            >{{newButtonText}}</vs-button>
 
             <feather-icon
               @click="toggleContent"
@@ -138,6 +138,10 @@ export default {
     actionButtonsColor: {
       type: String,
       default: 'success'
+    },
+    newButtonText: {
+      type: String,
+      default: 'Create Task'
     },
     codeToggler: {
       type: Boolean,

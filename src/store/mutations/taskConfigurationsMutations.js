@@ -14,7 +14,7 @@ const taskConfigurationsMutations = {
     },
 
     TASK_START(state, taskInfo) {
-        const runningTaskIndex = state.tasks.map((item) => item.taskId).indexOf(taskInfo.taskId);
+        const runningTaskIndex = state.tasks.map((item) => item.id).indexOf(taskInfo.id);
         if (runningTaskIndex >= 0) {
             state.tasks[runningTaskIndex] = Object.assign(state.tasks[runningTaskIndex], { status: 1 });
 
@@ -24,12 +24,12 @@ const taskConfigurationsMutations = {
         }
     },
 
-    TASK_STOP(state, taskId) {
-        const runningTaskIndex = state.tasks.map((item) => item.taskId).indexOf(taskId);
+    TASK_STOP(state, id) {
+        const runningTaskIndex = state.tasks.map((item) => item.id).indexOf(id);
         if (runningTaskIndex >= 0) {
             state.tasks[runningTaskIndex] = Object.assign(state.tasks[runningTaskIndex], { status: 0 });
 
-            const taskInterval = state.runningTasksInterval.filter((item) => item.taskId === taskId)[0];
+            const taskInterval = state.runningTasksInterval.filter((item) => item.id === id)[0];
             if (taskInterval) {
                 clearInterval(taskInterval.interval);
                 state.runningTasksInterval.splice(taskInterval, 1);

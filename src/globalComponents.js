@@ -24,6 +24,8 @@ import FpChooseUnfollowOption from './components/task-wizard-steps/FpChooseUnfol
 import FpChooseUnfollowUserCount from './components/task-wizard-steps/FpChooseUnfollowUserCount'
 import FpTaskTabs from './components/task-detail/FpTaskTabs'
 import FpTaskLogs from './components/task-detail/FpTaskLogs'
+import FpCreateUserList from './components/my-lists/FpCreateUserList'
+import FpCreateDirectMessage from './components/my-lists/FpCreateDirectMessage'
 
 Vue.component(VxTooltip.name, VxTooltip)
 Vue.component(VxCard.name, VxCard)
@@ -40,6 +42,8 @@ Vue.component(FpChooseUnfollowOption.name, FpChooseUnfollowOption)
 Vue.component(FpChooseUnfollowUserCount.name, FpChooseUnfollowUserCount)
 Vue.component(FpTaskTabs.name, FpTaskTabs)
 Vue.component(FpTaskLogs.name, FpTaskLogs)
+Vue.component(FpCreateUserList.name, FpCreateUserList)
+Vue.component(FpCreateDirectMessage.name, FpCreateDirectMessage)
 
 
 // v-select component

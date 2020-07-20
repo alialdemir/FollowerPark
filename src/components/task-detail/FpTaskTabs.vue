@@ -2,7 +2,7 @@
   <vs-tabs>
     <vs-tab @click="onChangeTab('detail')" label="Detail">
       <div class="con-tab-ejemplo">
-        <vs-list-item v-if="task.taskId" title="Task Id" :subtitle="`${task.taskId}`"></vs-list-item>
+        <vs-list-item v-if="task.id" title="Task Id" :subtitle="`${task.id}`"></vs-list-item>
 
         <vs-list-item title="Task Status" :subtitle="task.status === 1 ? 'Running': 'Stopped'"></vs-list-item>
 

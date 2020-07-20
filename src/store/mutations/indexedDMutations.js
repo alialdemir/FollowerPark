@@ -4,8 +4,8 @@ const indexedDMutations = {
         state.tasks = tasks;
     },
 
-    DELETE_TASK(state, taskId) {
-        const task = state.tasks.filter((item) => item.taskId === taskId)[0];
+    DELETE_TASK(state, id) {
+        const task = state.tasks.filter((item) => item.id === id)[0];
         if (task) {
             state.tasks.splice(task, 1);
         }
