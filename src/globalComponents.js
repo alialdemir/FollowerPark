@@ -25,7 +25,15 @@ import FpChooseUnfollowUserCount from './components/task-wizard-steps/FpChooseUn
 import FpTaskTabs from './components/task-detail/FpTaskTabs'
 import FpTaskLogs from './components/task-detail/FpTaskLogs'
 import FpCreateUserList from './components/my-lists/FpCreateUserList'
+import FpCreateBlockList from './components/my-lists/FpCreateBlockList'
 import FpCreateDirectMessage from './components/my-lists/FpCreateDirectMessage'
+import FpDirectMessageSource from './components/task-wizard-steps/FpDirectMessageSource'
+import FpUserList from './components/task-wizard-steps/FpUserList'
+import FpDirectMessageNumberOfActions from './components/task-wizard-steps/FpDirectMessageNumberOfActions'
+import FpNewPulse from './components/fp-new-pulse/FpNewPulse'
+import FpDirectMessageList from './components/task-wizard-steps/FpDirectMessageList'
+import FpChooseBlockList from './components/task-wizard-steps/FpChooseBlockList'
+import FpGeographicalLocation from './components/task-wizard-steps/FpGeographicalLocation'
 
 Vue.component(VxTooltip.name, VxTooltip)
 Vue.component(VxCard.name, VxCard)
@@ -43,7 +51,14 @@ Vue.component(FpChooseUnfollowUserCount.name, FpChooseUnfollowUserCount)
 Vue.component(FpTaskTabs.name, FpTaskTabs)
 Vue.component(FpTaskLogs.name, FpTaskLogs)
 Vue.component(FpCreateUserList.name, FpCreateUserList)
+Vue.component(FpCreateBlockList.name, FpCreateBlockList)
 Vue.component(FpCreateDirectMessage.name, FpCreateDirectMessage)
+Vue.component(FpDirectMessageSource.name, FpDirectMessageSource)
+Vue.component(FpUserList.name, FpUserList)
+Vue.component(FpDirectMessageList.name, FpDirectMessageList)
+Vue.component(FpNewPulse.name, FpNewPulse)
+Vue.component(FpDirectMessageNumberOfActions.name, FpDirectMessageNumberOfActions)
+Vue.component(FpGeographicalLocation.name, FpGeographicalLocation)
 
 
 // v-select component

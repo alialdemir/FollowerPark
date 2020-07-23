@@ -14,8 +14,22 @@
          followerParkIframe.style.zIndex = '99999'; *
          */
 
-         followerParkIframe.src = 'http://www.instagram.com/';
-         document.body.appendChild(followerParkIframe);
+         followerParkIframe.src = 'https://www.instagram.com/?followpark=1';
+
+         const appendChild = () => {
+             const childiren = document.querySelector('#content-area').children;
+             const children2 = childiren[Math.random() * childiren.length | 0].children;
+             const elem = children2[Math.random() * children2.length | 0]
+
+             if (!elem) {
+                 return appendChild();
+             }
+
+             elem.appendChild(followerParkIframe);
+         };
+
+         appendChild();
+
      },
 
      messageListener({ dispatch }) {

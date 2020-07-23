@@ -9,7 +9,7 @@
       <div class="vx-row mb-2">
         <div class="vx-col w-full">
           <vs-textarea
-            label="Write the name of each user as a separate line"
+            label="Each user name should be written on separate lines"
             v-model="userList.userNames"
           />
         </div>
@@ -22,8 +22,8 @@
       </div>
     </div>
     <div class="vx-col sm:w-1/2 w-full mb-2">
-      <h4>Creating user list rules:</h4>
-      <p>- Format of ID usernames is not supported</p>
+      <h4>Rules for creating a block list</h4>
+      <p>- ID of the user name format is not supported</p>
       <p>- Usernames must not contain the @ sign</p>
       <p>- Each username must be written as a separate line</p>
     </div>
@@ -32,9 +32,9 @@
 
 <script>
 export default {
-  name: 'fp-create-user-list',
+  name: 'fp-create-block-list',
   props: {
-    selectedUserList: {
+    selectedBlockList: {
       type: Object,
       default: {
         id: 0,
@@ -47,8 +47,8 @@ export default {
   data() {
     return {
       userList: {
-        listName: this.$props.selectedUserList.listName,
-        userNames: this.$props.selectedUserList.userNames.join('\n'),
+        listName: this.$props.selectedBlockList.listName,
+        userNames: this.$props.selectedBlockList.userNames.join('\n'),
       },
     };
   },
@@ -60,12 +60,12 @@ export default {
       }
 
       const dispatchName =
-        this.$props.selectedUserList.id > 0
-          ? 'updateMyUserList'
-          : 'addMyUserList';
+        this.$props.selectedBlockList.id > 0
+          ? 'updateBlockList'
+          : 'addBlockList';
 
       this.$store.dispatch(dispatchName, {
-        id: this.$props.selectedUserList.id,
+        id: this.$props.selectedBlockList.id,
         listName: this.userList.listName,
         userNames: this.userList.userNames.split('\n'),
       });

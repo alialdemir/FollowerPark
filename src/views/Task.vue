@@ -28,6 +28,7 @@
               <vs-dropdown-menu>
                 <vs-dropdown-item>
                   <vs-button
+                    :disabled="item.numberTransactions === item.maximumNumberTransactions"
                     size="small"
                     :color="item.status === 1 ? 'danger' : 'success'"
                     type="flat"
@@ -46,7 +47,7 @@
                   <vs-button
                     size="small"
                     color="danger"
-                    :disabled="item.status !== 0"
+                    :disabled="item.status !== 0 && item.numberTransactions !== item.maximumNumberTransactions"
                     type="flat"
                     @click="deleteTask(item)"
                   >Delete</vs-button>
@@ -85,7 +86,7 @@ export default {
   data() {
     return {
       popupActivo4: false,
-      selectedTask: {}
+      selectedTask: {},
     };
   },
   computed: {
@@ -93,7 +94,7 @@ export default {
       return this.$store.state.tasks;
     },
 
-    ...mapGetters(['taskActions', 'resources'])
+    ...mapGetters(['taskActions', 'resources']),
   },
 
   methods: {
@@ -102,7 +103,7 @@ export default {
         this.$store.dispatch('taskStart', {
           task,
           whereUserResources: this.$store.state.whereUserResources,
-          taskActions: this.$store.state.taskActions
+          taskActions: this.$store.state.taskActions,
         });
       } else if (task.status === 1) {
         this.$store.dispatch('taskStop', task);
@@ -122,7 +123,7 @@ export default {
         color: 'danger',
         title: `Delete task?`,
         text: 'Are you sure you want to delete the task?',
-        accept: this.deleteTaskAccept
+        accept: this.deleteTaskAccept,
       });
     },
 
@@ -130,25 +131,25 @@ export default {
       this.$vs.notify({
         color: 'success',
         title: 'Deleted task',
-        text: 'The selected task was successfully deleted'
+        text: 'The selected task was successfully deleted',
       });
 
       this.$store.dispatch('deleteTask', this.selectedTask.id);
-    }
+    },
   },
 
   created() {
     this.$vs.loading({
-      text: 'Connecting to your Instagram account...'
+      text: 'Connecting to your Instagram account...',
     });
 
     setTimeout(() => {
       this.$store.dispatch('getTask', {
         whereUserResources: this.$store.state.whereUserResources,
-        taskActions: this.$store.state.taskActions
+        taskActions: this.$store.state.taskActions,
       });
       this.$vs.loading.close();
     }, 1000);
-  }
+  },
 };
 </script>

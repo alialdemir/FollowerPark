@@ -1,13 +1,14 @@
 <template>
   <div class="btn-group">
     <vs-button
-      @click="$store.dispatch('setTaskConfigurations', { intervalSpeed: speedType.id });"
-      v-for="(speedType, indextr)  in speedTypes"
-      :color="intervalSpeed === speedType.id ? 'success' : 'primary'"
+      @click="$store.dispatch('setTaskConfigurations', { intervalSpeed: item.id });"
+      :key="indextr"
+      v-for="(item, indextr) in speedTypes"
+      :color="intervalSpeed === item.id ? 'success' : 'primary'"
       type="border"
     >
-      <b class="inline-block">{{speedType.text}}</b>
-      <div>{{speedType.subText}}</div>
+      <b class="inline-block">{{item.text}}</b>
+      <div>{{item.subText}}</div>
     </vs-button>
   </div>
 </template>

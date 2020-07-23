@@ -9,19 +9,27 @@
 import currentUserAction from './actions/currentUserAction';
 import indexedDBAction from './actions/indexedDBAction';
 import logAction from './actions/logAction';
-import userListsActions from './actions/userListsActions';
-import taskConfigurationActions from './actions/taskConfigurationActions';
+import userListAction from './actions/userListAction';
+import blockListAction from './actions/blockListAction';
 import taskDBAction from './actions/taskDBAction';
 import directMessagesAction from './actions/directMessagesAction';
+import taskConfigurationAction from './actions/taskConfigurationAction';
+import taskDirectMessagesAction from './actions/taskDirectMessagesAction';
+import taskFollowAction from './actions/taskFollowAction';
+import taskUnfollowAction from './actions/taskUnfollowAction';
 
 const actions = {
     ...currentUserAction,
-    ...taskConfigurationActions,
     ...indexedDBAction,
     ...logAction,
-    ...userListsActions,
+    ...userListAction,
+    ...blockListAction,
     ...taskDBAction,
     ...directMessagesAction,
+    ...taskConfigurationAction,
+    ...taskDirectMessagesAction,
+    ...taskFollowAction,
+    ...taskUnfollowAction,
 
     // /////////////////////////////////////////////
     // COMPONENTS

@@ -1,5 +1,6 @@
-import { default as colors, default as themeConfig } from "@/../themeConfig.js"
-import navbarSearchAndPinList from "@/layouts/components/navbar/navbarSearchAndPinList"
+import { default as colors, default as themeConfig } from "@/../themeConfig.js";
+import navbarSearchAndPinList from "@/layouts/components/navbar/navbarSearchAndPinList";
+import { taskConfigurations } from '../middleware/enums';
 
 
 // /////////////////////////////////////////////
@@ -14,21 +15,7 @@ const myStates = {
             biography: ''
         }
     },
-    taskConfigurations: {
-        action: 0,
-        resource: 0,
-        username: '',
-        userId: '',
-        whereUserResource: 0,
-        status: 0,
-        intervalSpeed: 1000 * 60, // 60 sec
-        postsShortCode: [],
-        unfollowOption: 0,
-        maximumNumberTransactions: 400,
-        numberTransactions: 0,
-        firstOldUsersUnfollow: false,
-        unfollowFollowerParkFollowing: false,
-    },
+    taskConfigurations: taskConfigurations,
     tasks: [],
     runningTasksInterval: [],
     logs: [],
@@ -47,6 +34,7 @@ const myStates = {
             description: 'In the selected action, your account will follow the users from the source you specified.',
             disabled: true,
             function: 'follow',
+            dispatchActionName: 'startFollowTaskWithInterval'
         },
         {
             id: 3,
@@ -55,6 +43,7 @@ const myStates = {
             description: 'In the selected action, your account will leave the users you follow.',
             disabled: true,
             function: 'unfollow',
+            dispatchActionName: 'startUnfollowTaskWithInterval'
         },
         {
             id: 4,
@@ -75,7 +64,8 @@ const myStates = {
             text: 'Direct',
             icon: 'SendIcon',
             description: 'In the selected action, your account will send Direct messages to users received from the source you specified.',
-            disabled: false
+            disabled: true,
+            isNewPulse: true
         },
         {
             id: 7,
@@ -96,25 +86,29 @@ const myStates = {
             id: 1,
             text: 'Geographical location',
             icon: 'MapPinIcon',
-            disabled: false
+            disabled: true,
+            description: 'Paste the post\'s link from each new location into the appropriate area,each geographic location.Enter the name of the place(city, place, institution) in the search box.'
         },
         {
             id: 2,
             text: 'Hashtag',
             icon: 'HashIcon',
-            disabled: false
+            disabled: false,
+            description: 'Enter the hashtag you are interested in. You can enter multiple hashtags.To do so, the list following the rule: each must begin on a new line hashtag.'
         },
         {
             id: 3,
             text: 'User',
             icon: 'UserIcon',
-            disabled: true
+            disabled: true,
+            description: 'Specify the username of the user you will use as the source. You can enter multiple usernames.'
         },
         {
             id: 4,
             text: 'User List',
             icon: 'UsersIcon',
-            disabled: false
+            disabled: true,
+            description: 'Specify a list of users you want to use as the source. You can enter multiple usernames.To do this, you need to create a new user list.'
         }
     ],
     whereUserResources: [{
@@ -123,7 +117,7 @@ const myStates = {
             icon: 'UserPlusIcon',
             disabled: true,
             function: 'followers',
-            paremeter: 'userId',
+            paremeter: 'userList',
             result: {
                 object: 'user.edge_followed_by.edges.node.id',
                 map: ['id', 'username']
@@ -135,7 +129,7 @@ const myStates = {
             icon: 'UserCheckIcon',
             disabled: true,
             function: 'following',
-            paremeter: 'userId',
+            paremeter: 'userList',
             result: {
                 object: 'user.edge_follow.edges.node.id',
                 map: ['id', 'username']
@@ -147,12 +141,11 @@ const myStates = {
             icon: 'HeartIcon',
             disabled: true,
             function: 'likes',
-            paremeter: 'postsShortCode',
+            paremeter: 'userList',
             result: {
                 object: 'shortcode_media.edge_liked_by.edges.node.id',
                 map: ['id', 'username']
             }
-
         },
         {
             id: 4,
@@ -160,15 +153,54 @@ const myStates = {
             icon: 'MessageCircleIcon',
             disabled: true,
             function: 'comments',
-            paremeter: 'postsShortCode',
+            paremeter: 'userList',
             result: {
-                object: 'shortcode_media.edge_media_to_parent_comment.edges.node.id',
-                map: ['id', 'username']
+                object: 'shortcode_media.edge_media_to_parent_comment.edges.node.owner',
+                map: ['owner']
             }
-
         }
     ],
+    unfollowOptions: [{
+        id: 1,
+        text: 'All',
+        icon: 'UserPlusIcon',
+        disabled: true,
+        description: 'Unfollow all followers.'
+    }, {
+        id: 2,
+        text: 'Mutual',
+        icon: 'ShuffleIcon',
+        disabled: true,
+        description: 'If both parties follow each other, unfollow.'
+    }, {
+        id: 3,
+        text: 'One sided',
+        icon: 'UserIcon',
+        disabled: true,
+        description: 'I follow the other party but if the other does not follow me.',
+    }, {
+        id: 4,
+        text: 'List of blocks',
+        icon: 'UsersIcon',
+        disabled: true,
+        description: 'Remove users on the are blocked list.'
+    }, ],
 
+    directMessageSources: [{
+            id: 1,
+            text: 'Your Followers',
+            icon: 'UserPlusIcon',
+            description: 'Sends a message to your followers.',
+            disabled: true
+        },
+        {
+            id: 2,
+            text: 'User list',
+            icon: 'ListIcon',
+            description: 'Sends a direct message to users in the user list I created.',
+            disabled: true
+        },
+    ],
     speedTypes: [{
         id: 60000, // One minite
         text: 'SLOW',
@@ -186,31 +218,10 @@ const myStates = {
         text: 'TO FAST',
         subText: 'SOME DANGEROUS'
     }],
-    unfollowOptions: [{
-        id: 1,
-        text: 'All',
-        icon: 'UserPlusIcon',
-        disabled: true
-    }, {
-        id: 2,
-        text: 'Mutual',
-        icon: 'ShuffleIcon',
-        disabled: false
-    }, {
-        id: 3,
-        text: 'One sided',
-        icon: 'UserIcon',
-        disabled: false
-    }, {
-        id: 5,
-        text: 'List of blocks',
-        icon: 'UsersIcon',
-        disabled: false
-    }, ],
-
     // Lists
     myUserLists: [],
-    directMessages: []
+    directMessages: [],
+    blockList: [],
 }
 
 // /////////////////////////////////////////////

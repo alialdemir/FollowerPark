@@ -1,15 +1,15 @@
 <template>
   <div>
     <vx-card
-      title="Direct Messages"
+      title="Block List"
       :refreshContentAction="true"
-      newButtonText="Create Direct Messages"
+      newButtonText="Create Block list"
       :addCardAction="true"
       @refresh="closeCardAnimation"
       @add="isShowCreatePanel=true"
       class="overflow-hidden"
     >
-      <vs-table stripe :data="directMessages">
+      <vs-table stripe :data="blockList">
         <template slot="thead">
           <vs-th style="width:50px"></vs-th>
           <vs-th>List name</vs-th>
@@ -26,19 +26,14 @@
 
                 <vs-dropdown-menu>
                   <vs-dropdown-item>
-                    <vs-button
-                      size="small"
-                      color="dark"
-                      type="flat"
-                      @click="selectedDirectMessage = item; isShowCreatePanel=true"
-                    >Edit</vs-button>
+                    <vs-button size="small" color="dark" type="flat" @click="edit(item)">Edit</vs-button>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <vs-button
                       size="small"
                       color="danger"
                       type="flat"
-                      @click="deleteDirectMessage(item)"
+                      @click="deleteUserList(item)"
                     >Delete</vs-button>
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
@@ -46,7 +41,7 @@
             </vs-td>
 
             <vs-td>{{ item.listName }}</vs-td>
-            <vs-td>{{ item.messages.length }}</vs-td>
+            <vs-td>{{ item.userNames.length }}</vs-td>
           </vs-tr>
         </template>
       </vs-table>
@@ -55,21 +50,17 @@
     <vs-popup
       v-if="isShowCreatePanel"
       :button-close-hidden="true"
-      :title="selectedDirectMessage.id === 0 ?'Create Direct Message': 'Edit Direct Message'"
-      fullscreen
+      :title="selectedBlockList.id === 0 ?'Create Block List': 'Edit Block List'"
       :active.sync="isShowCreatePanel"
     >
-      <fp-create-direct-message
-        :selectedDirectMessage="selectedDirectMessage"
-        @saveList="saveList"
-      />
+      <fp-create-block-list :selectedBlockList="selectedBlockList" @saveList="saveList" />
     </vs-popup>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'fp-direct-messages',
+  name: 'fp-block-list',
 
   created() {
     if (this.$route.query.q === 'c') {
@@ -78,84 +69,90 @@ export default {
     }
 
     setTimeout(() => {
-      this.$store.dispatch('getDirectMessages');
+      this.$store.dispatch('getBlockList');
     }, 500);
   },
 
-  watch: {
-    isShowCreatePanel(val) {
-      if (val === false) {
-        this.selectedDirectMessage = {
-          id: 0,
-          listName: '',
-          messages: [],
-        };
-      }
-    },
-  },
-
   computed: {
-    directMessages() {
-      return this.$store.state.directMessages;
+    blockList() {
+      return this.$store.state.blockList;
     },
   },
 
   data() {
     return {
       isShowCreatePanel: false,
-      selectedDirectMessage: {
+      selectedBlockList: {
         id: 0,
         listName: '',
-        messages: [],
+        userNames: [],
       },
     };
+  },
+
+  watch: {
+    isShowCreatePanel(val) {
+      if (val === false) {
+        this.selectedBlockList = {
+          id: 0,
+          listName: '',
+          userNames: [],
+        };
+      }
+    },
   },
 
   methods: {
     saveList() {
       this.isShowCreatePanel = false;
 
-      this.selectedDirectMessage = {
+      this.selectedBlockList = {
         id: 0,
         listName: '',
-        messages: [],
+        userNames: [],
       };
     },
 
     closeCardAnimation(card) {
-      this.$store.dispatch('getDirectMessages');
+      this.$store.dispatch('getBlockList');
       card.removeRefreshAnimation(3000);
     },
 
-    deleteDirectMessage(item) {
-      this.selectedDirectMessage = item;
+    deleteUserList(item) {
+      this.selectedBlockList = item;
 
       this.$vs.dialog({
         type: 'confirm',
         'accept-text': 'Delete',
         color: 'danger',
-        title: `Delete direct messages?`,
-        text: 'Are you sure you want to delete the direct messages?',
-        accept: this.deleteDirectMessageAccept,
+        title: `Delete block list?`,
+        text: 'Are you sure you want to delete the block list?',
+        accept: this.deleteUserListAccept,
       });
     },
 
-    deleteDirectMessageAccept() {
+    deleteUserListAccept() {
       this.$vs.notify({
         color: 'success',
-        title: 'Deleted direct messages',
-        text: 'The selected direct messages was successfully deleted',
+        title: 'Deleted block list',
+        text: 'The selected block list was successfully deleted',
       });
 
       this.$store.dispatch(
-        'deleteDirectMessage',
-        JSON.parse(JSON.stringify(this.selectedDirectMessage))
+        'deleteBlockList',
+        JSON.parse(JSON.stringify(this.selectedBlockList))
       );
-      this.selectedDirectMessage = {
+
+      this.selectedBlockList = {
         id: 0,
         listName: '',
-        messages: [],
+        userNames: [],
       };
+    },
+
+    edit(item) {
+      this.selectedBlockList = item;
+      this.isShowCreatePanel = true;
     },
   },
 };

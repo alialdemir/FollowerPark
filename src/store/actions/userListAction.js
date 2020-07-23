@@ -1,8 +1,9 @@
 import { getItems } from './indexedDBAction';
+import { Object } from 'core-js';
 
 const dbName = 'UserLists';
 
-const userListsActions = {
+const userListAction = {
 
     async getUserList({ commit }) {
         const myUserList = await getItems(dbName);
@@ -13,7 +14,7 @@ const userListsActions = {
     addMyUserList({ dispatch }, myUserList) {
         dispatch('addDb', {
             dbName,
-            ...myUserList,
+            ...Object.assign({}, myUserList),
         });
 
         dispatch('getUserList');
@@ -31,11 +32,11 @@ const userListsActions = {
     updateMyUserList({ dispatch }, myUserList) {
         dispatch('updateDb', {
             dbName,
-            ...myUserList,
+            ...Object.assign({}, myUserList),
         });
 
         dispatch('getUserList');
     },
 }
 
-export default userListsActions
+export default userListAction

@@ -19,15 +19,20 @@ export default [{
     slug: "My Lists",
     icon: "ListIcon",
     submenu: [{
-        url: '/user-lists',
+        url: '/user-list',
         name: "User Lists",
-        slug: "user-lists",
+        slug: "user-list",
         i18n: "User Lists",
     }, {
         url: '/direct-messages',
         name: "Direct Messages",
         slug: "direct-messages",
         i18n: "Direct Messages",
+    }, {
+        url: '/block-list',
+        name: "Block List",
+        slug: "block-list",
+        i18n: "Block List",
     }]
 
 }]

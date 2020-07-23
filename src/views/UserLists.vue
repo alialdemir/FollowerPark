@@ -1,7 +1,7 @@
 <template>
   <div>
     <vx-card
-      title="User Lists"
+      title="User List"
       :refreshContentAction="true"
       newButtonText="Create User list"
       :addCardAction="true"
@@ -26,12 +26,7 @@
 
                 <vs-dropdown-menu>
                   <vs-dropdown-item>
-                    <vs-button
-                      size="small"
-                      color="dark"
-                      type="flat"
-                      @click="selectedUserList = item; isShowCreatePanel=true"
-                    >Edit</vs-button>
+                    <vs-button size="small" color="dark" type="flat" @click="edit(item)">Edit</vs-button>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <vs-button
@@ -52,13 +47,14 @@
       </vs-table>
     </vx-card>
 
-    <vx-card
+    <vs-popup
       v-if="isShowCreatePanel"
+      :button-close-hidden="true"
       :title="selectedUserList.id === 0 ?'Create User List': 'Edit User List'"
-      class="mt-4"
+      :active.sync="isShowCreatePanel"
     >
       <fp-create-user-list :selectedUserList="selectedUserList" @saveList="saveList" />
-    </vx-card>
+    </vs-popup>
   </div>
 </template>
 
@@ -67,6 +63,11 @@ export default {
   name: 'fp-user-list',
 
   created() {
+    if (this.$route.query.q === 'c') {
+      this.isShowCreatePanel = true;
+      this.$router.push(this.$route.path);
+    }
+
     setTimeout(() => {
       this.$store.dispatch('getUserList');
     }, 500);
@@ -75,7 +76,7 @@ export default {
   computed: {
     myUserLists() {
       return this.$store.state.myUserLists;
-    }
+    },
   },
 
   data() {
@@ -84,9 +85,21 @@ export default {
       selectedUserList: {
         id: 0,
         listName: '',
-        userNames: []
-      }
+        userNames: [],
+      },
     };
+  },
+
+  watch: {
+    isShowCreatePanel(val) {
+      if (val === false) {
+        this.selectedUserList = {
+          id: 0,
+          listName: '',
+          userNames: [],
+        };
+      }
+    },
   },
 
   methods: {
@@ -96,7 +109,7 @@ export default {
       this.selectedUserList = {
         id: 0,
         listName: '',
-        userNames: []
+        userNames: [],
       };
     },
 
@@ -114,7 +127,7 @@ export default {
         color: 'danger',
         title: `Delete user list?`,
         text: 'Are you sure you want to delete the user list?',
-        accept: this.deleteUserListAccept
+        accept: this.deleteUserListAccept,
       });
     },
 
@@ -122,19 +135,25 @@ export default {
       this.$vs.notify({
         color: 'success',
         title: 'Deleted user list',
-        text: 'The selected user list was successfully deleted'
+        text: 'The selected user list was successfully deleted',
       });
 
       this.$store.dispatch(
         'deleteMyUserList',
         JSON.parse(JSON.stringify(this.selectedUserList))
       );
+
       this.selectedUserList = {
         id: 0,
         listName: '',
-        userNames: []
+        userNames: [],
       };
-    }
-  }
+    },
+
+    edit(item) {
+      this.selectedUserList = item;
+      this.isShowCreatePanel = true;
+    },
+  },
 };
 </script>

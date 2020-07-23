@@ -1,10 +1,15 @@
 <template>
   <div class="vx-row">
-    <div v-for="(item)  in taskActions" class="vx-col w-1/2 md:w-1/3 xl:w-1/4">
+    <div
+      :key="indextr"
+      v-for="(item, indextr) in taskActions"
+      class="vx-col w-1/2 md:w-1/3 xl:w-1/4"
+    >
       <div @click="chooseAction(item)">
         <statistics-card-line
           hideChart
           class="mb-base"
+          :isNewPulse="item.isNewPulse"
           :isActive="item.disabled"
           :textColor="action === item.id ? 'warning' : 'white'"
           :icon="item.icon"

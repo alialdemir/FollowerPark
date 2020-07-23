@@ -114,9 +114,9 @@ export default {
       default: {
         id: 0,
         listName: '',
-        messages: []
-      }
-    }
+        messages: [],
+      },
+    },
   },
 
   data() {
@@ -124,12 +124,12 @@ export default {
       directMessage: {
         listName: this.$props.selectedDirectMessage.listName,
         messages: this.$props.selectedDirectMessage.messages
-          .map(item => item.text)
-          .join('\n\n')
+          .map((item) => item.text)
+          .join('\n\n'),
       },
       messageList: this.$props.selectedDirectMessage.messages,
       selectedComment: {},
-      isEditAllComments: false
+      isEditAllComments: false,
     };
   },
 
@@ -159,11 +159,11 @@ export default {
     addMessages() {
       const messages = this.directMessage.messages
         .split('\n\n')
-        .filter(item => item.trim() !== '')
-        .map(item => {
+        .filter((item) => item.trim() !== '')
+        .map((item) => {
           return {
             id: this.createGuid(),
-            text: item
+            text: item,
           };
         });
 
@@ -177,7 +177,7 @@ export default {
       this.selectedComment.text = this.directMessage.messages;
 
       const index = this.messageList.findIndex(
-        item => item.id === this.selectedComment.id
+        (item) => item.id === this.selectedComment.id
       );
 
       this.messageList[index] = this.selectedComment;
@@ -201,7 +201,7 @@ export default {
 
     editAllComments() {
       this.directMessage.messages = this.messageList
-        .map(item => item.text)
+        .map((item) => item.text)
         .join('\n\n');
 
       this.selectedComment = {};
@@ -222,7 +222,7 @@ export default {
       this.$store.dispatch(dispatchName, {
         id: this.$props.selectedDirectMessage.id,
         listName: this.directMessage.listName,
-        messages: this.messageList
+        messages: this.messageList,
       });
 
       this.$emit('saveList');
@@ -237,7 +237,7 @@ export default {
         color: 'danger',
         title: `Delete comment?`,
         text: 'Are you sure you want to delete the comment?',
-        accept: this.deleteCommentAccept
+        accept: this.deleteCommentAccept,
       });
     },
 
@@ -245,16 +245,16 @@ export default {
       this.$vs.notify({
         color: 'success',
         title: 'Deleted comment',
-        text: 'The selected comment was successfully deleted'
+        text: 'The selected comment was successfully deleted',
       });
 
       this.messageList = this.messageList.filter(
-        item => item.id !== this.selectedComment.id
+        (item) => item.id !== this.selectedComment.id
       );
 
       if (this.directMessage.messages.length > 0) {
         this.directMessage.messages = this.messageList
-          .map(item => item.text)
+          .map((item) => item.text)
           .join('\n\n');
       }
     },
@@ -266,7 +266,7 @@ export default {
         color: 'danger',
         title: `Delete all comments?`,
         text: 'Are you sure you want to delete all comments?',
-        accept: this.allDeleteCommentAccept
+        accept: this.allDeleteCommentAccept,
       });
     },
 
@@ -274,15 +274,15 @@ export default {
       this.$vs.notify({
         color: 'success',
         title: 'Deleted comment',
-        text: 'The all comments was successfully deleted'
+        text: 'The all comments was successfully deleted',
       });
 
       this.isEditAllComments = false;
       this.messageList = [];
       this.selectedComment = {};
       this.directMessage.messages = [];
-    }
-  }
+    },
+  },
 };
 </script>
 

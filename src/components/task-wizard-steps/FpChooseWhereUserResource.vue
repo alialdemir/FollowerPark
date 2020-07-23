@@ -1,6 +1,10 @@
 <template>
   <div class="vx-row">
-    <div v-for="(item, indextr)  in whereUserResources" class="vx-col w-1/2 md:w-1/3 xl:w-1/4">
+    <div
+      :key="indextr"
+      v-for="(item, indextr) in whereUserResources"
+      class="vx-col w-1/2 md:w-1/3 xl:w-1/4"
+    >
       <div @click="chooseWhereUserResources(item)">
         <statistics-card-line
           hideChart
@@ -36,11 +40,6 @@ export default {
         });
 
         this.$emit('click');
-
-        this.$store.dispatch('followByUserResource', {
-          username: this.$store.state.taskConfigurations.username,
-          whereUserResourceId: whereUserResource.id
-        });
       } else {
         this.$vs.notify({
           title: 'This user resource will be added very soon.',

@@ -35,7 +35,7 @@ const taskConfigurationsMutations = {
                 state.runningTasksInterval.splice(taskInterval, 1);
             }
         }
-    }
+    },
 }
 
 export default taskConfigurationsMutations

@@ -5,12 +5,23 @@
 </template>
 
 <script>
-import { mapFields } from 'vuex-map-fields';
-
 export default {
   name: 'fp-choose-user-resource',
-  computed: {
-    ...mapFields(['taskConfigurations.username'])
-  }
+  watch: {
+    username(val) {
+      if (val) {
+        this.$store.dispatch('setTaskConfigurations', {
+          userList: JSON.parse(
+            JSON.stringify(val.split('\n').filter((item) => item !== ''))
+          ),
+        });
+      }
+    },
+  },
+  data() {
+    return {
+      username: '',
+    };
+  },
 };
 </script>

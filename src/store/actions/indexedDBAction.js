@@ -42,8 +42,8 @@ const indexedDBAction = {
             }
 
             if (!window.db.objectStoreNames.contains('Logs')) {
-                const objectStore = window.db.createObjectStore('Logs', { keyPath: "id", autoIncrement: true });
-                objectStore.createIndex("taskId", "id", { unique: false });
+                const objectStore = window.db.createObjectStore('Logs', { keyPath: "taskId", autoIncrement: true });
+                objectStore.createIndex("taskId", "taskId", { unique: false });
             }
 
             if (!window.db.objectStoreNames.contains('UserLists')) {
@@ -52,6 +52,10 @@ const indexedDBAction = {
 
             if (!window.db.objectStoreNames.contains('DirectMessages')) {
                 window.db.createObjectStore('DirectMessages', { autoIncrement: true });
+            }
+
+            if (!window.db.objectStoreNames.contains('BlockList')) {
+                window.db.createObjectStore('BlockList', { autoIncrement: true });
             }
 
         }

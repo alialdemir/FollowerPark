@@ -16,75 +16,93 @@ if ((location.host || '').indexOf('instagram') !== -1) {
     const s = document.createElement('script');
     s.type = 'text/javascript';
     const c = `
-   
-function getCookie(name) {
-    const parts = ('; ' + document.cookie).split('; ' + name + '=');
-    if (parts.length === 2) return parts.pop().split(';').shift();
-}
+     class followerPark {
+       constructor() {
+           this.postMessage({
+               type: 'scu',
+               data: ((window || {})._sharedData || {}).config || {},
+           });
 
-function postMessage(message) {
-    window.parent.postMessage(message, '*');
-};
+           window.addEventListener('message', async(event) => {
+               const data = (event || {}).data || {};
+               const { type, url } = data;
+               if (!(
+                       (type === 'GET' || type == 'POST' || type === 'dm') &&
+                       url !== 'string'
+                   )) {
+                   return;
+               }
 
-async function sendFetch({ type, url, responseType, responseData }) {
-    const response = await fetch(url, {
-        "headers": {
-            "x-csrftoken": getCookie('csrftoken')
-        },
-        'method': type,
-        'credentials': 'include'
-    });
+               if (type === 'dm') {
+                   this.sendDm(data);
+               } else {
+                   this.sendFetch(data);
+               }
+           });
+       }
 
-    if (response.url.indexOf('/accounts/login') !== -1) {
-        location.reload();
-    }
+       getCookie(name) {
+           const parts = ('; ' + document.cookie).split('; ' + name + '=');
+           if (parts.length === 2) return parts.pop().split(';').shift();
+       };
 
-    let responsejson = undefined;
-    if (type !== 'POST') {
-        responsejson = await response.json();
-    }
+       postMessage(message) {
+           window.parent.postMessage(message, '*');
+       };
 
-    if (responseType) {
-        postMessage({
-            type: responseType,
-            data: {
-                ...responseData,
-                ...((responsejson || {}).data || responsejson || {})
-            }
-        });
-    }
-}
+       async sendFetch({
+           type,
+           url,
+           responseType,
+           responseData,
+           requestData,
+           contentType,
+       }) {
+           const response = await fetch(url, {
+               headers: {
+                   'x-csrftoken': this.getCookie('csrftoken'),
+                   'content-type': contentType || 'application/json',
+                   'x-ig-app-id': '936619743392459',
+               },
+               method: type,
+               mode: 'cors',
+               credentials: 'include',
+               body: requestData || null,
+           });
 
-function sendDm({ thread_id, text }) {
-    try {
-        return new Promise(rs => {
-            __mqtt.sendTextMessage(thread_id, text).then(res => {
-                rs({ data: res, status: 200 });
-            }).catch(t => {
-                rs({ data: t, status: -1 });
-            })
-        })
-    } catch (e) {
-        console.log('FollowerPark error', e)
-        return { status: -10 };
-    }
-}
+           if (response.url.indexOf('/accounts/login') !== -1) {
+               location.reload();
+           }
 
-postMessage({ type: 'scu', data: ((window || {})._sharedData || {}).config || {} });
+           let responsejson = undefined;
 
-window.addEventListener('message', async(event) => {
-    const data = ((event || {}).data || {});
-    const { type, url } = data;
-    if (!((type === 'GET' || type == 'POST' || type === 'dm') && url !== 'string')) {
-        return;
-    }
+           try {
+               responsejson = await response.json();
+           } catch (error) {}
 
-    if (type === 'dm') {
-        sendDm(data);
-    } else {
-        sendFetch(data);
-    }
-});
+           if (responseType) {
+               this.postMessage({
+                   type: responseType,
+                   data: {
+                       ...responseData,
+                       ...((responsejson || {}).data || responsejson || {}),
+                   },
+               });
+           }
+       };
+
+       sendDm({ responseData, responseType, }) {
+           __mqtt.sendTextMessage(responseData.thread_id, responseData.directMessage)
+           if (responseType) {
+               this.postMessage({
+                   type: responseType,
+                   data: responseData,
+               });
+           }
+       };
+   }
+
+   new followerPark();
     `;
     s.appendChild(document.createTextNode(c));
     document.body.appendChild(s);

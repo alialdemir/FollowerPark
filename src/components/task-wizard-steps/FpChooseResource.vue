@@ -1,6 +1,6 @@
 <template>
   <div class="vx-row">
-    <div v-for="(item, indextr)  in resources" class="vx-col w-1/2 md:w-1/3 xl:w-1/4">
+    <div :key="indextr" v-for="(item, indextr) in resources" class="vx-col w-1/2 md:w-1/3 xl:w-1/4">
       <div @click="chooseResource(item)">
         <statistics-card-line
           hideChart

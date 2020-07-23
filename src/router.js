@@ -45,8 +45,8 @@ const router = new Router({
                         import ('./views/Task.vue')
                 },
                 {
-                    path: '/user-lists',
-                    name: 'UserLists',
+                    path: '/user-list',
+                    name: 'UserList',
                     component: () =>
                         import ('./views/UserLists.vue')
                 },
@@ -55,6 +55,12 @@ const router = new Router({
                     name: 'DirectMessages',
                     component: () =>
                         import ('./views/DirectMessages.vue')
+                },
+                {
+                    path: '/block-list',
+                    name: 'BlockList',
+                    component: () =>
+                        import ('./views/BlockList.vue')
                 },
                 {
                     path: '/index.html',

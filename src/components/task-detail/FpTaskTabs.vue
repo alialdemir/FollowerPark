@@ -7,12 +7,6 @@
         <vs-list-item title="Task Status" :subtitle="task.status === 1 ? 'Running': 'Stopped'"></vs-list-item>
 
         <vs-list-item
-          v-if="task.firstOldUsersUnfollow"
-          title="First, let the old users unfollow"
-          :subtitle="task.firstOldUsersUnfollow ? 'Yes': 'No'"
-        ></vs-list-item>
-
-        <vs-list-item
           v-if="task.maximumNumberTransactions && task.numberTransactions"
           title="Range of people removed from follow-up"
           :subtitle="`${task.numberTransactions}/${task.maximumNumberTransactions}`"
@@ -27,12 +21,6 @@
         <vs-list-item v-if="task.action" title="Resource" :subtitle="resources(task)"></vs-list-item>
 
         <vs-list-item v-if="task.intervalSpeed" title="Speed" :subtitle="speed(task.intervalSpeed)"></vs-list-item>
-
-        <vs-list-item
-          v-if="task.unfollowFollowerParkFollowing"
-          title="You will unfollow the followers of FollowerPark"
-          :subtitle="task.unfollowFollowerParkFollowing ? 'Yes': 'No'"
-        ></vs-list-item>
 
         <vs-list-item v-if="task.username" title="Username" :subtitle="task.username">
           <vs-button

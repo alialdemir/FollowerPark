@@ -23,6 +23,12 @@ const getters = {
                         item => item.id === task.unfollowOption
                     )[0] || {}
                 ).text;
+            case 6:
+                return (
+                    state.directMessageSources.filter(
+                        item => item.id === task.directMessageSource
+                    )[0] || {}
+                ).text;
         }
     },
 

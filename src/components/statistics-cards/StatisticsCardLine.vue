@@ -16,6 +16,8 @@
         :class="[`text-dark`, {'mb-4': !iconRight}]"
         :style="{background: `rgba(var(--vs-${isActive === true ? 'success' : 'danger'}))`}"
       ></feather-icon>
+      <fp-new-pulse v-if="isNewPulse" class="inline-flex self-end absolute" />
+
       <div
         class="p-6 cursor-pointer"
         :class="{
@@ -30,11 +32,11 @@
           :class="[`text-${color}`, {'mb-4': !iconRight}]"
           :style="{background: `rgba(var(--vs-${color}),.15)`}"
         ></feather-icon>
-        <div class="truncate">
-          <h2
+        <div>
+          <h3
             :style="{color: `rgba(var(--vs-${textColor}))`}"
             class="mb-1 font-bold"
-          >{{ statistic }}</h2>
+          >{{ statistic }}</h3>
           <span class="whitespace-pre-wrap">{{ statisticTitle }}</span>
         </div>
       </div>
@@ -62,14 +64,14 @@ export default {
   props: {
     icon: {
       type: String,
-      required: true
+      required: true,
     },
     statistic: {
       type: [Number, String],
-      required: true
+      required: true,
     },
     statisticTitle: {
-      type: String
+      type: String,
     },
     chartData: {
       // type: Array,
@@ -77,14 +79,14 @@ export default {
     },
     color: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     textColor: {
       type: String,
-      default: 'primary'
+      default: 'primary',
     },
     colorTo: {
-      type: String
+      type: String,
     },
     // chartType: {
     //     type: String,
@@ -92,37 +94,41 @@ export default {
     // },
     type: {
       type: String,
-      default: 'line'
+      default: 'line',
     },
     iconRight: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideChart: {
       type: Boolean,
-      default: false
+      default: false,
     },
     isActive: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
+    isNewPulse: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
-      chartOptions: null
+      chartOptions: null,
     };
   },
   watch: {
     themePrimaryColor() {
       this.$refs.apexChart.updateOptions({
-        theme: { monochrome: { color: this.getHex(this.color) } }
+        theme: { monochrome: { color: this.getHex(this.color) } },
       });
-    }
+    },
   },
   computed: {
     themePrimaryColor() {
       return this.$store.state.themePrimaryColor;
-    }
+    },
   },
   methods: {
     getHex(color) {
@@ -150,16 +156,16 @@ export default {
         primary: '#A9A2F6',
         success: '#55DD92',
         warning: '#ffc085',
-        danger: '#F97794'
+        danger: '#F97794',
       };
 
       return gradientToColors[color]
         ? gradientToColors[color]
         : gradientToColors['primary'];
-    }
+    },
   },
   components: {
-    VueApexCharts
+    VueApexCharts,
   },
   created() {
     if (this.type == 'area') {
@@ -171,8 +177,8 @@ export default {
           enabled: true,
           color: this.getHex(this.color),
           shadeTo: 'light',
-          shadeIntensity: 0.65
-        }
+          shadeIntensity: 0.65,
+        },
       };
     } else if (this.type == 'line') {
       // Assign chart options
@@ -181,15 +187,20 @@ export default {
       );
 
       this.chartOptions.fill.gradient.gradientToColors = [
-        this.gradientToColor(this.colorTo || this.color)
+        this.gradientToColor(this.colorTo || this.color),
       ];
       this.chartOptions.colors = [this.getHex(this.color)];
     }
-  }
+  },
 };
 </script>
 <style>
 .statistics-card-min-height {
   min-height: 300px;
+}
+
+.new-pulse {
+  right: 50px;
+  top: 10px;
 }
 </style>

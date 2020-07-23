@@ -32,7 +32,9 @@ const logDBAction = {
         var index = store.index("taskId");
         index.openCursor(range).onsuccess = function(e) {
             var result = e.target.result;
-            store.delete(result.value.id);
+            if (result) {
+                store.delete(result.value.id);
+            }
         };
     }
 }
