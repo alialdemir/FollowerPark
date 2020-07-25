@@ -3,7 +3,7 @@
     <div
       :key="indextr"
       v-for="(item, indextr) in directMessageSources"
-      class="vx-col w-1/2 md:w-1/3 xl:w-1/4"
+      class="vx-col w-1/2 md:w-1/3 xl:w-1/4 pr-2"
     >
       <div @click="chooseDirectMessageSource(item)">
         <statistics-card-line
@@ -27,23 +27,23 @@ import { mapFields } from 'vuex-map-fields';
 export default {
   name: 'fp-direct-message-source',
   components: {
-    StatisticsCardLine
+    StatisticsCardLine,
   },
   computed: {
     ...mapFields([
       'taskConfigurations.directMessageSource',
-      'directMessageSources'
-    ])
+      'directMessageSources',
+    ]),
   },
   methods: {
     chooseDirectMessageSource(directMessageSource) {
       this.$store.dispatch('setTaskConfigurations', {
         directMessageSource: directMessageSource.id,
-        userId: this.$store.state.AppActiveUser.uid
+        userId: this.$store.state.AppActiveUser.uid,
       });
 
       this.$emit('click');
-    }
-  }
+    },
+  },
 };
 </script>

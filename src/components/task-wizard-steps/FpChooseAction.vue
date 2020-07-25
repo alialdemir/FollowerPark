@@ -3,7 +3,7 @@
     <div
       :key="indextr"
       v-for="(item, indextr) in taskActions"
-      class="vx-col w-1/2 md:w-1/3 xl:w-1/4"
+      class="vx-col w-1/2 md:w-1/3 xl:w-1/4 pr-2"
     >
       <div @click="chooseAction(item)">
         <statistics-card-line
@@ -28,10 +28,10 @@ import { mapFields } from 'vuex-map-fields';
 export default {
   name: 'fp-choose-action',
   components: {
-    StatisticsCardLine
+    StatisticsCardLine,
   },
   computed: {
-    ...mapFields(['taskConfigurations.action', 'taskActions'])
+    ...mapFields(['taskConfigurations.action', 'taskActions']),
   },
   methods: {
     chooseAction(action) {
@@ -42,10 +42,10 @@ export default {
         this.$vs.notify({
           title: 'This task will be added very soon.',
           color: 'danger',
-          position: 'top-center'
+          position: 'top-center',
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>

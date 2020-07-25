@@ -1,42 +1,63 @@
 import { taskInterval, getObjBywhereUserResource } from '@/middleware/functions';
 import * as InsApi from '@/middleware/InsApi';
+import { resource } from '@/middleware/enums';
 
 const taskFollowAction = {
     /**
      * Follow tasks
      */
     startFollowTaskWithInterval({ commit, dispatch }, taskInfo) {
-        let userIds = getObjBywhereUserResource(taskInfo, taskInfo.whereUserResource.result, taskInfo.action.id);
-
-        const urls = userIds.map((item) => {
-            const user = item.owner || item;
-
-            return {
-                id: user.id,
-                username: user.username,
-                url: InsApi[taskInfo.action.function](user.id),
-            }
-        });
-
-        const callback = (item, maximumNumberTransactions) => {
-            if (urls.length <= 0 && maximumNumberTransactions < taskInfo.task.maximumNumberTransactions) {
-                dispatch('nextPage', {
-                    ...taskInfo,
+        let urls = [];
+        if (taskInfo.task.resource === resource.geographicalLocation) {
+            urls = taskInfo
+                .task
+                .georaphicalLocations
+                .map(username => {
+                    return {
+                        username
+                    }
                 });
 
-                return false;
-            }
+        } else {
+            let userIds = getObjBywhereUserResource(taskInfo, taskInfo.whereUserResource.result, taskInfo.action.id);
 
-            dispatch('postMessage', {
-                type: 'POST',
-                url: item.url,
-                responseType: 'addNewLog',
-                responseData: {
-                    ...item,
-                    actionId: taskInfo.action.id,
-                    id: taskInfo.task.id
+            urls = userIds.map((item) => {
+                const user = item.owner || item;
+
+                return {
+                    id: user.id,
+                    username: user.username,
+                    url: InsApi[taskInfo.action.function](user.id),
                 }
             });
+        }
+
+        const callback = (item, maximumNumberTransactions) => {
+            /*
+                        if (urls.length === 0 && maximumNumberTransactions < taskInfo.task.maximumNumberTransactions) {
+                            dispatch('nextPage', {
+                                ...taskInfo,
+                            });
+
+                            return false;
+                        }
+            */
+            const resources = taskInfo.task.resource;
+            if (resources === resource.geographicalLocation) {
+                debugger
+
+            } else {
+                dispatch('postMessage', {
+                    type: 'POST',
+                    url: item.url,
+                    responseType: 'addNewLog',
+                    responseData: {
+                        ...item,
+                        actionId: taskInfo.action.id,
+                        id: taskInfo.task.id
+                    }
+                });
+            }
 
             return true;
         }

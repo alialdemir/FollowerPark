@@ -104,3 +104,11 @@ export function isDirectMessageIncludeUrl(directMessage, thread_id) {
         data: queryParams
     };
 }
+
+export function search(text) {
+    return `${insUrl}/web/search/topsearch/?context=blended&query=${text}&rank_token=0.17570890531920336&include_reel=true`;
+}
+
+export function exploreLocations(pk) {
+    return `${insUrl}/explore/locations/${pk}/`
+}

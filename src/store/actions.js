@@ -16,6 +16,7 @@ import directMessagesAction from './actions/directMessagesAction';
 import taskConfigurationAction from './actions/taskConfigurationAction';
 import taskDirectMessagesAction from './actions/taskDirectMessagesAction';
 import taskFollowAction from './actions/taskFollowAction';
+import georaphicalLocationsSearchActions from './actions/georaphicalLocationsSearchActions';
 import taskUnfollowAction from './actions/taskUnfollowAction';
 
 const actions = {
@@ -30,6 +31,11 @@ const actions = {
     ...taskDirectMessagesAction,
     ...taskFollowAction,
     ...taskUnfollowAction,
+    ...georaphicalLocationsSearchActions,
+
+
+    webpackInvalid({}) {}, // Console da error basıyordu onu engellemek için ekledim
+    webpackWarnings({}) {}, // Console da error basıyordu onu engellemek için ekledim
 
     // /////////////////////////////////////////////
     // COMPONENTS

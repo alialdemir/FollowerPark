@@ -33,6 +33,9 @@ export const taskConfigurations = {
     directMessage: [],
     isSkipSentMessage: true, // Skip users who have already been sent a message
     isDeleteAfterSendingMessage: false, // Delete after sending the message.
+    georaphicalLocations: [], // Geographical location
+    interactWithPosts: false, //interact with posts of the last
+    interactWithPostsDays: 0 // interact with posts of the last days
 }
 
 export const unfollowOption = {
@@ -40,4 +43,11 @@ export const unfollowOption = {
     mutal: 2,
     onesided: 3,
     listofBlocks: 4
+}
+
+export const resource = {
+    geographicalLocation: 1,
+    hashtag: 2,
+    user: 3,
+    userList: 4
 }

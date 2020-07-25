@@ -4,6 +4,7 @@ import logMutations from './mutations/logMutations';
 import userListsMutations from './mutations/userListsMutations';
 import directMessagesMutations from './mutations/directMessagesMutations';
 import blockListMutations from './mutations/blockListMutations';
+import georaphicalLocationsSearchMutations from './mutations/georaphicalLocationsSearchMutations';
 import { updateField } from 'vuex-map-fields';
 
 const mutations = {
@@ -14,6 +15,7 @@ const mutations = {
     ...userListsMutations,
     ...directMessagesMutations,
     ...blockListMutations,
+    ...georaphicalLocationsSearchMutations,
 
     // /////////////////////////////////////////////
     // COMPONENTS

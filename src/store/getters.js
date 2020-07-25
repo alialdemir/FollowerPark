@@ -1,5 +1,5 @@
 import { getField } from 'vuex-map-fields';
-
+import { resource } from '@/middleware/enums';
 const getters = {
     getField,
 
@@ -12,11 +12,19 @@ const getters = {
     resources: (state) => (task) => {
         switch (task.action) {
             case 2:
-                return (
-                    state.whereUserResources.filter(
-                        item => item.id === task.whereUserResource
-                    )[0] || {}
-                ).text;
+                if (task.resource === resource.geographicalLocation) {
+                    return (
+                        state.resources.filter(
+                            item => item.id === task.resource
+                        )[0] || {}
+                    ).text;
+                } else {
+                    return (
+                        state.whereUserResources.filter(
+                            item => item.id === task.whereUserResource
+                        )[0] || {}
+                    ).text;
+                }
             case 3:
                 return (
                     state.unfollowOptions.filter(

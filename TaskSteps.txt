@@ -1,0 +1,125 @@
+----------------------------- Follow ----------------------------------------------------------------
+
+-  Follow > Geographical Location > Choose follow count > Speed
+
+- Follow > User > Write usernames > Followers > Speed
+- Follow > User > Write usernames > Following > Speed
+- Follow > User > Write usernames > Likes > Speed
+- Follow > User > Write usernames > Comment > Speed
+
+- Follow > User list > user list > Followers > Speed
+- Follow > User list > user list > Following > Speed
+- Follow > User list > user list > Likes > Speed
+- Follow > User list > user list > Comment > Speed
+
+----------------------------- Unfollow ----------------------------------------------------------------
+
+- Unfollow > All > Unfollow user count 
+- Unfollow > Mutual > Unfollow user count
+- Unfollow > One sided > Unfollow user count
+- Unfollow > List of blocks > Choose block list
+
+----------------------------- Direct ----------------------------------------------------------------
+
+- Direct > Your followers > Choose direct messages list > Number of action > Speed
+
+- Direct > User list > Choose user list > Choose direct messages list > Number of action > Speed
+
+
+
+
+
+
+
+
+
+-----------------------------------------------------------------------------------------------------
+
+
+
+
+
+----------------------------- Task start ----------------------------------------------------------------
+----------------------------- Follow by Georaphical Location ----------------------------------------------------------------
+
+- georaphicalLocations listesine ister at
+- dönen istekten owner id'leri al
+- follow isteği gönder
+
+----------------------------- Follow by User ----------------------------------------------------------------
+- userList içindeki kullanıcıların followers/following/likes/comment verilerini çek
+- dönen istekdeki kullanıcıların idleriini al
+- takip isteği at
+
+----------------------------- Follow by User list ----------------------------------------------------------------
+- userList içindeki kullanıcıların followers/following/likes/comment verilerini çek
+- dönen istekdeki kullanıcıların idleriini al
+- takip isteği at
+
+----------------------------- Unfollow by All ---------------------------------------------------------------- note burada task config de login olan kullanıcının userid'si alınıp takipçileri alınmış bunu username'e göre yaparsak diğer tasklara benzeyebilir
+
+- task içindeki user id'ye ait following listesini al
+- dönen istekdeki kullanıcıların idleriini
+- takipten çıkarma at
+
+
+----------------------------- Unfollow by Mutual ----------------------------------------------------------------
+
+- task içindeki user id'ye ait following listesini al
+- dönen istekdeki kullanıcıların idleriini
+- unFollowMutal actionu dispatch et
+- takipten çıkarma at
+
+----------------------------- Unfollow by One sided ----------------------------------------------------------------
+
+- task içindeki user id'ye ait following listesini al
+- dönen istekdeki kullanıcıların idleriini
+- unFollowOnesided actionu dispatch et
+- takipten çıkarma at
+
+----------------------------- Unfollow by List of blocks ----------------------------------------------------------------
+
+- userList içindeki kullanıcı adının'id değerini al
+- takipten çıkarma at
+
+
+
+
+
+
+
+
+
+----------------------------- Validations ----------------------------------------------------------------
+
+----------------------------- Step 1 ----------------------------------------------------------------
+
+- this.action > 0
+
+----------------------------- Step 2 ----------------------------------------------------------------
+
+- this.resource > 0 ||
+- this.unfollowOption > 0 ||
+- this.directMessageSource > 0
+----------------------------- Step 3 ----------------------------------------------------------------
+
+-  this.resource === 1 && this.georaphicalLocations.length <= 0 && this.interactWithPosts === false ||
+-  this.resource === 1 && this.georaphicalLocations.length > 0 && this.interactWithPosts === true && this.interactWithPostsDays <= 0 ||
+-  !(this.directMessageSource > 0 || this.userList.length > 0) && this.georaphicalLocations.length === 0
+
+
+----------------------------- Step 4 ----------------------------------------------------------------
+
+- this.directMessage.length > 0 ||
+- this.userList.length > 0 ||
+- this.maximumNumberTransactions > 0
+
+----------------------------- Step 5 ----------------------------------------------------------------
+
+- this.userList.length > 0 || 
+- this.directMessage.length > 0
+
+----------------------------- Step 6 ----------------------------------------------------------------
+
+- this.intervalSpeed > 0
+

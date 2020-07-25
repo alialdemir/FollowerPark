@@ -21,13 +21,6 @@ const myStates = {
     logs: [],
 
     taskActions: [{
-            id: 1,
-            text: 'Like',
-            icon: 'ThumbsUpIcon',
-            description: 'Selected transactions in your account, taken from the sources you specify users will like the posts issued.',
-            disabled: false
-        },
-        {
             id: 2,
             text: 'Follow',
             icon: 'UserPlusIcon',
@@ -46,6 +39,20 @@ const myStates = {
             dispatchActionName: 'startUnfollowTaskWithInterval'
         },
         {
+            id: 6,
+            text: 'Direct',
+            icon: 'SendIcon',
+            description: 'In the selected action, your account will send Direct messages to users received from the source you specified.',
+            disabled: true,
+            isNewPulse: true
+        }, {
+            id: 1,
+            text: 'Like',
+            icon: 'ThumbsUpIcon',
+            description: 'Selected transactions in your account, taken from the sources you specify users will like the posts issued.',
+            disabled: false
+        },
+        {
             id: 4,
             text: 'Comment',
             icon: 'MessageCircleIcon',
@@ -58,14 +65,6 @@ const myStates = {
             icon: 'HeartIcon',
             description: 'In the selected action, your account will like the shares of users taken from the source you specified, and then follow these users.',
             disabled: false
-        },
-        {
-            id: 6,
-            text: 'Direct',
-            icon: 'SendIcon',
-            description: 'In the selected action, your account will send Direct messages to users received from the source you specified.',
-            disabled: true,
-            isNewPulse: true
         },
         {
             id: 7,
@@ -84,7 +83,7 @@ const myStates = {
     ],
     resources: [{
             id: 1,
-            text: 'Geographical location',
+            text: 'Geographical Location',
             icon: 'MapPinIcon',
             disabled: true,
             description: 'Paste the post\'s link from each new location into the appropriate area,each geographic location.Enter the name of the place(city, place, institution) in the search box.'
@@ -164,26 +163,26 @@ const myStates = {
         id: 1,
         text: 'All',
         icon: 'UserPlusIcon',
-        disabled: true,
-        description: 'Unfollow all followers.'
+        description: 'Unfollow all followers.',
+        disabled: true
     }, {
         id: 2,
         text: 'Mutual',
         icon: 'ShuffleIcon',
-        disabled: true,
-        description: 'If both parties follow each other, unfollow.'
+        description: 'If both parties follow each other, unfollow.',
+        disabled: true
     }, {
         id: 3,
         text: 'One sided',
         icon: 'UserIcon',
-        disabled: true,
         description: 'I follow the other party but if the other does not follow me.',
+        disabled: true
     }, {
         id: 4,
         text: 'List of blocks',
         icon: 'UsersIcon',
-        disabled: true,
-        description: 'Remove users on the are blocked list.'
+        description: 'Remove users on the are blocked list.',
+        disabled: true
     }, ],
 
     directMessageSources: [{
@@ -222,6 +221,7 @@ const myStates = {
     myUserLists: [],
     directMessages: [],
     blockList: [],
+    searchGeographicalLocation: []
 }
 
 // /////////////////////////////////////////////

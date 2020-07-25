@@ -9,7 +9,7 @@ export default {
   name: 'fp-choose-user-resource',
   watch: {
     username(val) {
-      if (val) {
+      if (val.trim()) {
         this.$store.dispatch('setTaskConfigurations', {
           userList: JSON.parse(
             JSON.stringify(val.split('\n').filter((item) => item !== ''))

@@ -32,8 +32,9 @@ import FpUserList from './components/task-wizard-steps/FpUserList'
 import FpDirectMessageNumberOfActions from './components/task-wizard-steps/FpDirectMessageNumberOfActions'
 import FpNewPulse from './components/fp-new-pulse/FpNewPulse'
 import FpDirectMessageList from './components/task-wizard-steps/FpDirectMessageList'
-import FpChooseBlockList from './components/task-wizard-steps/FpChooseBlockList'
 import FpGeographicalLocation from './components/task-wizard-steps/FpGeographicalLocation'
+import FpChooseBlockList from './components/task-wizard-steps/FpChooseBlockList'
+import FpChooseFollowUserCount from './components/task-wizard-steps/FpChooseFollowUserCount'
 
 Vue.component(VxTooltip.name, VxTooltip)
 Vue.component(VxCard.name, VxCard)
@@ -59,6 +60,8 @@ Vue.component(FpDirectMessageList.name, FpDirectMessageList)
 Vue.component(FpNewPulse.name, FpNewPulse)
 Vue.component(FpDirectMessageNumberOfActions.name, FpDirectMessageNumberOfActions)
 Vue.component(FpGeographicalLocation.name, FpGeographicalLocation)
+Vue.component(FpChooseFollowUserCount.name, FpChooseFollowUserCount)
+Vue.component(FpChooseBlockList.name, FpChooseBlockList)
 
 
 // v-select component

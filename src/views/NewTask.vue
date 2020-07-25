@@ -55,13 +55,15 @@
     >
       <fp-choose-where-user-resource
         @click="changeWizard"
-        v-if="resource === 4  || userList.length > 0"
+        v-if="resource === 4  || (userList.length > 0 && resource > 1)"
       />
 
       <fp-direct-message-list
         @click="changeWizard"
         v-if="directMessageSource === 1 || directMessageSource === 2"
       />
+
+      <fp-choose-follow-user-count v-if="resource === 1" />
     </tab-content>
 
     <!-- tab 5 content -->
@@ -78,13 +80,13 @@
 
     <!-- tab 6 content -->
     <tab-content
-      v-if="action === 2 ||resource === 4 ||directMessageSource === 1 ||  directMessageSource === 2"
+      v-if="action === 2 ||resource === 4 || resource=== 1 ||directMessageSource === 1 ||  directMessageSource === 2"
       class="mb-5"
       :before-change="validateStep6"
     >
       <fp-choose-speed-action
         @click="changeWizard"
-        v-if="whereUserResource > 0 ||directMessageSource === 1 ||  directMessageSource === 2"
+        v-if="whereUserResource > 0 ||directMessageSource === 1 ||  directMessageSource === 2|| resource=== 1"
       />
     </tab-content>
   </form-wizard>
@@ -95,6 +97,7 @@ import { FormWizard, TabContent } from 'vue-form-wizard';
 import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 import { mapFields } from 'vuex-map-fields';
 import { taskConfigurations } from '../middleware/enums';
+import { actionType, resource } from '@/middleware/enums';
 
 export default {
   methods: {
@@ -103,6 +106,8 @@ export default {
         if (this.action > 0) {
           resolve(true);
         } else {
+          this.showError('Choose action');
+
           reject('correct all values');
         }
       });
@@ -110,39 +115,105 @@ export default {
 
     validateStep2() {
       return new Promise((resolve, reject) => {
-        if (
-          this.resource > 0 ||
-          this.unfollowOption > 0 ||
-          this.directMessageSource > 0
+        if (this.resource <= 0 && this.action === actionType.follow) {
+          this.showError('Choose resouce');
+        } else if (
+          this.unfollowOption <= 0 &&
+          this.action === actionType.unfollow
         ) {
-          resolve(true);
+          this.showError('Choose unfollow resource');
+        } else if (
+          this.directMessageSource <= 0 &&
+          this.action === actionType.direct
+        ) {
+          this.showError('Choose direct message resouce');
         } else {
-          reject('correct all values');
+          resolve(true);
+
+          return;
         }
+
+        reject('correct all values');
       });
     },
 
     validateStep3() {
       return new Promise((resolve, reject) => {
         if (
-          this.directMessageSource > 0 ||
-          this.userList.length > 0 ||
-          this.maximumNumberTransactions > 0
+          this.resource === resource.geographicalLocation &&
+          this.georaphicalLocations.length <= 0 &&
+          this.interactWithPosts === false &&
+          this.action === actionType.follow
         ) {
-          resolve(true);
+          this.showError(
+            'You must specify the geographical locations of the posts.'
+          );
+        } else if (
+          this.resource === resource.geographicalLocation &&
+          this.georaphicalLocations.length > 0 &&
+          this.interactWithPosts === true &&
+          this.interactWithPostsDays <= 0 &&
+          this.action === actionType.follow
+        ) {
+          this.showError(
+            'You must specify the number of days to interact with posts.'
+          );
+        } else if (
+          this.directMessageSource <= 0 &&
+          this.action === actionType.direct
+        ) {
+          this.showError('Choose direct message source.');
+        } else if (
+          this.userList.length <= 0 &&
+          this.action === actionType.follow &&
+          this.resource === resource.user
+        ) {
+          this.showError('Write a usernames.');
+        } else if (
+          this.userList.length <= 0 &&
+          this.action === actionType.follow &&
+          this.resource !== resource.geographicalLocation
+        ) {
+          this.showError('Choose user list.');
         } else {
-          reject('correct all values');
+          resolve(true);
+
+          return;
         }
+
+        reject('correct all values');
       });
     },
 
     validateStep4() {
       return new Promise((resolve, reject) => {
-        if (this.directMessage.length > 0 || this.userList.length > 0) {
-          resolve(true);
+        if (
+          this.directMessage.length <= 0 &&
+          this.action === actionType.direct
+        ) {
+          this.showError('Choose direct message list.');
+        } else if (!(this.maximumNumberTransactions > 0)) {
+          this.showError('Choose transactions count');
+        } else if (
+          this.whereUserResource === 0 &&
+          this.action === actionType.follow &&
+          (this.resource === resource.user ||
+            this.resource === resource.userList)
+        ) {
+          this.showError('Choose user source.');
+        } else if (
+          this.userList.length <= 0 &&
+          this.action === actionType.follow &&
+          this.resource === resource.userList
+        ) {
+          this.showError('Choose direct user list.');
         } else {
-          reject('correct all values');
+          resolve(true);
+
+          return;
         }
+
+        reject('correct all values');
       });
     },
 
@@ -161,6 +232,8 @@ export default {
         if (this.intervalSpeed > 0) {
           resolve(true);
         } else {
+          this.showError('Choose speed');
+
           reject('correct all values');
         }
       });
@@ -168,6 +241,16 @@ export default {
 
     changeWizard() {
       this.$refs.wizard.nextTab();
+    },
+
+    showError(text) {
+      this.$vs.notify({
+        text: text,
+        color: 'danger',
+        position: 'top-center',
+        iconPack: 'feather',
+        icon: 'icon-alert-triangle',
+      });
     },
 
     createTask() {
@@ -211,6 +294,7 @@ export default {
       },
     };
   },
+
   computed: {
     ...mapFields([
       'taskConfigurations',
@@ -223,8 +307,12 @@ export default {
       'taskConfigurations.directMessage',
       'taskConfigurations.intervalSpeed',
       'taskConfigurations.maximumNumberTransactions',
+      'taskConfigurations.interactWithPosts',
+      'taskConfigurations.interactWithPostsDays',
+      'taskConfigurations.georaphicalLocations',
     ]),
   },
+
   components: {
     FormWizard,
     TabContent,

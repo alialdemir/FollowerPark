@@ -24,7 +24,6 @@ const taskUnfollowAction = {
                     }
                 });
         } else {
-
             let userIds = getObjBywhereUserResource(taskInfo, taskInfo.whereUserResource.result, taskInfo.action.id);
             urls = userIds.map((item) => {
                 const user = item.owner || item;
@@ -44,8 +43,6 @@ const taskUnfollowAction = {
 
                 return false;
             }
-
-
 
             const unfollowOptions = taskInfo.task.unfollowOption;
             if (unfollowOptions === unfollowOption.listofBlocks) {

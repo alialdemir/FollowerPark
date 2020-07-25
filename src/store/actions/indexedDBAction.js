@@ -32,6 +32,7 @@ export function getItems(dbName) {
 
 const indexedDBAction = {
 
+
     initDatabase() {
         dbReq = indexedDB.open('FollowersPark', 2);
         dbReq.onupgradeneeded = function(event) {

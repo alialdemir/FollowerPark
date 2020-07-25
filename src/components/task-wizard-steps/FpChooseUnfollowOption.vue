@@ -3,7 +3,7 @@
     <div
       :key="indextr"
       v-for="(item, indextr) in unfollowOptions"
-      class="vx-col w-1/2 md:w-1/3 xl:w-1/4"
+      class="vx-col w-1/2 md:w-1/3 xl:w-1/4 pr-2"
     >
       <div @click="chooseUnfollowOption(item)">
         <statistics-card-line
@@ -28,14 +28,14 @@ import { whereUserResourceType } from '@/middleware/enums';
 export default {
   name: 'fp-choose-unfollow-option',
   components: {
-    StatisticsCardLine
+    StatisticsCardLine,
   },
   computed: {
     ...mapFields([
       'taskConfigurations.unfollowOption',
       'AppActiveUser',
-      'unfollowOptions'
-    ])
+      'unfollowOptions',
+    ]),
   },
   methods: {
     chooseUnfollowOption(unfollowOption) {
@@ -43,7 +43,7 @@ export default {
         this.$store.dispatch('setTaskConfigurations', {
           userId: this.AppActiveUser.uid,
           unfollowOption: unfollowOption.id,
-          whereUserResource: whereUserResourceType.following
+          whereUserResource: whereUserResourceType.following,
         });
 
         this.$emit('click');
@@ -51,10 +51,10 @@ export default {
         this.$vs.notify({
           title: 'This unfollow options will be added very soon.',
           color: 'danger',
-          position: 'top-center'
+          position: 'top-center',
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>

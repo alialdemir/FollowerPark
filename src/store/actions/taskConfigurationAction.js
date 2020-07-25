@@ -16,7 +16,6 @@ const taskConfigurationAction = {
             .filter(item => item.id === taskInfo.task.action)
             .shift();
 
-
         if (taskInfo.task.whereUserResource > 0) {
             whereUserResource = taskInfo
                 .whereUserResources

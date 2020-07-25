@@ -132,6 +132,7 @@ export default {
         color: 'success',
         title: 'Deleted task',
         text: 'The selected task was successfully deleted',
+        position: 'top-center',
       });
 
       this.$store.dispatch('deleteTask', this.selectedTask.id);

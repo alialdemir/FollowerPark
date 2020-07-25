@@ -1,5 +1,5 @@
 <template>
-  <vx-card title="AChoose block list">
+  <vx-card title="Choose block list">
     <vs-row>
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="10">
         <vs-select v-model="userList" @change="onChangeBlockList" class="w-full select-large">

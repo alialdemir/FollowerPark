@@ -10,12 +10,15 @@
 <template>
   <vx-card class="overflow-hidden statistics-card-min-height">
     <div slot="no-body">
+      <div v-if="isActive=== true" class="space"></div>
       <feather-icon
-        :icon="isActive === true ? 'CheckIcon' : 'XIcon'"
+        v-if="isActive === false"
+        :icon="isActive === true ? 'CheckIcon' : isActive === false ? 'XIcon' : ''"
         class="inline-flex rounded-full mx-2 text-right mt-2"
         :class="[`text-dark`, {'mb-4': !iconRight}]"
         :style="{background: `rgba(var(--vs-${isActive === true ? 'success' : 'danger'}))`}"
       ></feather-icon>
+
       <fp-new-pulse v-if="isNewPulse" class="inline-flex self-end absolute" />
 
       <div
@@ -202,5 +205,9 @@ export default {
 .new-pulse {
   right: 50px;
   top: 10px;
+}
+
+.space {
+  height: 46px;
 }
 </style>
