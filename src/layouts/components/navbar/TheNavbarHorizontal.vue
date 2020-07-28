@@ -55,15 +55,15 @@ export default {
     logo: { type: String },
     navbarType: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     Logo,
     Bookmarks,
     SearchBar,
     NotificationDropDown,
-    ProfileDropDown
+    ProfileDropDown,
   },
   computed: {
     navbarColor() {
@@ -104,8 +104,8 @@ export default {
     },
     windowWidth() {
       return this.$store.state.windowWidth;
-    }
-  }
+    },
+  },
 };
 </script>
 

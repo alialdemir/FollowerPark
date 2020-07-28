@@ -20,7 +20,70 @@ const router = new Router({
         return { x: 0, y: 0 }
     },
     routes: [
-
+        // =============================================================================
+        // FULL PAGE LAYOUTS
+        // =============================================================================
+        {
+            path: '',
+            component: () =>
+                import ('@/layouts/full-page/FullPage.vue'),
+            children: [
+                // =============================================================================
+                // PAGES
+                // =============================================================================
+                {
+                    path: '/',
+                    name: 'home',
+                    component: () =>
+                        import ('@/views/pages/SPA/Home.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/login',
+                    name: 'page-login',
+                    component: () =>
+                        import ('@/views/pages/Login.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/register',
+                    name: 'page-register',
+                    component: () =>
+                        import ('@/views/pages/Register.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/forgot-password',
+                    name: 'forgot-password',
+                    component: () =>
+                        import ('@/views/pages/ForgotPassword.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/reset-password',
+                    name: 'reset-password',
+                    component: () =>
+                        import ('@/views/pages/ResetPassword.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/pages/error-404',
+                    name: 'page-error-404',
+                    component: () =>
+                        import ('@/views/pages/Error404.vue')
+                },
+            ]
+        },
         {
             // =============================================================================
             // MAIN LAYOUT ROUTES
@@ -76,31 +139,7 @@ const router = new Router({
                 },
             ],
         },
-        // =============================================================================
-        // FULL PAGE LAYOUTS
-        // =============================================================================
-        {
-            path: '',
-            component: () =>
-                import ('@/layouts/full-page/FullPage.vue'),
-            children: [
-                // =============================================================================
-                // PAGES
-                // =============================================================================
-                {
-                    path: '/pages/login',
-                    name: 'page-login',
-                    component: () =>
-                        import ('@/views/pages/Login.vue')
-                },
-                {
-                    path: '/pages/error-404',
-                    name: 'page-error-404',
-                    component: () =>
-                        import ('@/views/pages/Error404.vue')
-                },
-            ]
-        },
+
         // Redirect to 404 page, if no match found
         {
             path: '*',

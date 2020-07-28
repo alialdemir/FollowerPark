@@ -20,7 +20,7 @@ import themeConfig from '@/../themeConfig.js';
 export default {
   data() {
     return {
-      vueAppClasses: []
+      vueAppClasses: [],
     };
   },
   watch: {
@@ -29,7 +29,7 @@ export default {
     },
     '$vs.rtl'(val) {
       document.documentElement.setAttribute('dir', val ? 'rtl' : 'ltr');
-    }
+    },
   },
   methods: {
     toggleClassInBody(className) {
@@ -62,7 +62,7 @@ export default {
     },
     handleScroll() {
       this.$store.commit('UPDATE_WINDOW_SCROLL_Y', window.scrollY);
-    }
+    },
   },
   mounted() {
     this.toggleClassInBody(themeConfig.theme);
@@ -82,6 +82,6 @@ export default {
   destroyed() {
     window.removeEventListener('resize', this.handleWindowResize);
     window.removeEventListener('scroll', this.handleScroll);
-  }
+  },
 };
 </script>
