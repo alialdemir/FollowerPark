@@ -13,7 +13,7 @@
             "128": "logo128x128.png",
             "256": "logo256x256.png"
         },
-        "default_title": "FollowerPark"
+        "default_title": "FollowerPark",
     },
     "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-bfWzfxE6viwRJzKroi9VJpG8JQm1iw3+o0Fc2fA3/jE=' object-src 'self'",
     "description": "Follow users on Instagram (or stop following)",

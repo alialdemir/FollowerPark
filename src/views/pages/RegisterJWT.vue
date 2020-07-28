@@ -47,11 +47,12 @@ Author URL: http://www.themeforest.net/user/pixinvent
       class="w-full mt-6"
     />
     <span class="text-danger text-sm">{{ errors.first('confirm_password') }}</span>
+    <div class="flex items-center flex-wrap">
+      <vs-checkbox v-model="isTermsConditionAccepted" class="mt-6"></vs-checkbox>
+      <a target="_blank" href="/policy">GİZLİLİK SÖZLEŞMESİ</a>&nbsp; ve
+      <a class="lg:ml-10" target="_blank" href="/offer">KULLANICI SÖZLEŞMESİ̇</a>&nbsp;kabul ediyorum.
+    </div>
 
-    <vs-checkbox
-      v-model="isTermsConditionAccepted"
-      class="mt-6"
-    >Şartlar ve koşulları kabul ediyorum.</vs-checkbox>
     <vs-button type="border" to="/login" class="mt-6">Giriş Yap</vs-button>
     <vs-button class="float-right mt-6" @click="registerUserJWt" :disabled="!validateForm">Üye Ol</vs-button>
   </div>

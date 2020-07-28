@@ -26,26 +26,30 @@ class AuthService extends EventEmitter {
     }
 
     localLogin(authResult) {
-        this.idToken = authResult.idToken;
-        this.profile = authResult.idTokenPayload;
+        return new Promise((resolve, reject) => {
+            this.idToken = authResult.idToken;
+            this.profile = authResult.idTokenPayload;
 
-        // Convert the JWT expiry time from seconds to milliseconds
-        this.tokenExpiry = new Date(this.profile.exp * 1000);
-        localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
-        localStorage.setItem(localStorageKey, 'true');
+            // Convert the JWT expiry time from seconds to milliseconds
+            this.tokenExpiry = new Date(this.profile.exp * 1000);
+            localStorage.setItem(tokenExpiryKey, this.tokenExpiry);
+            localStorage.setItem(localStorageKey, 'true');
 
-        store.commit("UPDATE_USER_INFO", {
-            displayName: this.profile.name,
-            email: this.profile.email,
-            photoURL: this.profile.picture,
-            providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
-            uid: this.profile.sub
-        })
+            store.commit("UPDATE_USER_INFO", {
+                displayName: this.profile.name,
+                email: this.profile.email,
+                photoURL: this.profile.picture,
+                providerId: this.profile.sub.substr(0, this.profile.sub.indexOf('|')),
+                uid: this.profile.sub
+            })
 
-        this.emit(loginEvent, {
-            loggedIn: true,
-            profile: authResult.idTokenPayload,
-            state: authResult.appState || {}
+            this.emit(loginEvent, {
+                loggedIn: true,
+                profile: authResult.idTokenPayload,
+                state: authResult.appState || {}
+            });
+
+            resolve(true);
         });
     }
 
@@ -74,7 +78,6 @@ class AuthService extends EventEmitter {
 
     isAuthenticated() {
         return (
-            new Date(Date.now()) < new Date(localStorage.getItem(tokenExpiryKey)) &&
             localStorage.getItem(localStorageKey) === 'true'
         );
     }

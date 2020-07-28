@@ -30,6 +30,7 @@
                 size="small"
                 color="primary"
                 type="flat"
+                :to="subItem.link"
                 class="w-full text-left"
               >{{subItem.text}}</vs-button>
             </template>

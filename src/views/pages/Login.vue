@@ -55,7 +55,7 @@
                     <router-link to="forgot-password">Şifremi unuttum?</router-link>
                   </div>
                   <vs-button to="/register" type="border">Üye Ol</vs-button>
-                  <vs-button class="float-right">Giriş Yap</vs-button>
+                  <vs-button class="float-right" @click="login">Giriş Yap</vs-button>
                 </div>
               </div>
             </div>
@@ -67,6 +67,8 @@
 </template>
 
 <script>
+import authService from '@/middleware/authService';
+
 export default {
   data() {
     return {
@@ -74,6 +76,24 @@ export default {
       password: '',
       checkbox_remember_me: false,
     };
+  },
+  methods: {
+    async login() {
+      const isAuthenticated = await authService.localLogin({
+        idToken: '12',
+        idTokenPayload: {
+          name: 'ali',
+          email: 'aa@ss.com',
+          picture: '#',
+          sub: '|',
+          exp: new Date().getTime(),
+        },
+      });
+
+      if (isAuthenticated) {
+        this.$router.push({ path: '/tasks' });
+      }
+    },
   },
 };
 </script>

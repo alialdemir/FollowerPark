@@ -11,7 +11,7 @@
          followerParkIframe.style.width = '414px';
          followerParkIframe.style.left = '0';
          followerParkIframe.style.top = '0';
-         followerParkIframe.style.zIndex = '99999'; *
+         followerParkIframe.style.zIndex = '99999';
          */
 
          followerParkIframe.src = 'https://www.instagram.com/?followpark=1';

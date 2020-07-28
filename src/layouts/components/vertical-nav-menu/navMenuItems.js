@@ -9,7 +9,7 @@
 
 
 export default [{
-    url: "/",
+    url: "/tasks",
     name: "task",
     slug: "Task",
     icon: "CheckSquareIcon",

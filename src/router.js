@@ -78,6 +78,24 @@ const router = new Router({
                     }
                 },
                 {
+                    path: '/offer',
+                    name: 'offer',
+                    component: () =>
+                        import ('@/views/pages/Offer.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
+                    path: '/policy',
+                    name: 'policy',
+                    component: () =>
+                        import ('@/views/pages/Policy.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
+                },
+                {
                     path: '/pages/error-404',
                     name: 'page-error-404',
                     component: () =>
@@ -96,14 +114,8 @@ const router = new Router({
                 // =============================================================================
                 // Theme Routes
                 // =============================================================================
-                /*   {
-                       path: '/',
-                       name: 'home',
-                       component: () =>
-                           import ('./views/Home.vue')
-                   },*/
                 {
-                    path: '/',
+                    path: '/tasks',
                     name: 'task',
                     component: () =>
                         import ('./views/Task.vue')
@@ -160,21 +172,27 @@ router.afterEach(() => {
 
 
 router.beforeEach((to, from, next) => {
-
     if (
-        to.path === "/" ||
         to.path === "/login" ||
         to.path === "/forgot-password" ||
-        to.path === "/error-404" ||
-        to.path === "/error-500" ||
         to.path === "/register" ||
-        (auth.isAuthenticated())
+        to.path === "/offer" ||
+        to.path === "/policy" ||
+        to.path === "/error-404" ||
+        to.path === "/error-500"
     ) {
         return next();
     }
 
+    const isAuthenticated = auth.isAuthenticated();
+    if (to.path === '/' && isAuthenticated) {
+        router.push({ path: '/tasks' });
+
+        return;
+    }
+
     // If auth required, check login. If login fails redirect to login page
-    if (!(auth.isAuthenticated())) {
+    if (to.path !== '/' && !isAuthenticated) {
         router.push({ path: '/login', query: { to: to.path } })
     }
 
