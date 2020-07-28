@@ -10,6 +10,7 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
+import auth from "@/middleware/authService";
 
 Vue.use(Router)
 
@@ -155,5 +156,30 @@ router.afterEach(() => {
         appLoading.style.display = "none";
     }
 })
+
+
+
+router.beforeEach((to, from, next) => {
+
+    if (
+        to.path === "/" ||
+        to.path === "/login" ||
+        to.path === "/forgot-password" ||
+        to.path === "/error-404" ||
+        to.path === "/error-500" ||
+        to.path === "/register" ||
+        (auth.isAuthenticated())
+    ) {
+        return next();
+    }
+
+    // If auth required, check login. If login fails redirect to login page
+    if (!(auth.isAuthenticated())) {
+        router.push({ path: '/login', query: { to: to.path } })
+    }
+
+    return next()
+
+});
 
 export default router

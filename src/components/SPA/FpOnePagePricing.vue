@@ -33,7 +33,7 @@
             color="primary"
             class="absolute w-full mt--10 bg-warning"
           >En Çok Tercih Edilen</vs-chip>
-          <div class="product-card-title mb-8 mt-8">
+          <div class="product-card-title mb-4 mt-6">
             <h3
               class="font-weight-bold text-uppercase"
               :class="{'text-white':item.isBestSeller, 'text-primary':!item.isBestSeller }"

@@ -39,7 +39,7 @@
         <h1 class="text-white font-bold text-4xl">Organik olarak instagram takipçilerini artır</h1>
         <p
           class="mb-4 mx-auto mt-4 text-xl max-w-6xl text-white"
-        >Instagram sayfanızı doğal yollardan büyütmenin en etkili yolu FollowPark servisi. Sizin belirlediğiniz eylemlerde beğeni, takip, yorum, direk mesaj ve daha birçok işlemi otomatik olarak yapar. Instagram takipçi hilesi yapmadan organik olarak arttırmanın en kolay yolu!</p>
+        >Instagram sayfanızı doğal yollardan büyütmenin en etkili yolu FollowPark servisi. Sizin belirlediğiniz eylemlerde beğeni, takip, yorum, direk mesaj ve daha birçok işlemi otomatik olarak yapar. Instagram takipçi hilesi yapmadan organik olarak takipçi arttırmanın en kolay yolu!</p>
         <vs-button
           color="warning"
           type="filled"
