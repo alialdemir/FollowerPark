@@ -1,9 +1,9 @@
 <template>
   <div>
     <vx-card
-      title="Direct Messages"
+      :title="$t('DirectMessages')"
       :refreshContentAction="true"
-      newButtonText="Create Direct Messages"
+      :newButtonText="$t('CreateDirectMessages')"
       :addCardAction="true"
       @refresh="closeCardAnimation"
       @add="isShowCreatePanel=true"
@@ -12,8 +12,8 @@
       <vs-table stripe :data="directMessages">
         <template slot="thead">
           <vs-th style="width:50px"></vs-th>
-          <vs-th>List name</vs-th>
-          <vs-th>Count</vs-th>
+          <vs-th>{{$t('ListName')}}</vs-th>
+          <vs-th>{{$t('Count')}}</vs-th>
         </template>
 
         <template slot-scope="{data}">
@@ -31,7 +31,7 @@
                       color="dark"
                       type="flat"
                       @click="selectedDirectMessage = item; isShowCreatePanel=true"
-                    >Edit</vs-button>
+                    >{{$t('Edit')}}</vs-button>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <vs-button
@@ -39,7 +39,7 @@
                       color="danger"
                       type="flat"
                       @click="deleteDirectMessage(item)"
-                    >Delete</vs-button>
+                    >{{$t('Delete')}}</vs-button>
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
               </vs-dropdown>
@@ -55,7 +55,7 @@
     <vs-popup
       v-if="isShowCreatePanel"
       :button-close-hidden="true"
-      :title="selectedDirectMessage.id === 0 ?'Create Direct Message': 'Edit Direct Message'"
+      :title="$t(selectedDirectMessage.id === 0 ?'CreateDirectMessages': 'EditDirectMessages')"
       fullscreen
       :active.sync="isShowCreatePanel"
     >
@@ -68,6 +68,8 @@
 </template>
 
 <script>
+import i18n from '@/i18n/i18n';
+
 export default {
   name: 'fp-direct-messages',
 
@@ -134,17 +136,19 @@ export default {
         type: 'confirm',
         'accept-text': 'Delete',
         color: 'danger',
-        title: `Delete direct messages?`,
-        text: 'Are you sure you want to delete the direct messages?',
+        title: i18n.t('DeleteDirectMessages') + '?',
+        text: i18n.t('AreYouSureYouWantToDeleteTheDirectMessages'),
         accept: this.deleteDirectMessageAccept,
+        'accept-text': i18n.t('Accept'),
+        'cancel-text': i18n.t('Cancel'),
       });
     },
 
     deleteDirectMessageAccept() {
       this.$vs.notify({
         color: 'success',
-        title: 'Deleted direct messages',
-        text: 'The selected direct messages was successfully deleted',
+        title: i18n.t('DeleteDirectMessages'),
+        text: i18n.t('TheSelectedDirectMessagesWasSuccessfullyDeleted'),
       });
 
       this.$store.dispatch(

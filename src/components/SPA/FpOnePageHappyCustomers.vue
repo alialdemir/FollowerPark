@@ -11,7 +11,7 @@
           class="text-center"
         >
           <vs-divider>
-            <h2 class="font-bold text-primary">MUTLU MÜŞTERİLERİMİZ</h2>
+            <h2 class="font-bold text-primary uppercase">{{$t('HappyCustomers')}}</h2>
           </vs-divider>
         </vs-col>
         <vs-col

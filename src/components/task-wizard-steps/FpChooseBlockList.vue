@@ -1,5 +1,5 @@
 <template>
-  <vx-card title="Choose block list">
+  <vx-card :title="$t('ChooseBlockList')">
     <vs-row>
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="10">
         <vs-select v-model="userList" @change="onChangeBlockList" class="w-full select-large">
@@ -12,7 +12,11 @@
         </vs-select>
       </vs-col>
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
-        <vs-button color="primary" type="border" :to="{ path: '/block-list?q=c'}">CREATE LIST</vs-button>
+        <vs-button
+          color="primary"
+          type="border"
+          :to="{ path: '/block-list?q=c'}"
+        >{{$t('CreateList')}}</vs-button>
       </vs-col>
     </vs-row>
   </vx-card>

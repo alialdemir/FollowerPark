@@ -11,7 +11,7 @@
           class="text-center"
         >
           <vs-divider>
-            <h2 class="font-bold text-primary">ÇOK SORULAN SORULAR</h2>
+            <h2 class="font-bold text-primary uppercase">{{$t('Faq')}}</h2>
           </vs-divider>
         </vs-col>
         <vs-col vs-type="flex" vs-lg="7" vs-sm="6" class="mt-4" vs-xs="12">

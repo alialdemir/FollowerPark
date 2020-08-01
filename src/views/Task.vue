@@ -1,7 +1,7 @@
 
 <template>
   <vx-card
-    title="Tasks"
+    :title="$t('Tasks')"
     :refreshContentAction="true"
     :addCardAction="true"
     @refresh="closeCardAnimation"
@@ -11,10 +11,10 @@
     <vs-table stripe :data="tasks">
       <template slot="thead">
         <vs-th style="width:50px"></vs-th>
-        <vs-th>Status</vs-th>
-        <vs-th>Action</vs-th>
-        <vs-th>Resource</vs-th>
-        <vs-th>Total</vs-th>
+        <vs-th>{{$t('Status')}}</vs-th>
+        <vs-th>{{$t('Action')}}</vs-th>
+        <vs-th>{{$t('Resource')}}</vs-th>
+        <vs-th>{{$t('Total')}}</vs-th>
       </template>
 
       <template slot-scope="{data}">
@@ -33,7 +33,7 @@
                     :color="item.status === 1 ? 'danger' : 'success'"
                     type="flat"
                     @click="changeTaskStatus(item)"
-                  >{{item.status === 1 ? 'Stop' : 'Start'}}</vs-button>
+                  >{{$t(item.status === 1 ? 'Stop' : 'Start')}}</vs-button>
                 </vs-dropdown-item>
                 <vs-dropdown-item>
                   <vs-button
@@ -41,7 +41,7 @@
                     color="dark"
                     type="flat"
                     @click="popupActivo4 = true; selectedTask = item"
-                  >Detail</vs-button>
+                  >{{$t('Detail')}}</vs-button>
                 </vs-dropdown-item>
                 <vs-dropdown-item divider>
                   <vs-button
@@ -50,7 +50,7 @@
                     :disabled="item.status !== 0 && item.numberTransactions !== item.maximumNumberTransactions"
                     type="flat"
                     @click="deleteTask(item)"
-                  >Delete</vs-button>
+                  >{{$t('Delete')}}</vs-button>
                 </vs-dropdown-item>
               </vs-dropdown-menu>
             </vs-dropdown>
@@ -60,7 +60,7 @@
               disabled
               :color="item.status === 1 ? 'success' : 'danger'"
               type="flat"
-            >{{item.status === 1 ? 'Running' : 'Stopped'}}</vs-button>
+            >{{$t(item.status === 1 ? 'Running' : 'Stopped')}}</vs-button>
           </vs-td>
           <vs-td>{{ taskActions(item.action) }}</vs-td>
           <vs-td>{{ resources(item) }}</vs-td>
@@ -69,7 +69,7 @@
       </template>
     </vs-table>
 
-    <vs-popup fullscreen title="Task Detail" :active.sync="popupActivo4">
+    <vs-popup fullscreen :title="$t('TaskDetail')" :active.sync="popupActivo4">
       <fp-task-tabs
         :task="selectedTask"
         :logs="$store.state.logs"
@@ -81,6 +81,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import i18n from '@/i18n/i18n';
 
 export default {
   data() {
@@ -119,10 +120,11 @@ export default {
 
       this.$vs.dialog({
         type: 'confirm',
-        'accept-text': 'Delete',
         color: 'danger',
-        title: `Delete task?`,
-        text: 'Are you sure you want to delete the task?',
+        title: i18n.t('DeleteTask') + '?',
+        text: i18n.t('AreYouSureYouWantToDeleteTheTask'),
+        'accept-text': i18n.t('Accept'),
+        'cancel-text': i18n.t('Cancel'),
         accept: this.deleteTaskAccept,
       });
     },
@@ -130,8 +132,8 @@ export default {
     deleteTaskAccept() {
       this.$vs.notify({
         color: 'success',
-        title: 'Deleted task',
-        text: 'The selected task was successfully deleted',
+        title: i18n.t('DeleteTask'),
+        text: i18n.t('TheSelectedTaskWasSuccessfullyDeleted'),
         position: 'top-center',
       });
 
@@ -141,7 +143,7 @@ export default {
 
   created() {
     this.$vs.loading({
-      text: 'Connecting to your Instagram account...',
+      text: i18n.t('ConnectingToYourInstagramAccount'),
     });
 
     setTimeout(() => {

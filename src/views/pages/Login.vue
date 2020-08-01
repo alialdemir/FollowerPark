@@ -24,7 +24,7 @@
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-4">
-                  <h4 class="mb-4">Giriş Yap</h4>
+                  <h4 class="mb-4">{{$t('SignIn')}}</h4>
                   <p>&nbsp;</p>
                 </div>
 
@@ -34,7 +34,7 @@
                     icon-no-border
                     icon="icon icon-user"
                     icon-pack="feather"
-                    label-placeholder="Eposta"
+                    :label-placeholder="$t('Email')"
                     v-model="email"
                     class="w-full"
                   />
@@ -45,17 +45,17 @@
                     icon-no-border
                     icon="icon icon-lock"
                     icon-pack="feather"
-                    label-placeholder="Şifre"
+                    :label-placeholder="$t('Password')"
                     v-model="password"
                     class="w-full mt-6"
                   />
 
                   <div class="flex flex-wrap justify-end my-5">
                     <!-- <vs-checkbox v-model="checkbox_remember_me" class="mb-3">Beni Hatırla</vs-checkbox> -->
-                    <router-link to="forgot-password">Şifremi unuttum?</router-link>
+                    <router-link to="forgot-password">{{$t('ForgotPassword')}}</router-link>
                   </div>
-                  <vs-button to="/register" type="border">Üye Ol</vs-button>
-                  <vs-button class="float-right" @click="login">Giriş Yap</vs-button>
+                  <vs-button to="/register" type="border">{{$t('SignUp')}}</vs-button>
+                  <vs-button class="float-right" @click="login">{{$t('SignIn')}}</vs-button>
                 </div>
               </div>
             </div>

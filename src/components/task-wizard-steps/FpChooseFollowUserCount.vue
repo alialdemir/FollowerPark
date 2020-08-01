@@ -1,14 +1,12 @@
 <template>
-  <div>
-    <vx-card title="How many subscriptions do you need to complete?">
-      <vs-input-number
-        v-model="maximumNumberTransactions"
-        label="Follow user count:"
-        class="justify-start bg-transparent"
-      />
-      <vs-checkbox disabled color="success" value="true">Skip users that are already follow.</vs-checkbox>
-    </vx-card>
-  </div>
+  <vx-card :title="$t('HowManySubscriptionsDoYouNeedToComplete')">
+    <vs-input-number
+      v-model="maximumNumberTransactions"
+      :label="$t('FollowUserCount')"
+      class="justify-start bg-transparent"
+    />
+    <vs-checkbox disabled color="success" value="true">{{$t('SkipUsersThatAreAlreadyFollow')}}</vs-checkbox>
+  </vx-card>
 </template>
 
 <script>
@@ -21,6 +19,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .vs-input-number--input {
   border: 1px solid #ddd;

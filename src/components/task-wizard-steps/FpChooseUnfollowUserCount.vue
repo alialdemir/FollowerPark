@@ -1,13 +1,12 @@
 <template>
   <div>
-    <vx-card title="How many followers should not be followed?">
+    <vx-card :title="$t('HowManyFollowersShouldNotBeFollowed')">
       <vs-input-number
         v-model="maximumNumberTransactions"
-        label="Unfollow user count:"
+        :label="$t('UnfollowUserCount')"
         class="justify-start bg-transparent"
       />
     </vx-card>
- 
   </div>
 </template>
 
@@ -17,10 +16,8 @@ import { mapFields } from 'vuex-map-fields';
 export default {
   name: 'fp-choose-unfollow-user-count',
   computed: {
-    ...mapFields([
-      'taskConfigurations.maximumNumberTransactions',
-    ])
-  }
+    ...mapFields(['taskConfigurations.maximumNumberTransactions']),
+  },
 };
 </script>
 <style>

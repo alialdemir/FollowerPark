@@ -12,8 +12,8 @@
           :textColor="unfollowOption === item.id ? 'warning' : 'white'"
           :icon="item.icon"
           :isActive="item.disabled"
-          :statistic="item.text"
-          :statisticTitle="item.description"
+          :statistic="$t(item.text)"
+          :statisticTitle="$t(item.description)"
         />
       </div>
     </div>
@@ -47,12 +47,6 @@ export default {
         });
 
         this.$emit('click');
-      } else {
-        this.$vs.notify({
-          title: 'This unfollow options will be added very soon.',
-          color: 'danger',
-          position: 'top-center',
-        });
       }
     },
   },

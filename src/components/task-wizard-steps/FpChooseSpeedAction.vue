@@ -7,8 +7,8 @@
       :color="intervalSpeed === item.id ? 'success' : 'primary'"
       type="border"
     >
-      <b class="inline-block">{{item.text}}</b>
-      <div>{{item.subText}}</div>
+      <b class="inline-block">{{$t(item.text)}}</b>
+      <div class="uppercase">{{$t(item.subText)}}</div>
     </vs-button>
   </div>
 </template>
@@ -20,10 +20,10 @@ import { mapFields } from 'vuex-map-fields';
 export default {
   name: 'fp-choose-speed-action',
   components: {
-    StatisticsCardLine
+    StatisticsCardLine,
   },
   computed: {
-    ...mapFields(['taskConfigurations.intervalSpeed', 'speedTypes'])
-  }
+    ...mapFields(['taskConfigurations.intervalSpeed', 'speedTypes']),
+  },
 };
 </script>

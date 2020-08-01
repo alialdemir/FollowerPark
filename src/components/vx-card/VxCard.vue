@@ -51,7 +51,7 @@
               @click="addCard"
               type="filled"
               v-if="actionButtons || addCardAction"
-            >{{newButtonText}}</vs-button>
+            >{{$t(newButtonText)}}</vs-button>
 
             <feather-icon
               @click="toggleContent"
@@ -133,55 +133,55 @@ export default {
     subtitle: String,
     actionButtons: {
       type: Boolean,
-      default: false
+      default: false,
     },
     actionButtonsColor: {
       type: String,
-      default: 'success'
+      default: 'success',
     },
     newButtonText: {
       type: String,
-      default: 'Create Task'
+      default: 'CreateTask',
     },
     codeToggler: {
       type: Boolean,
-      default: false
+      default: false,
     },
     noShadow: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     noRadius: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     cardBorder: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     codeLanguage: {
       default: 'markup',
-      type: String
+      type: String,
     },
     collapseAction: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     refreshContentAction: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     removeCardAction: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     addCardAction: {
       default: false,
-      type: Boolean
+      type: Boolean,
     },
     headerBackground: {
       default: '',
-      type: String
+      type: String,
     },
     // bodyBackground: {
     //   default: '',
@@ -193,20 +193,20 @@ export default {
     // },
     cardBackground: {
       default: '',
-      type: String
+      type: String,
     },
     contentColor: {
       default: '',
-      type: String
+      type: String,
     },
     titleColor: {
       default: '',
-      type: String
+      type: String,
     },
     subtitleColor: {
       default: '#b8c2cc',
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
@@ -215,7 +215,7 @@ export default {
       maxHeight: null,
       cardMaxHeight: null,
       codeContainerMaxHeight: '0px',
-      tempHidden: false
+      tempHidden: false,
     };
   },
   computed: {
@@ -264,7 +264,7 @@ export default {
     },
     titleStyles() {
       return {
-        color: _color.getColor(this.titleColor)
+        color: _color.getColor(this.titleColor),
       };
     },
     titleClasses() {
@@ -293,7 +293,7 @@ export default {
       }
 
       return str.trim();
-    }
+    },
   },
   methods: {
     toggleContent() {
@@ -318,7 +318,7 @@ export default {
     refreshcard() {
       this.$vs.loading({
         container: this.$refs.content,
-        scale: 0.5
+        scale: 0.5,
       });
       this.tempHidden = true;
       this.$emit('refresh', this);
@@ -358,11 +358,11 @@ export default {
           this.tempHidden = false;
         }, 150);
       }
-    }
+    },
   },
   components: {
-    Prism
-  }
+    Prism,
+  },
 };
 </script>
 

@@ -11,13 +11,13 @@
         vs-w="3"
       >
         <vs-list>
-          <vs-list-header :title="item.headerTitle" color="dark"></vs-list-header>
+          <vs-list-header :title="$t(item.headerTitle)" color="dark"></vs-list-header>
           <vs-list-item
             v-show="item.type === 1"
             class="ml-0"
             v-for="(subItem, indextrSubItem1) in item.subItems"
           >
-            <template slot="avatar">{{subItem.text}}</template>
+            <template slot="avatar">{{$t(subItem.text)}}</template>
           </vs-list-item>
 
           <vs-list-item
@@ -31,8 +31,8 @@
                 color="primary"
                 type="flat"
                 :to="subItem.link"
-                class="w-full text-left"
-              >{{subItem.text}}</vs-button>
+                class="w-full text-left pl-0"
+              >{{$t(subItem.text)}}</vs-button>
             </template>
           </vs-list-item>
 
@@ -61,21 +61,20 @@ export default {
         type: 1,
         subItems: [
           {
-            text:
-              'Instagram sayfanızı doğal yollardan büyütmenin en etkili yolu FollowPark servisi. Sizin belirlediğiniz eylemlerde beğeni, takip, yorum, direk mesaj ve daha birçok işlemi otomatik olarak yapar. Instagram takipçi hilesi yapmadan organik olarak arttırmanın en kolay yolu!',
+            text: 'FooterDescription',
           },
         ],
       },
       {
-        headerTitle: 'Diğer Sayfalar',
+        headerTitle: 'OtherPages',
         type: 2,
         subItems: [
           {
-            text: 'KULLANİCİ SÖZLEŞMESİ',
+            text: 'UserAgreement',
             link: '/offer',
           },
           {
-            text: 'GİZLİLİK SÖZLEŞMESİ',
+            text: 'ConfidentialityAgreement',
             link: '/policy',
           },
           {
@@ -83,13 +82,13 @@ export default {
             link: '/blog',
           },
           {
-            text: 'SİTE HARİTASI',
+            text: 'SiteMap',
             link: '/site-map',
           },
         ],
       },
       {
-        headerTitle: 'İletişim',
+        headerTitle: 'Contact',
         type: 3,
         subItems: [
           {

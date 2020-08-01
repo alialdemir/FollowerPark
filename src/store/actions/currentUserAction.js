@@ -12,9 +12,10 @@
          followerParkIframe.style.left = '0';
          followerParkIframe.style.top = '0';
          followerParkIframe.style.zIndex = '99999';
-         */
+     */
 
-         followerParkIframe.src = 'https://www.instagram.com/?followpark=1';
+
+         followerParkIframe.src = 'https://www.instagram.com';
 
          const appendChild = () => {
              const childiren = document.querySelector('#content-area').children;

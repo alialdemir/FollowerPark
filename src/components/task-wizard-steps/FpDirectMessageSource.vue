@@ -12,8 +12,8 @@
           :textColor="directMessageSource === item.id ? 'warning' : 'white'"
           :icon="item.icon"
           :isActive="item.disabled"
-          :statistic="item.text"
-          :statisticTitle="item.description"
+          :statistic="$t(item.text)"
+          :statisticTitle="$t(item.description)"
         />
       </div>
     </div>
@@ -35,6 +35,7 @@ export default {
       'directMessageSources',
     ]),
   },
+
   methods: {
     chooseDirectMessageSource(directMessageSource) {
       this.$store.dispatch('setTaskConfigurations', {

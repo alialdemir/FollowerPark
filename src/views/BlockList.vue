@@ -1,9 +1,9 @@
 <template>
   <div>
     <vx-card
-      title="Block List"
+      :title="$t('BlockList')"
       :refreshContentAction="true"
-      newButtonText="Create Block list"
+      :newButtonText="$t('CreateBlockList')"
       :addCardAction="true"
       @refresh="closeCardAnimation"
       @add="isShowCreatePanel=true"
@@ -12,8 +12,8 @@
       <vs-table stripe :data="blockList">
         <template slot="thead">
           <vs-th style="width:50px"></vs-th>
-          <vs-th>List name</vs-th>
-          <vs-th>Count</vs-th>
+          <vs-th>{{$t('ListName')}}</vs-th>
+          <vs-th>{{$t('Count')}}</vs-th>
         </template>
 
         <template slot-scope="{data}">
@@ -26,7 +26,12 @@
 
                 <vs-dropdown-menu>
                   <vs-dropdown-item>
-                    <vs-button size="small" color="dark" type="flat" @click="edit(item)">Edit</vs-button>
+                    <vs-button
+                      size="small"
+                      color="dark"
+                      type="flat"
+                      @click="edit(item)"
+                    >{{$t('Edit')}}</vs-button>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <vs-button
@@ -34,7 +39,7 @@
                       color="danger"
                       type="flat"
                       @click="deleteUserList(item)"
-                    >Delete</vs-button>
+                    >{{$t('Delete')}}</vs-button>
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
               </vs-dropdown>
@@ -50,7 +55,7 @@
     <vs-popup
       v-if="isShowCreatePanel"
       :button-close-hidden="true"
-      :title="selectedBlockList.id === 0 ?'Create Block List': 'Edit Block List'"
+      :title="$t(selectedBlockList.id === 0 ? 'CreateBlockList': 'EditBlockList')"
       :active.sync="isShowCreatePanel"
     >
       <fp-create-block-list :selectedBlockList="selectedBlockList" @saveList="saveList" />
@@ -59,6 +64,8 @@
 </template>
 
 <script>
+import i18n from '@/i18n/i18n';
+
 export default {
   name: 'fp-block-list',
 
@@ -125,8 +132,8 @@ export default {
         type: 'confirm',
         'accept-text': 'Delete',
         color: 'danger',
-        title: `Delete block list?`,
-        text: 'Are you sure you want to delete the block list?',
+        title: i18n.t('DeleteBlockList') + '?',
+        text: i18n.t('AreYouSureYouWantToDeleteTheBlockList'),
         accept: this.deleteUserListAccept,
       });
     },
@@ -134,8 +141,8 @@ export default {
     deleteUserListAccept() {
       this.$vs.notify({
         color: 'success',
-        title: 'Deleted block list',
-        text: 'The selected block list was successfully deleted',
+        title: i18n.t('DeleteBlockList'),
+        text: i18n.t('TheSelectedBlockListWasSuccessfullyDeleted'),
       });
 
       this.$store.dispatch(

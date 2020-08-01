@@ -1,5 +1,5 @@
 <template>
-  <vx-card title="Choose user list">
+  <vx-card :title="$t('ChooseUserList')">
     <vs-row>
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="10">
         <vs-select v-model="userList" class="w-full select-large">
@@ -12,7 +12,11 @@
         </vs-select>
       </vs-col>
       <vs-col vs-type="flex" vs-justify="center" vs-align="center" vs-w="2">
-        <vs-button color="primary" type="border" :to="{ path: '/user-list?q=c'}">CREATE LIST</vs-button>
+        <vs-button
+          color="primary"
+          type="border"
+          :to="{ path: '/user-list?q=c'}"
+        >{{$t('CreateList')}}</vs-button>
       </vs-col>
     </vs-row>
   </vx-card>
@@ -32,6 +36,7 @@ export default {
     myUserLists() {
       return this.$store.state.myUserLists;
     },
+
     ...mapFields(['taskConfigurations.userList']),
   },
 };

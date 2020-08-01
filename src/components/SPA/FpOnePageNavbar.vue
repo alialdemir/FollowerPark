@@ -12,12 +12,13 @@
     </div>
 
     <vs-navbar-item :key="indextr" v-for="(item, indextr) in menuItems">
-      <a :href="item.link" v-smooth-scroll>{{item.text}}</a>
+      <a :href="item.link" v-smooth-scroll class="capitalize">{{ $t(item.text) | lowercase }}</a>
     </vs-navbar-item>
 
     <vs-navbar-item class="mr-6 ml-6">
       <vs-button color="warning" type="border" class="flex m-auto half-button" to="/login">
-        <font-awesome-icon size="1x" icon="sign-in-alt" />&nbsp;GİRİŞ
+        <font-awesome-icon size="1x" icon="sign-in-alt" />
+        &nbsp;{{$t('Login')}}
       </vs-button>
     </vs-navbar-item>
 
@@ -27,7 +28,7 @@
         type="filled"
         class="flex m-auto half-button"
         to="/register"
-      >ÜCRETSİZ DENE</vs-button>
+      >{{$t('TryForFree')}}</vs-button>
     </vs-navbar-item>
   </vs-navbar>
 </template>
@@ -37,23 +38,23 @@ export default {
     menuItems: [
       {
         link: '#ana-sayfa',
-        text: 'Ana Sayfa',
+        text: 'Home',
       },
       {
         link: '#neleri-alirsiniz',
-        text: 'Neleri alırsınız',
+        text: 'Features',
       },
       {
         link: '#hizmetlerimiz',
-        text: 'Hizmetlerimiz',
+        text: 'OurServices',
       },
       {
         link: '#mutlu-musterilerimiz',
-        text: 'Mutlu Müşterilerimiz',
+        text: 'HappyCustomers',
       },
       {
         link: '#fiyatlar',
-        text: 'Fiyatlar',
+        text: 'Pricing',
       },
     ],
   }),

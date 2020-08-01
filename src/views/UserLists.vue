@@ -1,9 +1,9 @@
 <template>
   <div>
     <vx-card
-      title="User List"
+      :title="$t('UserLists')"
       :refreshContentAction="true"
-      newButtonText="Create User list"
+      :newButtonText="$t('CreateUserList')"
       :addCardAction="true"
       @refresh="closeCardAnimation"
       @add="isShowCreatePanel=true"
@@ -12,8 +12,8 @@
       <vs-table stripe :data="myUserLists">
         <template slot="thead">
           <vs-th style="width:50px"></vs-th>
-          <vs-th>List name</vs-th>
-          <vs-th>Count</vs-th>
+          <vs-th>{{$t('ListName')}}</vs-th>
+          <vs-th>{{$t('Count')}}</vs-th>
         </template>
 
         <template slot-scope="{data}">
@@ -26,7 +26,12 @@
 
                 <vs-dropdown-menu>
                   <vs-dropdown-item>
-                    <vs-button size="small" color="dark" type="flat" @click="edit(item)">Edit</vs-button>
+                    <vs-button
+                      size="small"
+                      color="dark"
+                      type="flat"
+                      @click="edit(item)"
+                    >{{$t('Edit')}}</vs-button>
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <vs-button
@@ -34,7 +39,7 @@
                       color="danger"
                       type="flat"
                       @click="deleteUserList(item)"
-                    >Delete</vs-button>
+                    >{{$t('Delete')}}</vs-button>
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
               </vs-dropdown>
@@ -50,7 +55,7 @@
     <vs-popup
       v-if="isShowCreatePanel"
       :button-close-hidden="true"
-      :title="selectedUserList.id === 0 ?'Create User List': 'Edit User List'"
+      :title="$t(selectedUserList.id === 0 ?'CreateUserList': 'EditUserList')"
       :active.sync="isShowCreatePanel"
     >
       <fp-create-user-list :selectedUserList="selectedUserList" @saveList="saveList" />
@@ -59,6 +64,8 @@
 </template>
 
 <script>
+import i18n from '@/i18n/i18n';
+
 export default {
   name: 'fp-user-list',
 
@@ -125,17 +132,19 @@ export default {
         type: 'confirm',
         'accept-text': 'Delete',
         color: 'danger',
-        title: `Delete user list?`,
-        text: 'Are you sure you want to delete the user list?',
+        title: i18n.t('DeleteUserList') + '?',
+        text: i18n.t('AreYouSureYouWantToDeleteTheUserlist'),
         accept: this.deleteUserListAccept,
+        'accept-text': i18n.t('Accept'),
+        'cancel-text': i18n.t('Cancel'),
       });
     },
 
     deleteUserListAccept() {
       this.$vs.notify({
         color: 'success',
-        title: 'Deleted user list',
-        text: 'The selected user list was successfully deleted',
+        title: i18n.t('DeleteUserList'),
+        text: i18n.t('TheSelectedUserListWasSuccessfullyDeleted'),
       });
 
       this.$store.dispatch(

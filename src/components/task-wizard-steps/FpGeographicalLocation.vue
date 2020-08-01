@@ -1,7 +1,7 @@
 
 <template>
-  <vx-card title="Search geographic location you want to find">
-    <p>We recommend you to enter up to 10 geographic locations.</p>
+  <vx-card :title="$t('SearchGeographicLocationYouWantToFind')">
+    <p>{{$t('WeRecommendYouToEnterUpToTenGeographicLocations')}}</p>
     <div class="relative mb-4">
       <GmapMap
         :center="center"
@@ -35,9 +35,13 @@
             autofocus
             class="w-full mr-4"
             :warning="true"
-            placeholder="Search"
+            :placeholder="$t('Search')"
           />
-          <vs-button color="warning" type="filled" @click="onSearchGeographicalLocation">Search</vs-button>
+          <vs-button
+            color="warning"
+            type="filled"
+            @click="onSearchGeographicalLocation"
+          >{{$t('Search')}}</vs-button>
         </form>
       </div>
     </div>
@@ -47,7 +51,7 @@
         <vs-textarea
           class="w-full h-full location-links"
           v-model="georaphicalLocation"
-          placeholder="For example: https://www.instagram.com/explore/locations/212903416"
+          :placeholder="$t('ForExampleLocation')"
           width="300px"
         />
       </vs-col>
@@ -76,10 +80,10 @@
     </vs-row>
 
     <div class="flex items-center">
-      <vs-checkbox color="success" v-model="interactWithPosts">interact with posts of the last</vs-checkbox>
+      <vs-checkbox color="success" v-model="interactWithPosts">{{$t('InteractWithPostsOfTheLast')}}</vs-checkbox>
 
       <vs-input-number v-model="interactWithPostsDays" />
-      <p>days</p>
+      <p>{{$t('Days')}}</p>
     </div>
   </vx-card>
 </template>

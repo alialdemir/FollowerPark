@@ -20,18 +20,18 @@
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
               <div class="p-8">
                 <div class="vx-card__title mb-8">
-                  <h4 class="mb-4">Şifreyi yenile</h4>
-                  <p>Lütfen yeni şifrenizi girin.</p>
+                  <h4 class="mb-4">{{$t('RenewPassword')}}</h4>
+                  <p>{{$t('PleaseEnterYourNewPassword')}}</p>
                 </div>
                 <vs-input
                   type="password"
-                  label-placeholder="Şifre"
+                  :label-placeholder="$t('Password')"
                   v-model="value2"
                   class="w-full mb-6"
                 />
                 <vs-input
                   type="password"
-                  label-placeholder="Şifre tekrarla"
+                  :label-placeholder="$t('ConfirmPassword')"
                   v-model="value3"
                   class="w-full mb-8"
                 />
@@ -41,8 +41,8 @@
                     type="border"
                     to="/login"
                     class="w-full sm:w-auto mb-8 sm:mb-auto mt-3 sm:mt-auto"
-                  >Giriş Yap</vs-button>
-                  <vs-button class="w-full sm:w-auto">Yenile</vs-button>
+                  >{{$t('SignIn')}}</vs-button>
+                  <vs-button class="w-full sm:w-auto">{{$t('RenewPassword')}}</vs-button>
                 </div>
               </div>
             </div>

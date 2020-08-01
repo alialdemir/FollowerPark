@@ -20,7 +20,7 @@
       >
         <!--  <bookmarks :navbarColor="navbarColor" v-if="windowWidth >= 992" />-->
         <vs-button
-          color="warning"
+          color="primary"
           type="filled"
           target="_blank"
           href="https://chrome.google.com/webstore/detail/followerpark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0"

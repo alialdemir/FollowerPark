@@ -26,7 +26,7 @@
             @click="logout"
           >
             <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">Logout</span>
+            <span class="ml-2">{{$t('Logout')}}</span>
           </li>
         </ul>
       </vs-dropdown-menu>

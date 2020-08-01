@@ -4,17 +4,22 @@
       <div class="vx-col sm:w-1/2 w-full mb-2">
         <div class="vx-row mb-2">
           <div class="vx-col w-full">
-            <vs-input autofocus class="w-full" label="List name" v-model="directMessage.listName" />
+            <vs-input
+              autofocus
+              class="w-full"
+              :label="$t('ListName')"
+              v-model="directMessage.listName"
+            />
           </div>
         </div>
       </div>
       <div class="vx-col sm:w-1/2 w-full mb-2">
-        <h4>Creating direct message rules:</h4>
-        <p>- The message can be between 1 and 1000 characters</p>
-        <p>- The list should contain more than 15 unique messages</p>
+        <h4>{{$t('CreatingDirectMessageRules')}}</h4>
+        <p>{{$t('TheMessageCanBeBetweenOneAndThousandCharacters')}}</p>
+        <p>{{$t('TheListShouldContainMoreThanFifteenUniqueMessages')}}</p>
       </div>
     </div>
-    <h5>Write each separate message as a separate line</h5>
+    <h5>{{$t('WriteEachSeparateMessageAsASeparateLine')}}</h5>
     <div class="vx-row">
       <div class="vx-col sm:w-1/2 w-full">
         <div class="vx-row">
@@ -22,8 +27,8 @@
             <div class="multicomment-wrapper">
               <div v-show="messageList.length > 0" class="counts">
                 <span class="subtext">
-                  Messages: {{messageList.length}} (
-                  <small>+15 messages are recommended</small>)
+                  {{$t('Messages')}} {{messageList.length}} (
+                  <small>{{$t('FifteenMessagesAreRecommended')}}</small>)
                 </span>
                 <!---->
               </div>
@@ -60,14 +65,14 @@
                 color="primary"
                 type="border"
                 icon="create"
-              >Edit All</vs-button>
+              >{{$t('EditAll')}}</vs-button>
               <vs-button
                 @click="allDeleteComment"
                 v-show="messageList.length > 0"
                 color="danger"
                 type="border"
                 icon="close"
-              >Delete All</vs-button>
+              >{{$t('DeleteAll')}}</vs-button>
             </div>
           </div>
         </div>
@@ -75,30 +80,25 @@
       <div class="vx-col sm:w-1/2 w-full mb-2 direct-message-textarea flex flex-col pr-4 pl-4">
         <vs-textarea
           height="200px"
-          placeholder="Sample:
-  Thank you for subscribing! We offer you 20% discount.
-
-  We are glad to subscribe, We give you as a free 10 day gift.
-
-  Hello, We give you $30 coupon as a gift."
+          :placeholder="$t('AddMessageSample')"
           v-model="directMessage.messages"
         />
-        <vs-button v-if="!isEditAllComments" @click="addMessages">Add messages</vs-button>
+        <vs-button v-if="!isEditAllComments" @click="addMessages">{{$t('AddMessages')}}</vs-button>
         <div class="flex justify-around">
-          <vs-button v-if="isEditAllComments" color="primary" @click="cancelEdit">Cancel</vs-button>
+          <vs-button v-if="isEditAllComments" color="primary" @click="cancelEdit">{{$t('Cancel')}}</vs-button>
           <vs-button
             v-if="isEditAllComments"
             color="success"
             @click="saveAllChanges"
-          >Save all changes</vs-button>
+          >{{$t('SaveAllChanges')}}</vs-button>
         </div>
-        <p class="mt-2">*You can add several messages separated by an empty line</p>
+        <p class="mt-2">{{$t('YouCanAddSeveralMessagesSeparatedByAnEmptyLine')}}</p>
       </div>
     </div>
     <div class="vx-row mt-2">
       <div class="vx-col w-full">
-        <vs-button @click="saveList" color="success" class="mr-3 mb-2">Save</vs-button>
-        <vs-button @click="$emit('saveList')" color="danger" class="mr-3 mb-2">Cancel</vs-button>
+        <vs-button @click="saveList" color="success" class="mr-3 mb-2">{{$t('Save')}}</vs-button>
+        <vs-button @click="$emit('saveList')" color="danger" class="mr-3 mb-2">{{$t('Cancel')}}</vs-button>
       </div>
     </div>
   </div>
@@ -157,6 +157,10 @@ export default {
     },
 
     addMessages() {
+      if (!this.directMessage.messages) {
+        return;
+      }
+
       const messages = this.directMessage.messages
         .split('\n\n')
         .filter((item) => item.trim() !== '')
@@ -290,7 +294,6 @@ export default {
 .direct-message-textarea {
   background-color: #fff;
   border: 1px solid #b8ddf8;
-  padding: 0 !important;
 }
 
 .direct-message-textarea .vs-textarea-primary,

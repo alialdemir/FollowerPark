@@ -1,13 +1,3 @@
-<!-- =========================================================================================
-File Name: RegisterJWT.vue
-Description: Register Page for JWT
-----------------------------------------------------------------------------------------
-Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-Author URL: http://www.themeforest.net/user/pixinvent
-========================================================================================== -->
-
-
 <template>
   <div class="clearfix">
     <vs-input
@@ -15,8 +5,8 @@ Author URL: http://www.themeforest.net/user/pixinvent
       data-vv-validate-on="blur"
       name="email"
       type="email"
-      label-placeholder="Eposta"
-      placeholder="Eposta"
+      :label-placeholder="$t('Email')"
+      :placeholder="$t('Email')"
       v-model="email"
       class="w-full mt-6"
     />
@@ -28,8 +18,8 @@ Author URL: http://www.themeforest.net/user/pixinvent
       data-vv-validate-on="blur"
       v-validate="'required|min:6|max:10'"
       name="password"
-      label-placeholder="Şifre"
-      placeholder="Şifre"
+      :label-placeholder="$t('Password')"
+      :placeholder="$t('Password')"
       v-model="password"
       class="w-full mt-6"
     />
@@ -41,20 +31,26 @@ Author URL: http://www.themeforest.net/user/pixinvent
       data-vv-validate-on="blur"
       data-vv-as="password"
       name="confirm_password"
-      label-placeholder="Şifre Tekrarla"
-      placeholder="Şifre Tekrarla"
+      :label-placeholder="$t('ConfirmPassword')"
+      :placeholder="$t('ConfirmPassword')"
       v-model="confirm_password"
       class="w-full mt-6"
     />
     <span class="text-danger text-sm">{{ errors.first('confirm_password') }}</span>
     <div class="flex items-center flex-wrap">
       <vs-checkbox v-model="isTermsConditionAccepted" class="mt-6"></vs-checkbox>
-      <a target="_blank" href="/policy">GİZLİLİK SÖZLEŞMESİ</a>&nbsp; ve
-      <a class="lg:ml-10" target="_blank" href="/offer">KULLANICI SÖZLEŞMESİ̇</a>&nbsp;kabul ediyorum.
+      <a target="_blank" href="/policy">{{$t('ConfidentialityAgreement')}}</a>
+      &nbsp; {{$t('And')}}
+      <a class="lg:ml-10" target="_blank" href="/offer">{{$t('UserAgreement')}}</a>
+      &nbsp;{{$t('IAgree')}}
     </div>
 
-    <vs-button type="border" to="/login" class="mt-6">Giriş Yap</vs-button>
-    <vs-button class="float-right mt-6" @click="registerUserJWt" :disabled="!validateForm">Üye Ol</vs-button>
+    <vs-button type="border" to="/login" class="mt-6">{{$t('SignIn')}}</vs-button>
+    <vs-button
+      class="float-right mt-6"
+      @click="registerUserJWt"
+      :disabled="!validateForm"
+    >{{$t('SignUp')}}</vs-button>
   </div>
 </template>
 

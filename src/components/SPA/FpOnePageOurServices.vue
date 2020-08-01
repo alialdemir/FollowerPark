@@ -10,7 +10,7 @@
         class="text-center"
       >
         <vs-divider>
-          <h2 class="font-bold">HİZMETLERİMİZ</h2>
+          <h2 class="font-bold uppercase">{{$t('OurServices')}}</h2>
         </vs-divider>
       </vs-col>
 
@@ -41,8 +41,8 @@
               :data-aos-duration="indextr * 500"
               class="h-48 hover:shadow-lg"
             >
-              <h4 class="font-semibold inline-block">{{item.title}}</h4>
-              <p>{{item.description}}</p>
+              <h4 class="font-semibold inline-block">{{$t(item.title)}}</h4>
+              <p>{{$t(item.description)}}</p>
             </vx-card>
           </vs-col>
         </vs-row>
@@ -59,39 +59,33 @@ export default {
     fatues: [
       {
         icon: 'id-badge',
-        title: 'EYLEM OTOMASYONU',
-        description:
-          'Beğenme, takip etme, takipten çıkma, direk mesaj gönderme, yorum yapma, story izleme, veri toplama ve daha birçok servisi sağlıyoruz. ',
+        title: 'ActionOtomation',
+        description: 'ActionOtomationDescription',
       },
       {
         icon: 'robot',
-        title: 'BOTLARI ARAYİP FİLTRELİYOR',
-        description:
-          'hashtag, geolokasyon, rakiplere göre, takip edilen ve takipçilerinize göre veya kendi belirlediğiniz kullanıcı listesine göre filterelemeler yapıyoruz.',
+        title: 'SearchingAndFilteringTheRobots',
+        description: 'SearchingAndFilteringTheRobotsDescription',
       },
       {
         icon: 'comments',
-        title: 'YORUM YAPMA, DİRECT MESAJ GÖNDERME',
-        description:
-          'Toplu takip özelliği ile her ay binlerce instagram takipçi kazan. İstatistikleri izleyin ve sadık hayranlar oluşturun.',
+        title: 'CommentingSendingDirectMessages',
+        description: 'CommentingSendingDirectMessagesDescription',
       },
       {
         icon: 'clipboard-list',
-        title: 'OTO POST PAYLAŞMA, OTO DİREKT MESAJ',
-        description:
-          'İnstagram tanıtım servisimiz ile tüm paylaşımlarınızı otomatik olarak programa yaptırabilirsiniz.',
+        title: 'AutoPostSharingAutoDirectMessage',
+        description: 'AutoPostSharingAutoDirectMessageDescription',
       },
       {
         icon: 'chart-line',
-        title: 'TANITIM İSTATİSTİĞİ',
-        description:
-          'Toplu takip hizmeti programının özelliklerinden biri de tüm işlemlerin istatistiğini göstermesidir.',
+        title: 'PromotionalStatistics',
+        description: 'PromotionalStatisticsDescription',
       },
       {
         icon: 'shield-virus',
-        title: 'AKILLI MOD - AKILLI TANITIM',
-        description:
-          "FollowerPark'ın yapay zekası sizin için akıllı mod özelliğini sunar. Instagram'ın sınırlarına takılmadan oto takip, oto beğeni ve toplu yorum yapabilirsiniz.",
+        title: 'SmartModSmartPromotion',
+        description: 'SmartModSmartPromotionDescription',
       },
     ],
   }),

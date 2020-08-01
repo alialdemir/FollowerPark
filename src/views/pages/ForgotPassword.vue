@@ -1,13 +1,3 @@
-<!-- =========================================================================================
-    File Name: ForgotPassword.vue
-    Description: FOrgot Password Page
-    ----------------------------------------------------------------------------------------
-    Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-      Author: Pixinvent
-    Author URL: http://www.themeforest.net/user/pixinvent
-========================================================================================== -->
-
-
 <template>
   <div class="h-screen flex w-full bg-img">
     <div class="vx-col w-4/5 sm:w-4/5 md:w-3/5 lg:w-3/4 xl:w-3/5 mx-auto self-center">
@@ -20,20 +10,20 @@
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
               <div class="p-8">
                 <div class="vx-card__title mb-8">
-                  <h4 class="mb-4">Şifreni kurtar</h4>
-                  <p>Lütfen e-posta adresinizi girin, size şifrenizi nasıl sıfırlayacağınızla ilgili talimatlar gönderelim.</p>
+                  <h4 class="mb-4">{{$t('RecoverYourPassword')}}</h4>
+                  <p>{{$t('RecoverYourPasswordDescription')}}</p>
                 </div>
 
                 <vs-input
                   type="email"
-                  label-placeholder="Eposta"
+                  :label-placeholder="$t('Email')"
                   v-model="value1"
                   class="w-full mb-8"
                 />
-                <vs-button type="border" to="/login" class="px-4 w-full md:w-auto">Giriş Yap</vs-button>
+                <vs-button type="border" to="/login" class="px-4 w-full md:w-auto">{{$t('SignIn')}}</vs-button>
                 <vs-button
                   class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0"
-                >Şifre Kurtarma</vs-button>
+                >{{$t('PasswordRecovery')}}</vs-button>
               </div>
             </div>
           </div>

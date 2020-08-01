@@ -10,29 +10,31 @@
 
 export default [{
     url: "/tasks",
-    name: "task",
+    name: "Tasks",
     slug: "Task",
+    i18n: "Tasks",
     icon: "CheckSquareIcon",
 }, {
     url: null,
     name: "My Lists",
     slug: "My Lists",
+    i18n: "MyLists",
     icon: "ListIcon",
     submenu: [{
         url: '/user-list',
         name: "User Lists",
         slug: "user-list",
-        i18n: "User Lists",
+        i18n: "UserLists",
     }, {
         url: '/direct-messages',
         name: "Direct Messages",
         slug: "direct-messages",
-        i18n: "Direct Messages",
+        i18n: "DirectMessages",
     }, {
         url: '/block-list',
         name: "Block List",
         slug: "block-list",
-        i18n: "Block List",
+        i18n: "BlockList",
     }]
 
 }]

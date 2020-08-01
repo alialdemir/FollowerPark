@@ -12,8 +12,8 @@
           :isActive="item.disabled"
           :textColor="whereUserResource === item.id ? 'warning' : 'white'"
           :icon="item.icon"
-          :statistic="item.text"
-          :statisticTitle="item.description"
+          :statistic="$t(item.text)"
+          :statisticTitle="$t(item.description)"
         />
       </div>
     </div>
@@ -26,15 +26,18 @@ import { mapFields } from 'vuex-map-fields';
 
 export default {
   name: 'fp-choose-where-user-resource',
+
   components: {
     StatisticsCardLine,
   },
+
   computed: {
     ...mapFields([
       'taskConfigurations.whereUserResource',
       'whereUserResources',
     ]),
   },
+
   methods: {
     chooseWhereUserResources(whereUserResource) {
       if (whereUserResource.disabled === true) {
@@ -43,12 +46,6 @@ export default {
         });
 
         this.$emit('click');
-      } else {
-        this.$vs.notify({
-          title: 'This user resource will be added very soon.',
-          color: 'danger',
-          position: 'top-center',
-        });
       }
     },
   },

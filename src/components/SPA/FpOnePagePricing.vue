@@ -10,7 +10,7 @@
         class="text-center mb-8"
       >
         <vs-divider>
-          <h2 class="font-bold">FİYATLARIMIZ</h2>
+          <h2 class="font-bold uppercase">{{$t('Pricing')}}</h2>
         </vs-divider>
       </vs-col>
       <vs-col
@@ -32,7 +32,7 @@
             v-if="item.isBestSeller"
             color="primary"
             class="absolute w-full mt--10 bg-warning"
-          >En Çok Tercih Edilen</vs-chip>
+          >{{$t('MostPreferred')}}</vs-chip>
           <div class="product-card-title mb-4 mt-6">
             <h3
               class="font-weight-bold text-uppercase"
@@ -41,28 +41,19 @@
             <p
               class="text-uppercase mb-0"
               :class="{'text-white':item.isBestSeller, 'text-primary':!item.isBestSeller }"
-            >{{item.subtitle}} Hesap</p>
+            >{{item.subtitle}} {{$t('Account')}}</p>
           </div>
           <div class="product-card-detail p-4">
             <p class="mb-2 text-primary" v-html="item.price"></p>
             <div>
-              <ul class="list-group list-group-flush text-primary">
-                <li class="list-group-item p-1 text-muted">Oto Takip</li>
-                <li class="list-group-item p-1 text-muted">Oto Takipten Çıkma</li>
-                <li class="list-group-item p-1">Oto Beğeni</li>
-                <li class="list-group-item p-1">Oto Direk Mesaj</li>
-
-                <li class="list-group-item p-1 text-muted">24/7 Destek</li>
-                <li class="list-group-item p-1 text-muted">İstatistik</li>
-                <li class="list-group-item p-1 text-muted">Ve Daha Fazlası</li>
-              </ul>
+              <ul class="text-primary" v-html="$t('OrderDescription')"></ul>
             </div>
 
             <vs-button
               class="btn btn-gradient half-button pl-5 pr-5 mt-4 mb-4"
               color="primary"
               type="filled"
-            >Sipariş Et</vs-button>
+            >{{$t('Order')}}</vs-button>
           </div>
         </div>
       </vs-col>
@@ -77,14 +68,14 @@
         vs-xs="12"
       >
         <div class="flex flex-col items-center">
-          <h2 class="text-primary">ŞİMDİ BAŞLAT</h2>
-          <h3 class="mt-4 mb-8 text-dark text-center">Kayıt olun ve 5 günlük ücretsiz tanıtım alın</h3>
+          <h2 class="text-primary">{{$t('StartNow')}}</h2>
+          <h3 class="mt-4 mb-8 text-dark text-center">{{$t('SignUpAndgetaFreeFourDayPromotion')}}</h3>
           <vs-button
             color="warning"
             type="filled"
             class="half-button"
             to="/register"
-          >5 GÜN ÜCRETSİZ DENE</vs-button>
+          >{{$t('TryFourDaysFree')}}</vs-button>
         </div>
       </vs-col>
     </vs-row>
@@ -92,34 +83,45 @@
 </template>
 
 <script>
+import i18n from '@/i18n/i18n';
+
 export default {
   name: 'fp-one-page-pricing',
+
   data: () => ({
     products: [
       {
         title: 'Individual',
         subtitle: 1,
         price:
-          '<span class="text-5xl font-bold">30<sup class="text-4xl font-normal">₺</sup></span><span>/Ay</span>',
+          '<span class="text-5xl font-bold">30<sup class="text-4xl font-normal">₺</sup></span><span>' +
+          i18n.t('Monthly') +
+          '</span>',
       },
       {
         title: 'Duo',
         subtitle: 2,
         price:
-          '<span class="text-5xl font-bold">51<sup class="text-4xl font-normal">₺</sup></span><span>/Ay</span>',
+          '<span class="text-5xl font-bold">51<sup class="text-4xl font-normal">₺</sup></span><span>' +
+          i18n.t('Monthly') +
+          '</span>',
         isBestSeller: true,
       },
       {
         title: 'Triple',
         subtitle: 3,
         price:
-          '<span class="text-5xl font-bold">75<sup class="text-4xl font-normal">₺</sup></span><span>/Ay</span>',
+          '<span class="text-5xl font-bold">75<sup class="text-4xl font-normal">₺</sup></span><span>' +
+          i18n.t('Monthly') +
+          '</span>',
       },
       {
         title: 'Quintette',
         subtitle: 5,
         price:
-          '<span class="text-5xl font-bold">120<sup class="text-4xl font-normal">₺</sup></span><span>/Ay</span>',
+          '<span class="text-5xl font-bold">120<sup class="text-4xl font-normal">₺</sup></span><span>' +
+          i18n.t('Monthly') +
+          '</span>',
       },
     ],
   }),

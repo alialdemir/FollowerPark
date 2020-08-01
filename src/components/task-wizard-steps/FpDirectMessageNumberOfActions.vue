@@ -1,22 +1,22 @@
 <template>
-  <vx-card title="Number of actions">
-    <p>The total number of steps in which the job is stopped. Example: 5000, which means that the service will distribute the 5000 action for a few days with respect to the selected speed.</p>
+  <vx-card :title="$t('NumberOfActions')">
+    <p>{{$t('DirectMessageNumberOfActionsDescription')}}</p>
     <vs-input-number
       v-model="maximumNumberTransactions"
-      label="How many messages do you need to send?"
+      :label="$t('HowManyMessagesDoYouNeedToSend')"
       class="justify-start bg-transparent mb-8"
     />
 
-    <p>Please note: when changing the value, the Smart job counters are reset to zero.</p>
+    <p>{{$t('PleaseNoteWhenChangingTheValueTheSmartJobCountersAreResetToZero')}}</p>
     <vs-checkbox
       color="success"
       v-model="isSkipSentMessage"
-    >Skip users who have already been sent a message</vs-checkbox>
-    
+    >{{$t('SkipUsersWhoHaveAlreadyBeenSentAMessage')}}</vs-checkbox>
+
     <vs-checkbox
       color="success"
       v-model="isDeleteAfterSendingMessage"
-    >Delete after sending the message</vs-checkbox>
+    >{{$t('DeleteAfterSendingTheMessage')}}</vs-checkbox>
   </vx-card>
 </template>
 
@@ -25,13 +25,14 @@ import { mapFields } from 'vuex-map-fields';
 
 export default {
   name: 'fp-direct-message-number-of-action',
+
   computed: {
     ...mapFields([
       'taskConfigurations.maximumNumberTransactions',
       'taskConfigurations.isSkipSentMessage',
-      'taskConfigurations.isDeleteAfterSendingMessage'
-    ])
-  }
+      'taskConfigurations.isDeleteAfterSendingMessage',
+    ]),
+  },
 };
 </script>
 

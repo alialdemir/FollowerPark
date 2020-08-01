@@ -6,16 +6,14 @@
       <!-- NAVBAR END -->
 
       <section class="container header__description mb-3 text-center pt-32">
-        <h1 class="text-white font-bold text-4xl">Organik olarak instagram takipçilerini artır</h1>
-        <p
-          class="mb-4 mx-auto mt-4 text-xl max-w-6xl text-white"
-        >Instagram sayfanızı doğal yollardan büyütmenin en etkili yolu FollowPark servisi. Sizin belirlediğiniz eylemlerde beğeni, takip, yorum, direk mesaj ve daha birçok işlemi otomatik olarak yapar. Instagram takipçi hilesi yapmadan organik olarak takipçi arttırmanın en kolay yolu!</p>
+        <h1 class="text-white font-bold text-4xl">{{$t('OnePageH1')}}</h1>
+        <p class="mb-4 mx-auto mt-4 text-xl max-w-6xl text-white">{{$t('OnePageDescription')}}</p>
         <vs-button
           color="warning"
           type="filled"
           class="half-button mt-6 z-10"
           to="/register"
-        >ÜCRETSİZ DENE</vs-button>
+        >{{$t('TryForFree')}}</vs-button>
       </section>
     </div>
 

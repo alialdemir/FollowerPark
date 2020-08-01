@@ -1,13 +1,3 @@
-/*=========================================================================================
-  File Name: main.js
-  Description: main vue(js) file
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
-
 // Tailwind
 import '@/assets/css/main.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -58,7 +48,13 @@ Vue.prototype.$http = axios
 
 
 
+Vue.filter('lowercase', function(value) {
+    if (!value) {
+        return '';
+    }
 
+    return value.toLowerCase()
+})
 
 
 
@@ -102,9 +98,14 @@ library.add(faChartLine)
 library.add(faShieldVirus)
 library.add(faSignInAlt)
 
+
+// i18n
+import i18n from './i18n/i18n'
+
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 new Vue({
     router,
     store,
+    i18n,
     render: h => h(App)
 }).$mount('#app')

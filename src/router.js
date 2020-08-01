@@ -175,11 +175,12 @@ router.beforeEach((to, from, next) => {
     if (
         to.path === "/login" ||
         to.path === "/forgot-password" ||
+        to.path === "/reset-password" ||
         to.path === "/register" ||
         to.path === "/offer" ||
         to.path === "/policy" ||
-        to.path === "/error-404" ||
-        to.path === "/error-500"
+        to.path === "/pages/error-404" ||
+        to.path === "/pages/error-500"
     ) {
         return next();
     }

@@ -24,7 +24,7 @@ const myStates = {
             id: 2,
             text: 'Follow',
             icon: 'UserPlusIcon',
-            description: 'In the selected action, your account will follow the users from the source you specified.',
+            description: 'FollowDescription',
             disabled: true,
             function: 'follow',
             dispatchActionName: 'startFollowTaskWithInterval'
@@ -33,7 +33,7 @@ const myStates = {
             id: 3,
             text: 'Unfollow',
             icon: 'UserMinusIcon',
-            description: 'In the selected action, your account will leave the users you follow.',
+            description: 'UnfollowDescription',
             disabled: true,
             function: 'unfollow',
             dispatchActionName: 'startUnfollowTaskWithInterval'
@@ -42,72 +42,72 @@ const myStates = {
             id: 6,
             text: 'Direct',
             icon: 'SendIcon',
-            description: 'In the selected action, your account will send Direct messages to users received from the source you specified.',
+            description: 'DirectDescription',
             disabled: true,
             isNewPulse: true
         }, {
             id: 1,
             text: 'Like',
             icon: 'ThumbsUpIcon',
-            description: 'Selected transactions in your account, taken from the sources you specify users will like the posts issued.',
+            description: 'LikeDescription',
             disabled: false
         },
         {
             id: 4,
             text: 'Comment',
             icon: 'MessageCircleIcon',
-            description: 'In the selected action, your account will leave a comment under the shares of users taken from the source you specified.',
+            description: 'CommentDescription',
             disabled: false
         },
         {
             id: 5,
-            text: 'Like + Follow',
+            text: 'LikeFollow',
             icon: 'HeartIcon',
-            description: 'In the selected action, your account will like the shares of users taken from the source you specified, and then follow these users.',
+            description: 'LikeFollowDescription',
             disabled: false
         },
         {
             id: 7,
-            text: 'Data collection',
+            text: 'DataCollection',
             icon: 'DatabaseIcon',
-            description: 'When you choose Data Collection, your account will collect users from the source you specified. You cannot set other promotional tasks at the time of data collection.',
+            description: 'DataCollectionDescription',
             disabled: false
         },
         {
             id: 8,
-            text: 'Story watching',
+            text: 'StoryWatching',
             icon: 'PlayCircleIcon',
-            description: 'When you choose to watch the story, your account will watch the stories of users taken from the source you specified. Once the story is watched, you cannot adjust other promotional tasks.',
+            description: 'StoryWatchingDescription',
             disabled: false
         }
     ],
     resources: [{
             id: 1,
-            text: 'Geographical Location',
+            text: 'GeographicalLocation',
             icon: 'MapPinIcon',
             disabled: true,
-            description: 'Paste the post\'s link from each new location into the appropriate area,each geographic location.Enter the name of the place(city, place, institution) in the search box.'
+            description: 'GeographicalLocationDescription'
         },
         {
             id: 2,
             text: 'Hashtag',
             icon: 'HashIcon',
             disabled: false,
-            description: 'Enter the hashtag you are interested in. You can enter multiple hashtags.To do so, the list following the rule: each must begin on a new line hashtag.'
+            description: 'HashtagDescription'
         },
         {
             id: 3,
             text: 'User',
             icon: 'UserIcon',
             disabled: true,
-            description: 'Specify the username of the user you will use as the source. You can enter multiple usernames.'
+            description: 'UserDescription'
         },
         {
             id: 4,
-            text: 'User List',
+            text: 'UserList',
             icon: 'UsersIcon',
             disabled: true,
-            description: 'Specify a list of users you want to use as the source. You can enter multiple usernames.To do this, you need to create a new user list.'
+            description: 'UserListDescription'
         }
     ],
     whereUserResources: [{
@@ -163,38 +163,38 @@ const myStates = {
         id: 1,
         text: 'All',
         icon: 'UserPlusIcon',
-        description: 'Unfollow all followers.',
+        description: 'AllDescription',
         disabled: true
     }, {
         id: 2,
         text: 'Mutual',
         icon: 'ShuffleIcon',
-        description: 'If both parties follow each other, unfollow.',
+        description: 'MutualDescription',
         disabled: true
     }, {
         id: 3,
-        text: 'One sided',
+        text: 'OneSided',
         icon: 'UserIcon',
-        description: 'I follow the other party but if the other does not follow me.',
+        description: 'OneSidedDescription',
         disabled: true
     }, {
         id: 4,
-        text: 'List of blocks',
+        text: 'ListOfBlocks',
         icon: 'UsersIcon',
-        description: 'Remove users on the are blocked list.',
+        description: 'ListOfBlocksDescription',
         disabled: true
     }, ],
 
     directMessageSources: [{
             id: 1,
-            text: 'Your Followers',
+            text: 'YourFollowers',
             icon: 'UserPlusIcon',
             description: 'Sends a message to your followers.',
             disabled: true
         },
         {
             id: 2,
-            text: 'User list',
+            text: 'UserList',
             icon: 'ListIcon',
             description: 'Sends a direct message to users in the user list I created.',
             disabled: true
@@ -202,20 +202,20 @@ const myStates = {
     ],
     speedTypes: [{
         id: 60000, // One minite
-        text: 'SLOW',
-        subText: 'VERY SAFE'
+        text: 'Slow',
+        subText: 'VerySafe'
     }, {
         id: 30000, // 30 second
-        text: 'MIDDLE',
-        subText: 'SAFE'
+        text: 'Middle',
+        subText: 'Safe'
     }, {
         id: 20000, // 20 second
-        text: 'FAST',
-        subText: 'NORMAL'
+        text: 'Fast',
+        subText: 'Normal'
     }, {
         id: 10000, // 10 second
-        text: 'TO FAST',
-        subText: 'SOME DANGEROUS'
+        text: 'ToFast',
+        subText: 'SomeDangerous'
     }],
     // Lists
     myUserLists: [],

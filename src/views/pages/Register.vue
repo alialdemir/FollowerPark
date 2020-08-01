@@ -20,11 +20,11 @@
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
               <div class="px-8 pt-8 register-tabs-container">
                 <div class="vx-card__title mb-4">
-                  <h4 class="mb-4">Hesap Oluştur</h4>
-                  <p>Yeni bir hesap oluşturmak için aşağıdaki formu doldurun.</p>
+                  <h4 class="mb-4">{{$t('CreateAccount')}}</h4>
+                  <p>{{$t('FillOutTheFormBelowToCreateANewAccount')}}</p>
                 </div>
                 <vs-tabs>
-                  <vs-tab label="Üye Ol">
+                  <vs-tab :label="$t('SignUp')">
                     <register-jwt></register-jwt>
                   </vs-tab>
                 </vs-tabs>
