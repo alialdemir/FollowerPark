@@ -64,7 +64,7 @@
           </vs-td>
           <vs-td>{{ taskActions(item.action) }}</vs-td>
           <vs-td>{{ resources(item) }}</vs-td>
-          <vs-td>{{ `${item.numberTransactions}/${item.maximumNumberTransactions}` }}</vs-td>
+          <vs-td>{{ `${item.numberTransactions || 0}/${item.maximumNumberTransactions || 0}` }}</vs-td>
         </vs-tr>
       </template>
     </vs-table>
