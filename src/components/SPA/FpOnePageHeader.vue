@@ -1,24 +1,31 @@
 <template>
-  <div class="bg-primary sticky z-50" id="ana-sayfa">
+  <div class="bg-header sticky z-50" id="ana-sayfa">
     <div class="container">
       <fp-one-page-navbar />
 
       <!-- NAVBAR END -->
 
       <section class="container header__description mb-3 text-center pt-32">
-        <h1 class="text-white font-bold text-4xl">{{$t('OnePageH1')}}</h1>
-        <p class="mb-4 mx-auto mt-4 text-xl max-w-6xl text-white">{{$t('OnePageDescription')}}</p>
+        <h1 class="text-white font-bold text-4xl">{{ $t("OnePageH1") }}</h1>
+        <p class="mb-4 mx-auto mt-4 text-xl max-w-6xl text-white">
+          {{ $t("OnePageDescription") }}
+        </p>
         <vs-button
           color="warning"
           type="filled"
           class="half-button mt-6 z-10"
           to="/register"
-        >{{$t('TryForFree')}}</vs-button>
+          >{{ $t("TryForFree") }}</vs-button
+        >
       </section>
     </div>
 
     <back-to-top bottom="5%" visibleoffset="500">
-      <vs-button icon-pack="feather" icon="icon-arrow-up" class="shadow-lg btn-back-to-top" />
+      <vs-button
+        icon-pack="feather"
+        icon="icon-arrow-up"
+        class="shadow-lg btn-back-to-top"
+      />
     </back-to-top>
 
     <img
@@ -29,11 +36,11 @@
 </template>
 
 <script>
-import BackToTop from 'vue-backtotop';
-import FpOnePageNavbar from './FpOnePageNavbar';
+import BackToTop from "vue-backtotop";
+import FpOnePageNavbar from "./FpOnePageNavbar";
 
 export default {
-  name: 'fp-one-page-header',
+  name: "fp-one-page-header",
   components: {
     BackToTop,
     FpOnePageNavbar,
@@ -42,8 +49,12 @@ export default {
 </script>
 
 <style scoped>
+.bg-header {
+  background: #10163a;
+}
+
 .header__description::after {
-  content: '';
+  content: "";
   display: block;
   background: url(../../assets/images/pages/headerbg.png) bottom no-repeat;
   background-size: cover;

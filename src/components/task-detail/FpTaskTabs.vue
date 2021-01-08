@@ -2,9 +2,16 @@
   <vs-tabs>
     <vs-tab @click="onChangeTab('detail')" label="Detail">
       <div class="con-tab-ejemplo">
-        <vs-list-item v-if="task.id" title="Task Id" :subtitle="`${task.id}`"></vs-list-item>
+        <vs-list-item
+          v-if="task.taskId"
+          title="Task Id"
+          :subtitle="`${task.taskId}`"
+        ></vs-list-item>
 
-        <vs-list-item title="Task Status" :subtitle="task.status === 1 ? 'Running': 'Stopped'"></vs-list-item>
+        <vs-list-item
+          title="Task Status"
+          :subtitle="task.status === true ? 'Running' : 'Stopped'"
+        ></vs-list-item>
 
         <vs-list-item
           v-if="task.maximumNumberTransactions && task.numberTransactions"
@@ -18,17 +25,30 @@
           :subtitle="taskActions(task.action)"
         ></vs-list-item>
 
-        <vs-list-item v-if="task.action" title="Resource" :subtitle="resources(task)"></vs-list-item>
+        <vs-list-item
+          v-if="task.action"
+          title="Resource"
+          :subtitle="resources(task)"
+        ></vs-list-item>
 
-        <vs-list-item v-if="task.intervalSpeed" title="Speed" :subtitle="speed(task.intervalSpeed)"></vs-list-item>
+        <vs-list-item
+          v-if="task.intervalSpeed"
+          title="Speed"
+          :subtitle="speed(task.intervalSpeed)"
+        ></vs-list-item>
 
-        <vs-list-item v-if="task.username" title="Username" :subtitle="task.username">
+        <vs-list-item
+          v-if="task.username"
+          title="Username"
+          :subtitle="task.username"
+        >
           <vs-button
             color="primary"
             target="_blank"
             type="flat"
             :href="`https://instagram.com/${task.username}`"
-          >{{task.username}}</vs-button>
+            >{{ task.username }}</vs-button
+          >
         </vs-list-item>
       </div>
     </vs-tab>
@@ -39,37 +59,37 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'fp-task-tabs',
+  name: "fp-task-tabs",
   props: {
     task: {
       type: Object,
-      required: true
+      required: true,
     },
     logs: {
       type: Array,
-      required: false
-    }
+      required: false,
+    },
   },
   computed: {
     getLogs() {
       return this.$props.logs;
     },
-    ...mapGetters(['taskActions', 'resources', 'speed'])
+    ...mapGetters(["taskActions", "resources", "speed"]),
   },
   methods: {
     onChangeTab(tab) {
       switch (tab) {
-        case 'logs':
-          this.$emit('getLog');
+        case "logs":
+          this.$emit("getLog");
           break;
 
         default:
           break;
       }
-    }
-  }
+    },
+  },
 };
 </script>

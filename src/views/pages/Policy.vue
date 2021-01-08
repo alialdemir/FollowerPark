@@ -18,15 +18,17 @@
           <vs-list-item
             subtitle="Site üzerinden deneme amaçlı sahte sipariş verilmesi yasaktır. Tespit edildiği taktirde üyelikleri iptal edilecek olup kayıt olurken belirtikleri e-posta ve gsm numaraları, ip numarası ile bir daha hesap oluşturulamaz."
           ></vs-list-item>
-          <vs-list-item title="KULLANIM KURALLARI GİZLİLİK HÜKÜMLERİ SORUMLULUKLAR"></vs-list-item>
           <vs-list-item
-            subtitle="Kullanıcı işbu sözleşmeyi kabul etmekle aksine bir yazılı bildirimi olmadığı müddetçe FollowerPark’ın kendisine yönelik yukarıda belirtilen iletişim faaliyetlerinde bulunabileceğini kabul ve beyan etmektedir."
+            title="KULLANIM KURALLARI GİZLİLİK HÜKÜMLERİ SORUMLULUKLAR"
+          ></vs-list-item>
+          <vs-list-item
+            subtitle="Kullanıcı işbu sözleşmeyi kabul etmekle aksine bir yazılı bildirimi olmadığı müddetçe FollowersPark’ın kendisine yönelik yukarıda belirtilen iletişim faaliyetlerinde bulunabileceğini kabul ve beyan etmektedir."
           ></vs-list-item>
           <vs-list-item
             subtitle="Sitenin belirli yerlerinde o bölüme özel farklı kurallar ve yükümlülükler belirtilebilir. Bu bölümleri kullanan kişi ve kuruluşlar peşinen belirtilen bu kuralları kabul etmiş sayılır."
           ></vs-list-item>
           <vs-list-item
-            subtitle="Kullanıcılarımızın kişisel bilgilerini ve gizliliklerini korumak için aldığımız önlemler ve bu konudaki genel politikamızı okumak için, lütfen “Gizlilik Sözleşmesi” sayfasını okuyunuz. Kullanıcı, servisten faydalanmaya başlandığı andan itibaren bu katılım sözleşmesinin tüm hükümlerini kabul etmiş sayılacağını ve sözleşmenin kendisi hakkında hüküm ifade edeceğini kabul eder. Kullanıcı işbu sözleşme ile üstlenmiş olduğu yükümlülüklere aykırı hareketi nedeniyle followerpark.com’un uğrayacağı her türlü zararı aynen tazmin etmeyi kabul eder. FollowerPark, kullanıcının sözleşmeye aykırı davranışları nedeniyle kamu kurumlarına ve/veya üçüncü şahıslara ödemek zorunda kalabileceği her türlü tazminat ve/veya idari/adli para cezaları için kullanıcıya aynen rücu hakkına sahiptir."
+            subtitle="Kullanıcılarımızın kişisel bilgilerini ve gizliliklerini korumak için aldığımız önlemler ve bu konudaki genel politikamızı okumak için, lütfen “Gizlilik Sözleşmesi” sayfasını okuyunuz. Kullanıcı, servisten faydalanmaya başlandığı andan itibaren bu katılım sözleşmesinin tüm hükümlerini kabul etmiş sayılacağını ve sözleşmenin kendisi hakkında hüküm ifade edeceğini kabul eder. Kullanıcı işbu sözleşme ile üstlenmiş olduğu yükümlülüklere aykırı hareketi nedeniyle followerpark.com’un uğrayacağı her türlü zararı aynen tazmin etmeyi kabul eder. FollowersPark, kullanıcının sözleşmeye aykırı davranışları nedeniyle kamu kurumlarına ve/veya üçüncü şahıslara ödemek zorunda kalabileceği her türlü tazminat ve/veya idari/adli para cezaları için kullanıcıya aynen rücu hakkına sahiptir."
           ></vs-list-item>
           <vs-list-item
             subtitle="Müşteri, satın alacağı web paketine ek olarak modül, istek ve düzenlemeler için followerpark.com’un belirleyeceği ücreti ayrıca ödeyeceğini kabul ve beyan eder."
@@ -41,16 +43,16 @@
             subtitle="Kullanıcı, diğer kullanıcıların ve ziyaretçilerin followerpark.com’u uygulamasını kullanmasını önleyici veya zorlaştırıcı hareketlerde bulunamaz, sunucuları ya da veritabanlarını otomatik programlar yükleyip zorlayamaz/kilitleyemez.Hile girişimlerinde bulunamaz. Bulunması halinde üyeliğinin sonlandırılacağını ve durumdan doğabilecek her türlü hukuki, cezai sorumluluğu kabul eder."
           ></vs-list-item>
           <vs-list-item
-            subtitle="followerpark.com uygulaması ile yapılan mesajlaşmaların yedeğinin alınması kişilerin sorumluluğundadır ve FollowerPark tarafından önerilmektedir. Mesajlaşmaların yedeklerinin alınmaması nedeniyle kaybolmasından, silinmesinden veya hasar görmesinden FollowerPark sorumlu tutulamaz."
+            subtitle="followerpark.com uygulaması ile yapılan mesajlaşmaların yedeğinin alınması kişilerin sorumluluğundadır ve FollowersPark tarafından önerilmektedir. Mesajlaşmaların yedeklerinin alınmaması nedeniyle kaybolmasından, silinmesinden veya hasar görmesinden FollowersPark sorumlu tutulamaz."
           ></vs-list-item>
           <vs-list-item
             subtitle="Üyelik iptali ve hesap silme işlemi, kullanıcı tarafından followerpark.com üzerinden yapılabilir. Üyeliğini bitiren kullanıcının siteye giriş yetkisi iptal edilecektir. Üyeliğini iptal eden kişi bu işlemin geri dönüşü olmadığını kabul eder. followerpark.com ya da kullanıcının kendisi tarafından sonlandırılan kullanıcı hesabına ait her türlü kaydı silip silmeme kararı followerpark.com’a aittir. Kullanıcı silinen kayıtlarla ilgili herhangi bir hak veya tazminat talebinde bulunamaz."
           ></vs-list-item>
           <vs-list-item
-            subtitle="Bu internet sitesi FollowerPark’ın Kontrolü altında olmayan başka internet sitelerinde bağlantı veya referans içerebilir. FollowerPark, bu sitelerin içeriklere veya içerdikleri diğer bağlantılardan sorumlu değildir."
+            subtitle="Bu internet sitesi FollowersPark’ın Kontrolü altında olmayan başka internet sitelerinde bağlantı veya referans içerebilir. FollowersPark, bu sitelerin içeriklere veya içerdikleri diğer bağlantılardan sorumlu değildir."
           ></vs-list-item>
           <vs-list-item
-            subtitle="FollowerPark’ın, kullanıcı tarafından siteye ya da mobil uygulamaya kayıt formunda belirtilen veya daha sonra kendisi tarafından güncellenen adresi, e-posta adresi, sabit ve mobil telefon hatları ve diğer iletişim bilgileri üzerinden mektup, e-posta, SMS, telefon görüşmesi ve diğer yollarla kullanıcıya iletişim, pazarlama, bildirim ve diğer amaçlarla kullanıcıya ulaşma hakkı bulunmaktadır."
+            subtitle="FollowersPark’ın, kullanıcı tarafından siteye ya da mobil uygulamaya kayıt formunda belirtilen veya daha sonra kendisi tarafından güncellenen adresi, e-posta adresi, sabit ve mobil telefon hatları ve diğer iletişim bilgileri üzerinden mektup, e-posta, SMS, telefon görüşmesi ve diğer yollarla kullanıcıya iletişim, pazarlama, bildirim ve diğer amaçlarla kullanıcıya ulaşma hakkı bulunmaktadır."
           ></vs-list-item>
           <vs-list-item
             subtitle="Kullanım ve Gizlilik Kuralları followerpark.com’un tüm üyelerine açıktır. Site üzerinde verilen hizmetler aksi belirtilmedikçe, ücretsizdir. Aşağıdaki yazılı durumlarda, site yönetimi üyenin site kullanımını engelleyebilir ve aşağıdaki girişimlere karışan kişi veya kişiler hakkında kanuni haklarını saklı tutar:"
@@ -58,7 +60,9 @@
           <vs-list-item
             subtitle="Yanlış, düzensiz, eksik ve yanıltıcı bilgiler, genel ahlak kurallarına uygun olmayan ifadeler içeren ve Türkiye Cumhuriyeti yasalarıyla ters düşen bilgilerin siteye kaydedilmesi,"
           ></vs-list-item>
-          <vs-list-item subtitle="Site içeriğinin izinsiz olarak kısmen veya tümüyle kopyalanması,"></vs-list-item>
+          <vs-list-item
+            subtitle="Site içeriğinin izinsiz olarak kısmen veya tümüyle kopyalanması,"
+          ></vs-list-item>
           <vs-list-item
             subtitle="Kullanıcılara verilen ya da kendi belirledikleri kullanıcı adı, şifre gibi bilgilerin, kullanım haklarının, üçüncü kişi ya da kuruluşlarla paylaşılmasından (bu bilgilerin kullanıcı dışındaki kişiler tarafından kullanılmasından) kaynaklanacak her türlü zarardan doğrudan Kullanıcı sorumludur. Aynı şekilde Kullanıcı, internet ortamında bir başkasına ait IP adresi, elektronik posta adresi, kullanıcı adı gibi kişisel bilgileri kullanamayacağı gibi diğer kullanıcıların özel bilgilerine de izinsiz olarak ulaşamaz veya bunları kullanamaz. Kullanıcı bu şekilde bir kullanımdan dolayı doğabilecek her türlü hukuki ve cezai yükümlülüğü kabul etmiş sayılmaktadır."
           ></vs-list-item>
@@ -67,7 +71,7 @@
           ></vs-list-item>
           <vs-list-item title="GİZLİLİK SÖZLEŞMESİ (1)"></vs-list-item>
           <vs-list-item
-            subtitle="followerpark.com site üzerinden kullanıcıların ilettiği kişisel bilgileri 3. Kişilere açıklamayacaktır. Bu kişisel bilgiler; kişi adı-soyadı, adresi, telefon numarası, cep telefonu, e-posta adresi gibi Kullanıcı’yı tanımlamaya yönelik her türlü diğer bilgiyi içermekte olup, kısaca ‘Gizli Bilgiler’ olarak anılacaktır.FollowerPark müşterilerinin kişisel bilgilerini asla üçüncü şahıslara satmaz, kiralamaz ve hiçbir şekilde farklı amaçlar için kullanmaz. Kaydedilen veriler followerpark.com kayıt sisteminde saklı tutularak sadece iletişim, güvenlik ve duyuru çalışmalarında kullanılabilir. followerpark.com, daha iyi hizmet verebilmek amacıyla bazı kişisel bilgilerinizi üyelik işlemi sırasında (İsim, yaş, e-posta, vb.) talep etmektedir. followerpark.com’da toplanan bu veriler; kampanya çalışmaları ya da profilinize yönelik özel promosyon faaliyetlerinin yapılabilmesi için followerpark.com bünyesinde kullanılmaktadır. Kişisel bilgileriniz haricinde; sitede ya da mobil uygulama üzerinden yapmış olduğunuz işlemlere ait istatistiksel veriler followerpark.com tarafından analiz edilmekte ve saklanmaktadır. followerpark.com, üyelik formlarından topladığı bilgileri, söz konusu üyenin haberi ya da aksi bir talimatı olmaksızın, üçüncü şahıslarla kesinlikle paylaşmamakta, faaliyet dışı hiçbir nedenle ticari amaçla kullanmamakta ve de satmamaktadır. followerpark.com, Google Analytics’in Yeniden Pazarlama & Demografi ve İlgi Alanı Raporlaması özelliklerini kullanmaktadır. Reklam ayarlarınızı kullanarak Görüntülü Reklamcılık için Google Analytics’in kapsamı dışında kalabilir ve Google Görüntülü Reklam Ağı reklamlarınızı özelleştirebilirsiniz. Google Analytics ile sağlanan demografik bilgiler, followerpark.com’u ve followerpark.com tarafından verilen reklamları, kullanıcılarımızın ilgi alanlarına göre özelleştirmek için kullanılmaktadır."
+            subtitle="followerpark.com site üzerinden kullanıcıların ilettiği kişisel bilgileri 3. Kişilere açıklamayacaktır. Bu kişisel bilgiler; kişi adı-soyadı, adresi, telefon numarası, cep telefonu, e-posta adresi gibi Kullanıcı’yı tanımlamaya yönelik her türlü diğer bilgiyi içermekte olup, kısaca ‘Gizli Bilgiler’ olarak anılacaktır.FollowersPark müşterilerinin kişisel bilgilerini asla üçüncü şahıslara satmaz, kiralamaz ve hiçbir şekilde farklı amaçlar için kullanmaz. Kaydedilen veriler followerpark.com kayıt sisteminde saklı tutularak sadece iletişim, güvenlik ve duyuru çalışmalarında kullanılabilir. followerpark.com, daha iyi hizmet verebilmek amacıyla bazı kişisel bilgilerinizi üyelik işlemi sırasında (İsim, yaş, e-posta, vb.) talep etmektedir. followerpark.com’da toplanan bu veriler; kampanya çalışmaları ya da profilinize yönelik özel promosyon faaliyetlerinin yapılabilmesi için followerpark.com bünyesinde kullanılmaktadır. Kişisel bilgileriniz haricinde; sitede ya da mobil uygulama üzerinden yapmış olduğunuz işlemlere ait istatistiksel veriler followerpark.com tarafından analiz edilmekte ve saklanmaktadır. followerpark.com, üyelik formlarından topladığı bilgileri, söz konusu üyenin haberi ya da aksi bir talimatı olmaksızın, üçüncü şahıslarla kesinlikle paylaşmamakta, faaliyet dışı hiçbir nedenle ticari amaçla kullanmamakta ve de satmamaktadır. followerpark.com, Google Analytics’in Yeniden Pazarlama & Demografi ve İlgi Alanı Raporlaması özelliklerini kullanmaktadır. Reklam ayarlarınızı kullanarak Görüntülü Reklamcılık için Google Analytics’in kapsamı dışında kalabilir ve Google Görüntülü Reklam Ağı reklamlarınızı özelleştirebilirsiniz. Google Analytics ile sağlanan demografik bilgiler, followerpark.com’u ve followerpark.com tarafından verilen reklamları, kullanıcılarımızın ilgi alanlarına göre özelleştirmek için kullanılmaktadır."
           ></vs-list-item>
           <vs-list-item title="GİZLİLİK SÖZLEŞMESİ (2)"></vs-list-item>
           <vs-list-item
@@ -75,7 +79,7 @@
           ></vs-list-item>
           <vs-list-item title="GİZLİLİK SÖZLEŞMESİ (3)"></vs-list-item>
           <vs-list-item
-            subtitle="Müşteri bilgileri, ancak resmi makamlarca talep edilmesi halinde ve yürürlükteki emredici mevzuat hükümleri gereğince açıklama yapmak zorunda olunduğu durumlarda resmi makamlara açıklanacaktır. Ödeme sayfasında istenen kredi kartı bilgileriniz, siteden alışveriş yapan siz değerli müşterilerimizin güvenliğini en üst seviyede tutmak amacıyla hiçbir şekilde followerpark.com ve followerpark.com’un mobil uygulaması veya ona hizmet veren şirketlerin sunucularında tutulmamaktadır. Bu şekilde ödemeye yönelik tüm işlemlerin followerpark.com ara yüzü üzerinden banka, iyzico ödeme sistemleri ve bilgisayarınız ya da telefonunuz arasında gerçekleşmesi sağlanmaktadır. Bizlere her zaman aşağıda belirtilen iletişim bilgilerinden yararlanarak ulaşabilirsiniz. Müşterinin sisteme girdiği tüm bilgilere sadece müşteri ulaşabilmekte ve bu bilgileri sadece müşteri değiştirebilmektedir. Bir başkasının bu bilgilere ulaşması ve bunları değiştirmesi mümkün değildir. FollowerPark Yazılım Danışmanlık ve Tic. A.Ş. ( followerpark.com) Email: info@followerpark.com"
+            subtitle="Müşteri bilgileri, ancak resmi makamlarca talep edilmesi halinde ve yürürlükteki emredici mevzuat hükümleri gereğince açıklama yapmak zorunda olunduğu durumlarda resmi makamlara açıklanacaktır. Ödeme sayfasında istenen kredi kartı bilgileriniz, siteden alışveriş yapan siz değerli müşterilerimizin güvenliğini en üst seviyede tutmak amacıyla hiçbir şekilde followerpark.com ve followerpark.com’un mobil uygulaması veya ona hizmet veren şirketlerin sunucularında tutulmamaktadır. Bu şekilde ödemeye yönelik tüm işlemlerin followerpark.com ara yüzü üzerinden banka, iyzico ödeme sistemleri ve bilgisayarınız ya da telefonunuz arasında gerçekleşmesi sağlanmaktadır. Bizlere her zaman aşağıda belirtilen iletişim bilgilerinden yararlanarak ulaşabilirsiniz. Müşterinin sisteme girdiği tüm bilgilere sadece müşteri ulaşabilmekte ve bu bilgileri sadece müşteri değiştirebilmektedir. Bir başkasının bu bilgilere ulaşması ve bunları değiştirmesi mümkün değildir. FollowersPark Yazılım Danışmanlık ve Tic. A.Ş. ( followerpark.com) Email: info@followerpark.com"
           ></vs-list-item>
           <vs-list-item
             title="İADE KOŞULLARI"
@@ -107,8 +111,8 @@
   </div>
 </template>
 <script>
-import FpOnePageNavbar from '@/components/SPA/FpOnePageNavbar';
-import FpOnePageFooter from '@/components/SPA/FpOnePageFooter';
+import FpOnePageNavbar from "@/components/SPA/FpOnePageNavbar";
+import FpOnePageFooter from "@/components/SPA/FpOnePageFooter";
 
 export default {
   components: {

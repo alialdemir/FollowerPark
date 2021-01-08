@@ -23,12 +23,12 @@
           color="primary"
           type="filled"
           target="_blank"
-          href="https://chrome.google.com/webstore/detail/followerpark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0"
+          href="https://chrome.google.com/webstore/detail/followerspark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0"
         >GET IT FOR FREE</vs-button>
 
         <router-link tag="div" to="/" class="vx-logo cursor-pointer mx-auto flex items-center">
           <logo class="w-10 mr-4 fill-current text-primary" />
-          <span class="vx-logo-text text-primary">FollowerPark</span>
+          <span class="vx-logo-text text-primary">FollowersPark</span>
         </router-link>
         <!--
         <search-bar />

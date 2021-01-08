@@ -5,7 +5,7 @@
         <vs-select v-model="userList" class="w-full select-large">
           <vs-select-item
             :key="index"
-            :value="item.userNames"
+            :value="item.usernames"
             :text="item.listName"
             v-for="(item,index) in myUserLists"
           />

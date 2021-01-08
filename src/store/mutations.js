@@ -1,21 +1,21 @@
-import taskConfigurationsMutations from './mutations/taskConfigurationsMutations';
-import indexedDMutations from './mutations/indexedDMutations';
-import logMutations from './mutations/logMutations';
-import userListsMutations from './mutations/userListsMutations';
-import directMessagesMutations from './mutations/directMessagesMutations';
-import blockListMutations from './mutations/blockListMutations';
-import georaphicalLocationsSearchMutations from './mutations/georaphicalLocationsSearchMutations';
 import { updateField } from 'vuex-map-fields';
+import blockListMutations from './mutations/blockListMutations';
+import directMessagesMutations from './mutations/directMessagesMutations';
+import georaphicalLocationsSearchMutations from './mutations/georaphicalLocationsSearchMutations';
+import logMutations from './mutations/logMutations';
+import taskConfigurationsMutations from './mutations/taskConfigurationsMutations';
+import userListsMutations from './mutations/userListsMutations';
+import pricingMutation from './mutations/pricingMutation';
 
 const mutations = {
     updateField,
     ...taskConfigurationsMutations,
-    ...indexedDMutations,
     ...logMutations,
     ...userListsMutations,
     ...directMessagesMutations,
     ...blockListMutations,
     ...georaphicalLocationsSearchMutations,
+    ...pricingMutation,
 
     // /////////////////////////////////////////////
     // COMPONENTS

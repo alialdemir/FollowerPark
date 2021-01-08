@@ -14,12 +14,12 @@
         </div>
       </div>
       <div class="vx-col sm:w-1/2 w-full mb-2">
-        <h4>{{$t('CreatingDirectMessageRules')}}</h4>
-        <p>{{$t('TheMessageCanBeBetweenOneAndThousandCharacters')}}</p>
-        <p>{{$t('TheListShouldContainMoreThanFifteenUniqueMessages')}}</p>
+        <h4>{{ $t("CreatingDirectMessageRules") }}</h4>
+        <p>{{ $t("TheMessageCanBeBetweenOneAndThousandCharacters") }}</p>
+        <p>{{ $t("TheListShouldContainMoreThanFifteenUniqueMessages") }}</p>
       </div>
     </div>
-    <h5>{{$t('WriteEachSeparateMessageAsASeparateLine')}}</h5>
+    <h5>{{ $t("WriteEachSeparateMessageAsASeparateLine") }}</h5>
     <div class="vx-row">
       <div class="vx-col sm:w-1/2 w-full">
         <div class="vx-row">
@@ -27,13 +27,19 @@
             <div class="multicomment-wrapper">
               <div v-show="messageList.length > 0" class="counts">
                 <span class="subtext">
-                  {{$t('Messages')}} {{messageList.length}} (
-                  <small>{{$t('FifteenMessagesAreRecommended')}}</small>)
+                  {{ $t("Messages") }} {{ messageList.length }} (
+                  <small>{{ $t("FifteenMessagesAreRecommended") }}</small
+                  >)
                 </span>
                 <!---->
               </div>
               <div
-                :style="[item.id == selectedComment.id  || (isEditAllComments && !selectedComment.id ) ? {'border-color': '#7ed321'} : {'border-color': '#FFF'}]"
+                :style="[
+                  item.directMessageId == selectedComment.directMessageId ||
+                  (isEditAllComments && !selectedComment.directMessageId)
+                    ? { 'border-color': '#7ed321' }
+                    : { 'border-color': '#3b4253' },
+                ]"
                 class="comment"
                 v-for="item in messageList"
                 :key="item.title"
@@ -65,40 +71,61 @@
                 color="primary"
                 type="border"
                 icon="create"
-              >{{$t('EditAll')}}</vs-button>
+                >{{ $t("EditAll") }}</vs-button
+              >
               <vs-button
                 @click="allDeleteComment"
                 v-show="messageList.length > 0"
                 color="danger"
                 type="border"
                 icon="close"
-              >{{$t('DeleteAll')}}</vs-button>
+                >{{ $t("DeleteAll") }}</vs-button
+              >
             </div>
           </div>
         </div>
       </div>
-      <div class="vx-col sm:w-1/2 w-full mb-2 direct-message-textarea flex flex-col pr-4 pl-4">
+      <div
+        class="vx-col sm:w-1/2 w-full mb-2 direct-message-textarea flex flex-col pr-4 pl-4"
+      >
         <vs-textarea
           height="200px"
           :placeholder="$t('AddMessageSample')"
           v-model="directMessage.messages"
         />
-        <vs-button v-if="!isEditAllComments" @click="addMessages">{{$t('AddMessages')}}</vs-button>
+        <vs-button v-if="!isEditAllComments" @click="addMessages">{{
+          $t("AddMessages")
+        }}</vs-button>
         <div class="flex justify-around">
-          <vs-button v-if="isEditAllComments" color="primary" @click="cancelEdit">{{$t('Cancel')}}</vs-button>
+          <vs-button
+            v-if="isEditAllComments"
+            color="primary"
+            @click="cancelEdit"
+            >{{ $t("Cancel") }}</vs-button
+          >
           <vs-button
             v-if="isEditAllComments"
             color="success"
             @click="saveAllChanges"
-          >{{$t('SaveAllChanges')}}</vs-button>
+            >{{ $t("SaveAllChanges") }}</vs-button
+          >
         </div>
-        <p class="mt-2">{{$t('YouCanAddSeveralMessagesSeparatedByAnEmptyLine')}}</p>
+        <p class="mt-2">
+          {{ $t("YouCanAddSeveralMessagesSeparatedByAnEmptyLine") }}
+        </p>
       </div>
     </div>
     <div class="vx-row mt-2">
       <div class="vx-col w-full">
-        <vs-button @click="saveList" color="success" class="mr-3 mb-2">{{$t('Save')}}</vs-button>
-        <vs-button @click="$emit('saveList')" color="danger" class="mr-3 mb-2">{{$t('Cancel')}}</vs-button>
+        <vs-button @click="saveList" color="success" class="mr-3 mb-2">{{
+          $t("Save")
+        }}</vs-button>
+        <vs-button
+          @click="$emit('saveList')"
+          color="danger"
+          class="mr-3 mb-2"
+          >{{ $t("Cancel") }}</vs-button
+        >
       </div>
     </div>
   </div>
@@ -107,14 +134,14 @@
 
 <script>
 export default {
-  name: 'fp-create-direct-message',
+  name: "fp-create-direct-message",
   props: {
     selectedDirectMessage: {
       type: Object,
       default: {
-        id: 0,
-        listName: '',
-        messages: [],
+        directMessageId: 0,
+        listName: "",
+        directMessages: [],
       },
     },
   },
@@ -122,12 +149,14 @@ export default {
   data() {
     return {
       directMessage: {
+        directMessageId: this.$props.selectedDirectMessage.directMessageId,
         listName: this.$props.selectedDirectMessage.listName,
-        messages: this.$props.selectedDirectMessage.messages
+        messages:
+          "" /*this.$props.selectedDirectMessage.directMessages
           .map((item) => item.text)
-          .join('\n\n'),
+          .join("\n\n"),*/,
       },
-      messageList: this.$props.selectedDirectMessage.messages,
+      messageList: this.$props.selectedDirectMessage.directMessages,
       selectedComment: {},
       isEditAllComments: false,
     };
@@ -143,13 +172,13 @@ export default {
       return (
         s4() +
         s4() +
-        '-' +
+        "-" +
         s4() +
-        '-' +
+        "-" +
         s4() +
-        '-' +
+        "-" +
         s4() +
-        '-' +
+        "-" +
         s4() +
         s4() +
         s4()
@@ -162,11 +191,11 @@ export default {
       }
 
       const messages = this.directMessage.messages
-        .split('\n\n')
-        .filter((item) => item.trim() !== '')
+        .split("\n\n")
+        .filter((item) => item.trim() !== "")
         .map((item) => {
           return {
-            id: this.createGuid(),
+            directMessageId: this.createGuid(),
             text: item,
           };
         });
@@ -184,9 +213,12 @@ export default {
         (item) => item.id === this.selectedComment.id
       );
 
-      this.messageList[index] = this.selectedComment;
-
-      this.cancelEdit();
+      if (this.selectedComment.text != "") {
+        this.messageList[index] = this.selectedComment;
+        this.cancelEdit();
+      } else {
+        this.deleteCommentAccept();
+      }
     },
 
     cancelEdit() {
@@ -206,7 +238,7 @@ export default {
     editAllComments() {
       this.directMessage.messages = this.messageList
         .map((item) => item.text)
-        .join('\n\n');
+        .join("\n\n");
 
       this.selectedComment = {};
 
@@ -219,66 +251,66 @@ export default {
       }
 
       const dispatchName =
-        this.$props.selectedDirectMessage.id > 0
-          ? 'updateDirectMessage'
-          : 'addDirectMessage';
+        this.$props.selectedDirectMessage.directMessageId > 0
+          ? "updateDirectMessage"
+          : "addDirectMessage";
 
       this.$store.dispatch(dispatchName, {
-        id: this.$props.selectedDirectMessage.id,
+        directMessageId: this.$props.selectedDirectMessage.directMessageId,
         listName: this.directMessage.listName,
-        messages: this.messageList,
+        directMessages: this.messageList,
       });
 
-      this.$emit('saveList');
+      this.$emit("saveList");
     },
 
     deleteComment(item) {
       this.selectedComment = item;
 
       this.$vs.dialog({
-        type: 'confirm',
-        'accept-text': 'Delete',
-        color: 'danger',
+        type: "confirm",
+        "accept-text": "Delete",
+        color: "danger",
         title: `Delete comment?`,
-        text: 'Are you sure you want to delete the comment?',
+        text: "Are you sure you want to delete the comment?",
         accept: this.deleteCommentAccept,
       });
     },
 
     deleteCommentAccept() {
       this.$vs.notify({
-        color: 'success',
-        title: 'Deleted comment',
-        text: 'The selected comment was successfully deleted',
+        color: "success",
+        title: "Deleted comment",
+        text: "The selected comment was successfully deleted",
       });
 
       this.messageList = this.messageList.filter(
-        (item) => item.id !== this.selectedComment.id
+        (item) => item.directMessageId !== this.selectedComment.directMessageId
       );
 
       if (this.directMessage.messages.length > 0) {
         this.directMessage.messages = this.messageList
           .map((item) => item.text)
-          .join('\n\n');
+          .join("\n\n");
       }
     },
 
     allDeleteComment() {
       this.$vs.dialog({
-        type: 'confirm',
-        'accept-text': 'Delete',
-        color: 'danger',
+        type: "confirm",
+        "accept-text": "Delete",
+        color: "danger",
         title: `Delete all comments?`,
-        text: 'Are you sure you want to delete all comments?',
+        text: "Are you sure you want to delete all comments?",
         accept: this.allDeleteCommentAccept,
       });
     },
 
     allDeleteCommentAccept() {
       this.$vs.notify({
-        color: 'success',
-        title: 'Deleted comment',
-        text: 'The all comments was successfully deleted',
+        color: "success",
+        title: "Deleted comment",
+        text: "The all comments was successfully deleted",
       });
 
       this.isEditAllComments = false;
@@ -292,8 +324,8 @@ export default {
 
 <style>
 .direct-message-textarea {
-  background-color: #fff;
-  border: 1px solid #b8ddf8;
+  background-color: #10163a;
+  border: 1px solid #3b4253;
 }
 
 .direct-message-textarea .vs-textarea-primary,
@@ -309,12 +341,12 @@ export default {
 }
 
 .multicomment-wrapper {
-  border: 1px solid #b8ddf8;
+  border: 1px solid #3b4253;
   height: 284px;
   margin-bottom: 0px;
   border-radius: 5px;
   overflow: auto;
-  background: #fafdff;
+  background: #10163a;
   cursor: default;
   position: relative;
 }
@@ -326,7 +358,7 @@ export default {
   height: auto;
   max-height: 8rem;
   border-radius: 3px;
-  background-color: #fff;
+  background-color: #262c49;
   border: 1px solid transparent;
   box-shadow: 0 2px 4px 0 rgba(26, 143, 230, 0.1);
   position: relative;
@@ -338,9 +370,9 @@ export default {
   margin-left: 0;
   width: 100%;
   border-radius: 4px 4px 0 0;
-  border: 1px solid #b8ddf8;
+  border-bottom: 1px solid #3b4253;
   border-bottom: 0;
-  background: #f3f8fb;
+  background: #10163a;
   padding: 0.2rem 1.7rem;
   z-index: 999;
 }

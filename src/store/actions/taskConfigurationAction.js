@@ -1,88 +1,86 @@
-import * as InsApi from '@/middleware/InsApi';
-import { unfollowOption } from '@/middleware/enums'
+import { deleteRequest, getRequest, postRequest, putRequest } from '@/axios.js';
+import main from '@/main.js';
 
 const taskConfigurationAction = {
 
-    async taskStart({ dispatch }, taskInfo) {
-        if (!taskInfo || !taskInfo.task.id) {
+    taskStart({ commit, dispatch }, task) {
+        if (!task || !task.taskId) {
             return;
         }
 
-        let url = '';
-        let whereUserResource = {};
+        const interval = setInterval(async () => {
+            if (main.$store.state.AppActiveUser.uid === 0) {
+                console.log('Instagram bağlantısı kurulamadı');
 
-        const action = taskInfo
-            .taskActions
-            .filter(item => item.id === taskInfo.task.action)
-            .shift();
-
-        if (taskInfo.task.whereUserResource > 0) {
-            whereUserResource = taskInfo
-                .whereUserResources
-                .filter(item => item.id === taskInfo.task.whereUserResource)
-                .shift();
-
-            let parameter = taskInfo.task[whereUserResource.paremeter];
-            if (Array.isArray(parameter)) { // todo multi support
-                parameter = parameter[0]
-            }
-
-            url = await InsApi[whereUserResource.function](parameter);
-            if (url === '') {
                 return;
             }
-        }
 
-        const task = {
-            ...taskInfo.task,
-            status: 1,
-        };
+            clearInterval(interval);
 
-        if (task.action === 6) {
-            if (task.directMessageSource === 1) {
+            const { status } = await putRequest(`/task/${task.taskId}/Start`);
+            if (status === 200) {
                 dispatch('postMessage', {
-                    type: 'GET',
-                    responseType: 'directMessageFollowers',
-                    responseData: task,
-                    url: InsApi.followers(task.userId),
+                    type: 'startTask',
+                    task
                 });
 
-            } else if (task.directMessageSource === 2) {
-                dispatch('startDirectMessageTaskWithInterval', { task });
+                task.status = true;
+                commit('TASK_START', task);
             }
-        } else if (task.unfollowOption === unfollowOption.listofBlocks) {
-            dispatch(action.dispatchActionName, {
-                task,
-                whereUserResource,
-                action,
-            });
-        } else {
-            dispatch('postMessage', {
-                type: 'GET',
-                responseType: action.dispatchActionName,
-                responseData: {
-                    task,
-                    whereUserResource,
-                    action,
-                },
-                url: url,
-            });
-        }
-
-        dispatch('updateTask', task);
+        }, 500);
     },
 
-    taskStop({ dispatch, commit }, task) {
-        commit('TASK_STOP', task.id);
+    async taskStop({ commit, dispatch }, task) {
+        const { status } = await putRequest(`/task/${task.taskId}/Stop`);
+        if (status === 200) {
+            dispatch('postMessage', {
+                type: 'stopTask',
+                task: { taskId: task.taskId }
+            });
 
-        dispatch('updateTask', {
-            ...task,
-            status: 0
-        });
+            task.status = false;
+            commit('TASK_STOP', task);
+        }
+    },
+
+    async addNewTask({ dispatch }, task) {
+        const { status } = await postRequest('/Task', task);
+
+        if (status === 200) {
+            dispatch('getTask');
+        }
+    },
+
+    async getTask({ commit, dispatch }) {
+        const { data } = await getRequest('/task?pageNumber=1&pageSize=9999');
+        commit('SET_TASK', data.items);
+
+
+        const activeTasks = ((data || {}).items || []).filter((item) => item.status === true);
+        for (let i = 0; i < activeTasks.length; i++) {
+            const task = activeTasks[i];
+
+            dispatch('taskStart', task);
+        }
+    },
+
+    async deleteTask({ commit }, taskId) {
+        const { status } = await deleteRequest(`/task/${taskId}`)
+        if (status === 200) {
+            commit('DELETE_TASK', taskId);
+        }
     },
 
     setTaskConfigurations({ commit }, config) {
         commit('SET_TASK_CONFIGURATIONS', config);
+    },
+
+    async updateTask({ commit }, { taskId, numberTransactions }) {
+        const { data, status } = await putRequest(`/task/${taskId}`, { numberTransactions });
+        if (status === 200) {
+            //  dispatc('getTask')
+            commit('UPDATE_TASK', data);
+        }
     },
 }
 

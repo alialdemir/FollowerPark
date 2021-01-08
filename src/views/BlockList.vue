@@ -2,27 +2,31 @@
   <div>
     <vx-card
       :title="$t('BlockList')"
-      :refreshContentAction="true"
-      :newButtonText="$t('CreateBlockList')"
       :addCardAction="true"
-      @refresh="closeCardAnimation"
-      @add="isShowCreatePanel=true"
+      @add="isShowCreatePanel = true"
       class="overflow-hidden"
     >
       <vs-table stripe :data="blockList">
         <template slot="thead">
-          <vs-th style="width:50px"></vs-th>
-          <vs-th>{{$t('ListName')}}</vs-th>
-          <vs-th>{{$t('Count')}}</vs-th>
+          <vs-th>{{ $t("ListName") }}</vs-th>
+          <vs-th>{{ $t("Count") }}</vs-th>
+          <vs-th style="width: 50px"></vs-th>
         </template>
 
-        <template slot-scope="{data}">
+        <template slot-scope="{ data }">
           <vs-tr :key="indextr" v-for="(item, indextr) in data">
+            <vs-td>{{ item.listName }}</vs-td>
+            <vs-td>{{ item.usernames.length }}</vs-td>
+
             <vs-td>
-              <vs-dropdown>
-                <a class="a-icon" href="#">
-                  <vs-icon size="large" class icon="expand_more"></vs-icon>
-                </a>
+              <vs-dropdown class="cursor-pointer" vs-trigger-click>
+                <vs-button
+                  size="small"
+                  radius
+                  color="dark"
+                  type="border"
+                  icon="more_vert"
+                ></vs-button>
 
                 <vs-dropdown-menu>
                   <vs-dropdown-item>
@@ -31,22 +35,22 @@
                       color="dark"
                       type="flat"
                       @click="edit(item)"
-                    >{{$t('Edit')}}</vs-button>
+                      >{{ $t("Edit") }}</vs-button
+                    >
                   </vs-dropdown-item>
                   <vs-dropdown-item divider>
                     <vs-button
                       size="small"
+                      class="w-full"
                       color="danger"
                       type="flat"
                       @click="deleteUserList(item)"
-                    >{{$t('Delete')}}</vs-button>
+                      >{{ $t("Delete") }}</vs-button
+                    >
                   </vs-dropdown-item>
                 </vs-dropdown-menu>
               </vs-dropdown>
             </vs-td>
-
-            <vs-td>{{ item.listName }}</vs-td>
-            <vs-td>{{ item.userNames.length }}</vs-td>
           </vs-tr>
         </template>
       </vs-table>
@@ -55,28 +59,37 @@
     <vs-popup
       v-if="isShowCreatePanel"
       :button-close-hidden="true"
-      :title="$t(selectedBlockList.id === 0 ? 'CreateBlockList': 'EditBlockList')"
+      :title="
+        $t(
+          selectedBlockList.blockListId === 0
+            ? 'CreateBlockList'
+            : 'EditBlockList'
+        )
+      "
       :active.sync="isShowCreatePanel"
     >
-      <fp-create-block-list :selectedBlockList="selectedBlockList" @saveList="saveList" />
+      <fp-create-block-list
+        :selectedBlockList="selectedBlockList"
+        @saveList="saveList"
+      />
     </vs-popup>
   </div>
 </template>
 
 <script>
-import i18n from '@/i18n/i18n';
+import i18n from "@/i18n/i18n";
 
 export default {
-  name: 'fp-block-list',
+  name: "fp-block-list",
 
   created() {
-    if (this.$route.query.q === 'c') {
+    if (this.$route.query.q === "c") {
       this.isShowCreatePanel = true;
       this.$router.push(this.$route.path);
     }
 
     setTimeout(() => {
-      this.$store.dispatch('getBlockList');
+      this.$store.dispatch("getBlockList");
     }, 500);
   },
 
@@ -90,9 +103,9 @@ export default {
     return {
       isShowCreatePanel: false,
       selectedBlockList: {
-        id: 0,
-        listName: '',
-        userNames: [],
+        blockListId: 0,
+        listName: "",
+        usernames: [],
       },
     };
   },
@@ -101,9 +114,9 @@ export default {
     isShowCreatePanel(val) {
       if (val === false) {
         this.selectedBlockList = {
-          id: 0,
-          listName: '',
-          userNames: [],
+          blockListId: 0,
+          listName: "",
+          usernames: [],
         };
       }
     },
@@ -114,14 +127,14 @@ export default {
       this.isShowCreatePanel = false;
 
       this.selectedBlockList = {
-        id: 0,
-        listName: '',
-        userNames: [],
+        blockListId: 0,
+        listName: "",
+        usernames: [],
       };
     },
 
     closeCardAnimation(card) {
-      this.$store.dispatch('getBlockList');
+      this.$store.dispatch("getBlockList");
       card.removeRefreshAnimation(3000);
     },
 
@@ -129,31 +142,32 @@ export default {
       this.selectedBlockList = item;
 
       this.$vs.dialog({
-        type: 'confirm',
-        'accept-text': 'Delete',
-        color: 'danger',
-        title: i18n.t('DeleteBlockList') + '?',
-        text: i18n.t('AreYouSureYouWantToDeleteTheBlockList'),
+        type: "confirm",
+        acceptText: i18n.t("Accept"),
+        cancelText: i18n.t("Cancel"),
+        color: "danger",
+        title: i18n.t("DeleteBlockList") + "?",
+        text: i18n.t("AreYouSureYouWantToDeleteTheBlockList"),
         accept: this.deleteUserListAccept,
       });
     },
 
     deleteUserListAccept() {
       this.$vs.notify({
-        color: 'success',
-        title: i18n.t('DeleteBlockList'),
-        text: i18n.t('TheSelectedBlockListWasSuccessfullyDeleted'),
+        color: "success",
+        title: i18n.t("DeleteBlockList"),
+        text: i18n.t("TheSelectedBlockListWasSuccessfullyDeleted"),
       });
 
       this.$store.dispatch(
-        'deleteBlockList',
-        JSON.parse(JSON.stringify(this.selectedBlockList))
+        "deleteBlockList",
+        this.selectedBlockList.blockListId
       );
 
       this.selectedBlockList = {
-        id: 0,
-        listName: '',
-        userNames: [],
+        blockListId: 0,
+        listName: "",
+        usernames: [],
       };
     },
 

@@ -1,13 +1,13 @@
 <template>
   <vs-navbar
     class="navbar left-0 right-0 top-0 fixed h-20"
-    color="primary"
+    color="#10163A"
     :class="{'navbar-fixed': scrollY > 0}"
     text-color="rgba(255,255,255,.6)"
   >
     <div class="w-100" slot="title">
       <a href="/">
-        <img src="@/assets/images/logo/logo.png" alt="FollowerPark" class="h-16 p-2 mt-1" />
+        <img src="@/assets/images/logo/logo.png" alt="FollowersPark" class="h-16 p-2 mt-1" />
       </a>
     </div>
 

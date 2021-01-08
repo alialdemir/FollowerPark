@@ -57,7 +57,7 @@ export default {
   data: () => ({
     footerMenuItems: [
       {
-        headerTitle: 'FollowerPark',
+        headerTitle: 'FollowersPark',
         type: 1,
         subItems: [
           {
@@ -97,7 +97,7 @@ export default {
           },
           {
             icon: 'alternate_email',
-            text: 'info@followerpark.com',
+            text: 'info@followerspark.com',
           },
           {},
           {},

@@ -1,5 +1,10 @@
+
 const georaphicalLocationsSearchActions = {
-    search({ commit }, { places }) {
+    async searchGeographicalLocation({ commit }, search) {
+        const response = await fetch(`https://www.instagram.com/web/search/topsearch/?context=blended&query=${search}&rank_token=0.17570890531920336&include_reel=true`);
+
+        const { places } = await response.json();
+
         commit('SET_SEARCH_RESULT', places);
     },
 

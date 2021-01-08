@@ -11,7 +11,7 @@
 .theme-dark {
 
   // Changes color code of dark color
-  --vs-dark: 184,194,204;
+  --vs-dark: 184, 194, 204;
 
   background-color: $content-dark-bg;
   color: $theme-dark-text-color !important;
@@ -908,6 +908,7 @@
     color: $theme-dark-text-color;
 
     .vs-textarea {
+      background: $theme-dark-bg;
       color: $theme-dark-text-color;
 
       &:focus {
@@ -1246,6 +1247,7 @@
           }
         }
       }
+
       .disabled {
         color: rgba($grey, .6);
       }
@@ -1497,7 +1499,7 @@
     }
 
     .vs-navbar-border,
-    {
+      {
       border-color: $theme-dark-border-color;
 
       .vs-navbar--item {
@@ -1542,4 +1544,5 @@
     }
   }
 }
+
 /*! rtl:end:ignore */

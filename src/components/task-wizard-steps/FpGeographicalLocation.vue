@@ -1,7 +1,7 @@
 
 <template>
   <vx-card :title="$t('SearchGeographicLocationYouWantToFind')">
-    <p>{{$t('WeRecommendYouToEnterUpToTenGeographicLocations')}}</p>
+    <p>{{ $t("WeRecommendYouToEnterUpToTenGeographicLocations") }}</p>
     <div class="relative mb-4">
       <GmapMap
         :center="center"
@@ -9,13 +9,13 @@
         style="width: 100%; height: 400px"
         @click="mapClicked"
         :options="{
-            zoomControl: true,
-            scaleControl: false,
-            mapTypeControl: false,
-            fullscreenControl: false,
-            streetViewControl: false,
-            disableDefaultUi: false
-          }"
+          zoomControl: true,
+          scaleControl: false,
+          mapTypeControl: false,
+          fullscreenControl: false,
+          streetViewControl: false,
+          disableDefaultUi: false,
+        }"
       >
         <GmapMarker
           :key="index"
@@ -23,7 +23,7 @@
           :position="m.position"
           :clickable="true"
           :draggable="true"
-          @click="center=m.position"
+          @click="center = m.position"
         />
       </GmapMap>
 
@@ -41,7 +41,8 @@
             color="warning"
             type="filled"
             @click="onSearchGeographicalLocation"
-          >{{$t('Search')}}</vs-button>
+            >{{ $t("Search") }}</vs-button
+          >
         </form>
       </div>
     </div>
@@ -66,12 +67,12 @@
           >
             <div @click="selectPlace(item)">
               <vs-chip
-                :color="item.place.closable === true ? 'success':''"
+                :color="item.place.closable === true ? 'success' : ''"
                 :closable="item.place.closable === true"
               >
-                {{item.place.location.name}}
+                {{ item.place.location.name }}
                 <b>&nbsp;|&nbsp;</b>
-                {{ item.place.location.pk}}
+                {{ item.place.location.pk }}
               </vs-chip>
             </div>
           </vs-col>
@@ -80,30 +81,32 @@
     </vs-row>
 
     <div class="flex items-center">
-      <vs-checkbox color="success" v-model="interactWithPosts">{{$t('InteractWithPostsOfTheLast')}}</vs-checkbox>
+      <vs-checkbox color="success" v-model="interactWithPosts">{{
+        $t("InteractWithPostsOfTheLast")
+      }}</vs-checkbox>
 
       <vs-input-number v-model="interactWithPostsDays" />
-      <p>{{$t('Days')}}</p>
+      <p>{{ $t("Days") }}</p>
     </div>
   </vx-card>
 </template>
 
 <script>
-import * as InsApi from '@/middleware/InsApi';
-import { mapGetters } from 'vuex';
-import { mapFields } from 'vuex-map-fields';
+import * as InsApi from "@/middleware/InsApi";
+import { mapGetters } from "vuex";
+import { mapFields } from "vuex-map-fields";
 
 export default {
-  name: 'fp-georaphical-location',
-  created() {
-    this.$store.dispatch('search', []);
-  },
+  name: "fp-georaphical-location",
+  /*created() {
+    this.$store.dispatch("search", []);
+  },*/
 
   data() {
     return {
-      georaphicalLocation: '',
+      georaphicalLocation: "",
       zoom: 6,
-      search: '',
+      search: "",
       center: { lat: 39.925533, lng: 32.866287 },
       markers: [],
     };
@@ -112,8 +115,8 @@ export default {
   watch: {
     georaphicalLocation(val) {
       if (val) {
-        this.$store.dispatch('setTaskConfigurations', {
-          georaphicalLocations: JSON.parse(JSON.stringify(val.split('\n'))),
+        this.$store.dispatch("setTaskConfigurations", {
+          georaphicalLocations: JSON.parse(JSON.stringify(val.split("\n"))),
         });
       }
     },
@@ -125,8 +128,8 @@ export default {
     },
 
     ...mapFields([
-      'taskConfigurations.interactWithPosts',
-      'taskConfigurations.interactWithPostsDays',
+      "taskConfigurations.interactWithPosts",
+      "taskConfigurations.interactWithPostsDays",
     ]),
   },
 
@@ -148,12 +151,8 @@ export default {
     },
 
     onSearchGeographicalLocation() {
-      if (this.search.trim() !== '') {
-        this.$store.dispatch('postMessage', {
-          type: 'GET',
-          responseType: 'search',
-          url: InsApi.search(this.search.trim()),
-        });
+      if (this.search.trim() !== "") {
+        this.$store.dispatch("searchGeographicalLocation", this.search.trim());
       }
     },
 
@@ -164,13 +163,13 @@ export default {
         selectedItem.place.closable === true
       ) {
         this.georaphicalLocation = this.georaphicalLocation
-          .replace(url + '\n', '')
-          .replace(url, '')
+          .replace(url + "\n", "")
+          .replace(url, "")
           .trim();
 
         selectedItem.place.closable = false;
 
-        this.$store.dispatch('selectSearchLocation', selectedItem);
+        this.$store.dispatch("selectSearchLocation", selectedItem);
 
         return;
       }
@@ -190,7 +189,7 @@ export default {
 
       selectedItem.place.closable = true;
 
-      this.$store.dispatch('selectSearchLocation', selectedItem);
+      this.$store.dispatch("selectSearchLocation", selectedItem);
     },
   },
 };

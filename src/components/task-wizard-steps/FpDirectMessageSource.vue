@@ -21,29 +21,29 @@
 </template>
 
 <script>
-import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue';
-import { mapFields } from 'vuex-map-fields';
+import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine.vue";
+import { mapFields } from "vuex-map-fields";
 
 export default {
-  name: 'fp-direct-message-source',
+  name: "fp-direct-message-source",
   components: {
     StatisticsCardLine,
   },
   computed: {
     ...mapFields([
-      'taskConfigurations.directMessageSource',
-      'directMessageSources',
+      "taskConfigurations.directMessageSource",
+      "directMessageSources",
     ]),
   },
 
   methods: {
     chooseDirectMessageSource(directMessageSource) {
-      this.$store.dispatch('setTaskConfigurations', {
+      this.$store.dispatch("setTaskConfigurations", {
         directMessageSource: directMessageSource.id,
-        userId: this.$store.state.AppActiveUser.uid,
+        username: this.$store.state.AppActiveUser.username,
       });
 
-      this.$emit('click');
+      this.$emit("click");
     },
   },
 };

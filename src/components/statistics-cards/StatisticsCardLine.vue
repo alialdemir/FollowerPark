@@ -10,13 +10,19 @@
 <template>
   <vx-card class="overflow-hidden statistics-card-min-height">
     <div slot="no-body">
-      <div v-if="isActive=== true" class="space"></div>
+      <div v-if="isActive === true" class="space"></div>
       <feather-icon
         v-if="isActive === false"
-        :icon="isActive === true ? 'CheckIcon' : isActive === false ? 'XIcon' : ''"
+        :icon="
+          isActive === true ? 'CheckIcon' : isActive === false ? 'XIcon' : ''
+        "
         class="inline-flex rounded-full mx-2 text-right mt-2"
-        :class="[`text-dark`, {'mb-4': !iconRight}]"
-        :style="{background: `rgba(var(--vs-${isActive === true ? 'success' : 'danger'}))`}"
+        :class="[`text-dark`, { 'mb-4': !iconRight }]"
+        :style="{
+          background: `rgba(var(--vs-${
+            isActive === true ? 'success' : 'danger'
+          }))`,
+        }"
       ></feather-icon>
 
       <fp-new-pulse v-if="isNewPulse" class="inline-flex self-end absolute" />
@@ -24,22 +30,24 @@
       <div
         class="p-6 cursor-pointer"
         :class="{
-              'flex justify-between flex-row-reverse items-center': iconRight,
-              'text-center': !iconRight && hideChart,
-              'pb-0': !hideChart
-            }"
+          'flex justify-between flex-row-reverse items-center': iconRight,
+          'text-center': !iconRight && hideChart,
+          'pb-0': !hideChart,
+        }"
       >
         <feather-icon
           :icon="icon"
           class="p-3 inline-flex rounded-full"
-          :class="[`text-${color}`, {'mb-4': !iconRight}]"
-          :style="{background: `rgba(var(--vs-${color}),.15)`}"
+          :class="[`text-${color}`, { 'mb-4': !iconRight }]"
+          :style="{ background: `rgba(var(--vs-${color}),.15)` }"
         ></feather-icon>
         <div>
           <h3
-            :style="{color: `rgba(var(--vs-${textColor}))`}"
+            :style="{ color: `rgba(var(--vs-${textColor}))` }"
             class="mb-1 font-bold"
-          >{{ statistic }}</h3>
+          >
+            {{ statistic }}
+          </h3>
           <span class="whitespace-pre-wrap">{{ statisticTitle }}</span>
         </div>
       </div>
@@ -59,9 +67,9 @@
 </template>
 
 <script>
-import VueApexCharts from 'vue-apexcharts';
-import chartConfigs from './chartConfigs.js';
-import _color from '@/assets/utils/color.js';
+import VueApexCharts from "vue-apexcharts";
+import chartConfigs from "./chartConfigs.js";
+import _color from "@/assets/utils/color.js";
 
 export default {
   props: {
@@ -82,11 +90,11 @@ export default {
     },
     color: {
       type: String,
-      default: 'primary',
+      default: "warning",
     },
     textColor: {
       type: String,
-      default: 'primary',
+      default: "primary",
     },
     colorTo: {
       type: String,
@@ -97,7 +105,7 @@ export default {
     // },
     type: {
       type: String,
-      default: 'line',
+      default: "line",
     },
     iconRight: {
       type: Boolean,
@@ -139,9 +147,9 @@ export default {
         let rgb = window
           .getComputedStyle(document.documentElement)
           .getPropertyValue(`--vs-${color}`);
-        rgb = rgb.split(',');
+        rgb = rgb.split(",");
         return (
-          '#' +
+          "#" +
           (
             (1 << 24) +
             (Number(rgb[0]) << 16) +
@@ -156,34 +164,34 @@ export default {
     },
     gradientToColor(color) {
       let gradientToColors = {
-        primary: '#A9A2F6',
-        success: '#55DD92',
-        warning: '#ffc085',
-        danger: '#F97794',
+        primary: "#A9A2F6",
+        success: "#55DD92",
+        warning: "#ffc085",
+        danger: "#F97794",
       };
 
       return gradientToColors[color]
         ? gradientToColors[color]
-        : gradientToColors['primary'];
+        : gradientToColors["primary"];
     },
   },
   components: {
     VueApexCharts,
   },
   created() {
-    if (this.type == 'area') {
+    if (this.type == "area") {
       // assign chart options
       this.chartOptions = Object.assign({}, chartConfigs.areaChartOptions);
 
-      this.chartOptions['theme'] = {
+      this.chartOptions["theme"] = {
         monochrome: {
           enabled: true,
           color: this.getHex(this.color),
-          shadeTo: 'light',
+          shadeTo: "light",
           shadeIntensity: 0.65,
         },
       };
-    } else if (this.type == 'line') {
+    } else if (this.type == "line") {
       // Assign chart options
       this.chartOptions = JSON.parse(
         JSON.stringify(chartConfigs.lineChartOptions)

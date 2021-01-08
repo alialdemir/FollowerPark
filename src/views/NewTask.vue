@@ -17,11 +17,14 @@
 
     <!-- tab 2 content -->
     <tab-content
-      v-if="action === 2 || action === 3 || action === 6"
+      v-if="action === 1 || action === 2 || action === 3 || action === 6"
       class="mb-5"
       :before-change="validateStep2"
     >
-      <fp-choose-resource @click="changeWizard" v-if="action === 2" />
+      <fp-choose-resource
+        @click="changeWizard"
+        v-if="action === 1 || action === 2"
+      />
       <fp-choose-unfollow-option @click="changeWizard" v-if="action === 3" />
 
       <fp-direct-message-source @click="changeWizard" v-if="action === 6" />
@@ -29,41 +32,68 @@
 
     <!-- tab 3 content -->
     <tab-content
-      v-if="resource === 1 ||resource === 3 || resource === 4 || unfollowOption > 0|| directMessageSource === 2"
+      v-if="
+        resource === 1 ||
+        resource === 2 ||
+        resource === 3 ||
+        resource === 4 ||
+        unfollowOption > 0 ||
+        directMessageSource === 2
+      "
       class="mb-5"
       :before-change="validateStep3"
     >
-      <fp-choose-user-resource @click="changeWizard" v-if="resource === 3" />
+      <fp-choose-user-resource
+        @click="changeWizard"
+        v-if="resource === 3 && unfollowOption === 0"
+      />
 
       <fp-georaphical-location @click="changeWizard" v-if="resource === 1" />
 
+      <fp-hastag @click="changeWizard" v-if="resource === 2" />
+
       <fp-choose-unfollow-user-count
         @click="changeWizard"
-        v-if="unfollowOption === 1 || unfollowOption === 2||  unfollowOption === 3"
+        v-if="
+          unfollowOption === 1 || unfollowOption === 2 || unfollowOption === 3
+        "
       />
 
       <fp-choose-block-list @click="changeWizard" v-if="unfollowOption === 4" />
 
-      <fp-user-list @click="changeWizard" v-if="resource === 4 || directMessageSource === 2" />
+      <fp-user-list
+        @click="changeWizard"
+        v-if="resource === 4 || directMessageSource === 2"
+      />
     </tab-content>
 
     <!-- tab 4 content -->
     <tab-content
-      v-if="resource === 4 || action === 2 || directMessageSource === 1 || directMessageSource === 2"
+      v-if="
+        action === 1 ||
+        action === 2 ||
+        resource === 4 ||
+        directMessageSource === 1 ||
+        directMessageSource === 2
+      "
       class="mb-5"
       :before-change="validateStep4"
     >
       <fp-choose-where-user-resource
         @click="changeWizard"
-        v-if="resource === 4  || (userList.length > 0 && resource > 1)"
+        v-if="resource === 4 || (userList.length > 0 && resource > 1)"
       />
+
+      <fp-choose-like-post-count @click="changeWizard" v-if="action === 1" />
 
       <fp-direct-message-list
         @click="changeWizard"
         v-if="directMessageSource === 1 || directMessageSource === 2"
       />
 
-      <fp-choose-follow-user-count v-if="resource === 1" />
+      <fp-choose-follow-user-count
+        v-if="action !== 1 && (resource === 1 || resource === 2)"
+      />
     </tab-content>
 
     <!-- tab 5 content -->
@@ -80,24 +110,37 @@
 
     <!-- tab 6 content -->
     <tab-content
-      v-if="action === 2 ||resource === 4 || resource=== 1 ||directMessageSource === 1 ||  directMessageSource === 2"
+      v-if="
+        action === 2 ||
+        resource === 4 ||
+        resource === 2 ||
+        resource === 1 ||
+        directMessageSource === 1 ||
+        directMessageSource === 2
+      "
       class="mb-5"
       :before-change="validateStep6"
     >
       <fp-choose-speed-action
         @click="changeWizard"
-        v-if="whereUserResource > 0 ||directMessageSource === 1 ||  directMessageSource === 2|| resource=== 1"
+        v-if="
+          whereUserResource > 0 ||
+          directMessageSource === 1 ||
+          directMessageSource === 2 ||
+          resource === 1 ||
+          resource === 2
+        "
       />
     </tab-content>
   </form-wizard>
 </template>
 
 <script>
-import { FormWizard, TabContent } from 'vue-form-wizard';
-import 'vue-form-wizard/dist/vue-form-wizard.min.css';
-import { mapFields } from 'vuex-map-fields';
-import { taskConfigurations } from '../middleware/enums';
-import { actionType, resource } from '@/middleware/enums';
+import { FormWizard, TabContent } from "vue-form-wizard";
+import "vue-form-wizard/dist/vue-form-wizard.min.css";
+import { mapFields } from "vuex-map-fields";
+import { taskConfigurations } from "../middleware/enums";
+import { actionType, resource } from "@/middleware/enums";
 
 export default {
   methods: {
@@ -106,9 +149,9 @@ export default {
         if (this.action > 0) {
           resolve(true);
         } else {
-          this.showError('Choose action');
+          this.showError("Choose action");
 
-          reject('correct all values');
+          reject("correct all values");
         }
       });
     },
@@ -116,24 +159,24 @@ export default {
     validateStep2() {
       return new Promise((resolve, reject) => {
         if (this.resource <= 0 && this.action === actionType.follow) {
-          this.showError('Choose resouce');
+          this.showError("Choose resouce");
         } else if (
           this.unfollowOption <= 0 &&
           this.action === actionType.unfollow
         ) {
-          this.showError('Choose unfollow resource');
+          this.showError("Choose unfollow resource");
         } else if (
           this.directMessageSource <= 0 &&
           this.action === actionType.direct
         ) {
-          this.showError('Choose direct message resouce');
+          this.showError("Choose direct message resouce");
         } else {
           resolve(true);
 
           return;
         }
 
-        reject('correct all values');
+        reject("correct all values");
       });
     },
 
@@ -146,7 +189,7 @@ export default {
           this.action === actionType.follow
         ) {
           this.showError(
-            'You must specify the geographical locations of the posts.'
+            "You must specify the geographical locations of the posts."
           );
         } else if (
           this.resource === resource.geographicalLocation &&
@@ -156,73 +199,76 @@ export default {
           this.action === actionType.follow
         ) {
           this.showError(
-            'You must specify the number of days to interact with posts.'
+            "You must specify the number of days to interact with posts."
           );
         } else if (
           this.directMessageSource <= 0 &&
           this.action === actionType.direct
         ) {
-          this.showError('Choose direct message source.');
+          this.showError("Choose direct message source.");
         } else if (
           this.userList.length <= 0 &&
           this.action === actionType.follow &&
           this.resource === resource.user
         ) {
-          this.showError('Write a usernames.');
+          this.showError("Write a usernames.");
+        } else if (
+          this.hashtags.length <= 0 &&
+          this.action === actionType.follow &&
+          this.resource === resource.hashtag
+        ) {
+          this.showError("Write a hashtags.");
         } else if (
           this.userList.length <= 0 &&
           this.action === actionType.follow &&
-          this.resource !== resource.geographicalLocation
+          this.resource === resource.userList
         ) {
-          this.showError('Choose user list.');
+          this.showError("Choose user list.");
         } else {
           resolve(true);
 
           return;
         }
 
-        reject('correct all values');
+        reject("correct all values");
       });
     },
 
     validateStep4() {
       return new Promise((resolve, reject) => {
-        if (
-          this.directMessage.length <= 0 &&
-          this.action === actionType.direct
-        ) {
-          this.showError('Choose direct message list.');
+        if (this.directMessageId <= 0 && this.action === actionType.direct) {
+          this.showError("Choose direct message list.");
         } else if (!(this.maximumNumberTransactions > 0)) {
-          this.showError('Choose transactions count');
+          this.showError("Choose transactions count");
         } else if (
           this.whereUserResource === 0 &&
           this.action === actionType.follow &&
           (this.resource === resource.user ||
             this.resource === resource.userList)
         ) {
-          this.showError('Choose user source.');
+          this.showError("Choose user source.");
         } else if (
           this.userList.length <= 0 &&
           this.action === actionType.follow &&
           this.resource === resource.userList
         ) {
-          this.showError('Choose direct user list.');
+          this.showError("Choose direct user list.");
         } else {
           resolve(true);
 
           return;
         }
 
-        reject('correct all values');
+        reject("correct all values");
       });
     },
 
     validateStep5() {
       return new Promise((resolve, reject) => {
-        if (this.userList.length > 0 || this.directMessage.length > 0) {
+        if (this.userList.length > 0 || this.directMessageId > 0) {
           resolve(true);
         } else {
-          reject('correct all values');
+          reject("correct all values");
         }
       });
     },
@@ -232,9 +278,9 @@ export default {
         if (this.intervalSpeed > 0) {
           resolve(true);
         } else {
-          this.showError('Choose speed');
+          this.showError("Choose speed");
 
-          reject('correct all values');
+          reject("correct all values");
         }
       });
     },
@@ -246,27 +292,27 @@ export default {
     showError(text) {
       this.$vs.notify({
         text: text,
-        color: 'danger',
-        position: 'top-center',
-        iconPack: 'feather',
-        icon: 'icon-alert-triangle',
+        color: "danger",
+        position: "top-center",
+        iconPack: "feather",
+        icon: "icon-alert-triangle",
       });
     },
 
     createTask() {
-      this.$store.dispatch('addNewTask', this.$store.state.taskConfigurations);
+      this.$store.dispatch("addNewTask", this.$store.state.taskConfigurations);
       this.$vs.notify({
-        title: 'The task has been created.',
-        text: 'You can start when you want the task.',
-        color: 'success',
-        position: 'top-center',
-        iconPack: 'feather',
-        icon: 'icon-check',
+        title: "The task has been created.",
+        text: "You can start when you want the task.",
+        color: "success",
+        position: "top-center",
+        iconPack: "feather",
+        icon: "icon-check",
       });
 
-      this.$store.dispatch('setTaskConfigurations', taskConfigurations);
+      this.$store.dispatch("setTaskConfigurations", taskConfigurations);
 
-      this.$router.push({ path: '/' });
+      this.$router.push({ path: "/" });
     },
 
     onChangeWizard(prevIndex, nextIndex) {
@@ -278,7 +324,7 @@ export default {
         const historyItem = this.taskConfigurationsHistory.items[prevIndex - 1];
         if (historyItem) {
           const prevConfigurations = JSON.parse(JSON.stringify(historyItem));
-          this.$store.dispatch('setTaskConfigurations', prevConfigurations);
+          this.$store.dispatch("setTaskConfigurations", prevConfigurations);
         }
       }
 
@@ -297,19 +343,20 @@ export default {
 
   computed: {
     ...mapFields([
-      'taskConfigurations',
-      'taskConfigurations.action',
-      'taskConfigurations.resource',
-      'taskConfigurations.whereUserResource',
-      'taskConfigurations.unfollowOption',
-      'taskConfigurations.directMessageSource',
-      'taskConfigurations.userList',
-      'taskConfigurations.directMessage',
-      'taskConfigurations.intervalSpeed',
-      'taskConfigurations.maximumNumberTransactions',
-      'taskConfigurations.interactWithPosts',
-      'taskConfigurations.interactWithPostsDays',
-      'taskConfigurations.georaphicalLocations',
+      "taskConfigurations",
+      "taskConfigurations.action",
+      "taskConfigurations.resource",
+      "taskConfigurations.whereUserResource",
+      "taskConfigurations.unfollowOption",
+      "taskConfigurations.directMessageSource",
+      "taskConfigurations.userList",
+      "taskConfigurations.hashtags",
+      "taskConfigurations.directMessageId",
+      "taskConfigurations.intervalSpeed",
+      "taskConfigurations.maximumNumberTransactions",
+      "taskConfigurations.interactWithPosts",
+      "taskConfigurations.interactWithPostsDays",
+      "taskConfigurations.georaphicalLocations",
     ]),
   },
 

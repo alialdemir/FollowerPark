@@ -1,7 +1,7 @@
 const georaphicalLocationsSearchMutations = {
 
     SET_SEARCH_RESULT(state, places) {
-        state.searchGeographicalLocation = places;
+        state.searchGeographicalLocation = places || [];
     },
 
     SELECT_SEARCH_LOCATION(state, selectedItem) {

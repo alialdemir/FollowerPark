@@ -1,22 +1,23 @@
 <template>
-  <vx-card title="Enter the name of the user-resource (without @ @)">
+  <vx-card title="Enter the hashtag  (without #)">
     <vs-textarea
-      class="choose-user-resource__textarea"
-      v-model="username"
-      :placeholder="$t('ForExample')"
+      class="hashtag__textarea"
+      v-model="hashtags"
+      :placeholder="$t('ForExampleHashtag')"
       width="300px"
+      height="200px"
     />
   </vx-card>
 </template>
 
 <script>
 export default {
-  name: "fp-choose-user-resource",
+  name: "fp-hastag",
   watch: {
-    username(val) {
+    hashtags(val) {
       if (val.trim()) {
         this.$store.dispatch("setTaskConfigurations", {
-          userList: JSON.parse(
+          hashtags: JSON.parse(
             JSON.stringify(val.split("\n").filter((item) => item !== ""))
           ),
         });
@@ -25,15 +26,14 @@ export default {
   },
   data() {
     return {
-      username: "",
+      hashtags: "",
     };
   },
 };
 </script>
 
-
 <style>
-.choose-user-resource__textarea textarea {
+.hashtag__textarea textarea {
   height: 200px;
 }
 </style>

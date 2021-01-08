@@ -1,40 +1,31 @@
-import { getItems } from './indexedDBAction';
-
-const dbName = 'DirectMessages';
+import { deleteRequest, getRequest, postRequest, putRequest } from '@/axios.js';
 
 const directMessagesAction = {
 
     async getDirectMessages({ commit }) {
-        const directMessage = await getItems(dbName);
-
-        commit('SET_DIRECT_MESSAGES', directMessage);
+        const { data } = await getRequest('/DirectMessage?pageNumber=1&pageSize=9999');
+        commit('SET_DIRECT_MESSAGES', data.items);
     },
 
-    addDirectMessage({ dispatch }, directMessage) {
-        dispatch('addDb', {
-            dbName,
-            ...directMessage,
-        });
-
-        dispatch('getDirectMessages');
+    async addDirectMessage({ dispatch }, directMessage) {
+        const { status } = await postRequest('/DirectMessage', directMessage);
+        if (status === 200) {
+            dispatch('getDirectMessages');
+        }
     },
 
-    deleteDirectMessage({ dispatch }, directMessage) {
-        dispatch('deleteDb', {
-            dbName,
-            id: directMessage.id
-        });
-
-        dispatch('getDirectMessages');
+    async deleteDirectMessage({ dispatch }, directMessageId) {
+        const { status } = await deleteRequest(`/DirectMessage/${directMessageId}`)
+        if (status === 200) {
+            dispatch('getDirectMessages');
+        }
     },
 
-    updateDirectMessage({ dispatch }, directMessage) {
-        dispatch('updateDb', {
-            dbName,
-            ...directMessage,
-        });
-
-        dispatch('getDirectMessages');
+    async updateDirectMessage({ dispatch }, directMessage) {
+        const { status } = await putRequest(`/DirectMessage/${directMessage.directMessageId}`, directMessage);
+        if (status === 200) {
+            dispatch('getDirectMessages');
+        }
     },
 }
 

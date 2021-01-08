@@ -14,7 +14,7 @@ export default {
         MoreFollowers: 'MORE FOLLOWERS',
         MoreSales: 'MORE SALES',
         MoreLikesDescription: 'Thanks to the tasks you create, we enable people to increase their number of likes by interacting with people.',
-        MoreFollowersDescription: 'You can increase the number of followers by using follow-up method in social networks. FollowerPark helps you at this point, automatically follows people and allows them to follow you. You can unsubscribe automatically at any time.',
+        MoreFollowersDescription: 'You can increase the number of followers by using follow-up method in social networks. FollowersPark helps you at this point, automatically follows people and allows them to follow you. You can unsubscribe automatically at any time.',
         MoreSalesDescription: 'Whether your page is a boutique or a gigantic brand, it makes no sense unless your customers see your products. At this point, we increase your sales by reaching customers suitable for your target audience.',
         ActionOtomation: 'ACTION AUTOMATION',
         ActionOtomationDescription: 'We provide services such as likes, follow-up, follow-up, direct message sending, commenting, story watching, data collection and many more.',
@@ -27,7 +27,7 @@ export default {
         PromotionalStatistics: 'PROMOTIONAL STATISTICS',
         PromotionalStatisticsDescription: 'Tasks can see the recycling rates statistically.',
         SmartModSmartPromotion: 'SMART MOD - SMART PROMOTION',
-        SmartModSmartPromotionDescription: 'Artificial intelligence of FollowerPark offers smart mode for you. You can make auto follow-up, auto likes and collective comments without getting stuck on Instagram.',
+        SmartModSmartPromotionDescription: 'Artificial intelligence of FollowersPark offers smart mode for you. You can make auto follow-up, auto likes and collective comments without getting stuck on Instagram.',
         Account: 'Account',
         Monthly: 'Monthly',
         Order: 'Order',
@@ -126,7 +126,7 @@ export default {
         DeleteAllComments: 'Delete all comments?',
         AreYouSureYouWantToDeleteAllComments: 'Are you sure you want to delete all comments?',
         TheAllCommentsWasSuccessfullyDeleted: 'The all comments was successfully deleted',
-        AddMessageSample: `ÖSample:
+        AddMessageSample: `Sample:
   Thank you for subscribing! We offer you 20% discount.
 
   We are glad to subscribe, We give you as a free 10 day gift.
@@ -197,7 +197,7 @@ export default {
         SkipUsersThatAreAlreadyFollow: 'Skip users that are already follow.',
         UnfollowUserCount: 'Unfollow user count:',
         HowManyFollowersShouldNotBeFollowed: 'How many followers should not be followed?',
-        ForExample: 'For example: ContestPark',
+        ForExample: 'For example:\nContestPark',
         ChooseDirectMessagesList: 'Choose direct messages list',
 
         HowManyMessagesDoYouNeedToSend: 'How many messages do you need to send?',
@@ -209,10 +209,19 @@ export default {
         SearchGeographicLocationYouWantToFind: 'Search geographic location you want to find',
         WeRecommendYouToEnterUpToTenGeographicLocations: 'We recommend you to enter up to 10 geographic locations.',
         Search: 'Search',
-        ForExampleLocation: 'For example: https://www.instagram.com/explore/locations/212903416',
+        ForExampleLocation: 'For example:\nhttps://www.instagram.com/explore/locations/212903416',
         InteractWithPostsOfTheLast: 'interact with posts of the last',
         Days: 'days',
-        ChooseUserList: 'Choose user list'
+        ChooseUserList: 'Choose user list',
+        UsernameOrPasswordIsIncorrect: 'Username or password is incorrect.',
+        TheUsernameYouEnteredBoesntBelongtoAnAccountPleaseCheckYourUsernameAndTryAgain: "The username you entered doesn't belong to an account. Please check your username and try again.",
+        ForExampleHashtag: 'For example:\nmyfriends\nbyhappy\ndreamteam',
+
+        NumberOfLikes: 'Number of likes',
+        TotalLikes: 'Total likes',
+        NumberOfLikesPerUser: 'Number of likes per user',
+        IWantToUse3DSecure: 'I want to use 3D Secure',
+        Continue: 'Continue'
 
     },
     tr: {
@@ -229,7 +238,7 @@ export default {
         MoreFollowers: 'DAHA FAZLA TAKİPÇİ',
         MoreSales: 'DAHA FAZLA SATIŞ',
         MoreLikesDescription: 'Oluşturduğunuz görevler sayesinde insanlarla etkileşime girerek paylaşımlarınızın beğeni sayılarılarını ve story izlenme asyılarınızın artmasını sağlıyoruz.',
-        MoreFollowersDescription: 'Sosyal ağlarda takibe takip yöntemini kullanarak takipçi sayınızı artırabilirsiniz. FollowerPark bu noktada size yardımcı olur insanları otomatik takip ederek onların sizi takip etmesini sağlar. Dilediğiniz zamanda otomatik olarak geri takipten çıkabilirsiniz.',
+        MoreFollowersDescription: 'Sosyal ağlarda takibe takip yöntemini kullanarak takipçi sayınızı artırabilirsiniz. FollowersPark bu noktada size yardımcı olur insanları otomatik takip ederek onların sizi takip etmesini sağlar. Dilediğiniz zamanda otomatik olarak geri takipten çıkabilirsiniz.',
         MoreSalesDescription: 'Sayfanız ister bir butik olsun yada devasa bir marka olun müşterileriniz ürünlerinizi görmediği sürece bir anlamı yok. Bu noktada sizin hedef kitlenize uygun müşterilere ulaşarak satışlarınızda artış sağlıyoruz.',
 
         ActionOtomation: 'EYLEM OTOMASYONU',
@@ -243,7 +252,7 @@ export default {
         PromotionalStatistics: 'TANITIM İSTATİSTİĞİ',
         PromotionalStatisticsDescription: 'Yapılan görevlerin geri dönüşüm oranlarını istatistiksel olarak görebilirsiniz.',
         SmartModSmartPromotion: 'AKILLI MOD - AKILLI TANITIM',
-        SmartModSmartPromotionDescription: 'FollowerPark\'ın yapay zekası sizin için akıllı mod özelliğini sunar.Instagram \'ın sınırlarına takılmadan oto takip, oto beğeni ve toplu yorum yapabilirsiniz.',
+        SmartModSmartPromotionDescription: 'FollowersPark\'ın yapay zekası sizin için akıllı mod özelliğini sunar.Instagram \'ın sınırlarına takılmadan oto takip, oto beğeni ve toplu yorum yapabilirsiniz.',
         Account: 'Hesap',
         Monthly: 'Aylık',
         Order: 'Sipariş Et',
@@ -422,7 +431,7 @@ export default {
         SkipUsersThatAreAlreadyFollow: 'Zaten takip edilen kullanıcıları atla.',
         UnfollowUserCount: 'Takip etmeyi bırakılacak kullanıcı sayısı:',
         HowManyFollowersShouldNotBeFollowed: 'Kaç takipçi takip edilmemelidir?',
-        ForExample: 'Örneğin: ContestPark',
+        ForExample: 'Örneğin:\nContestPark',
         ChooseDirectMessagesList: 'Doğrudan mesajlar listesi seçin',
 
 
@@ -435,9 +444,19 @@ export default {
         SearchGeographicLocationYouWantToFind: 'Bulmak istediğiniz coğrafi konumu arayın',
         WeRecommendYouToEnterUpToTenGeographicLocations: 'En fazla 10 coğrafi yer girmenizi öneririz.',
         Search: 'Ara',
-        ForExampleLocation: 'Örneğin: https://www.instagram.com/explore/locations/212903416',
+        ForExampleLocation: 'Örneğin:\nhttps://www.instagram.com/explore/locations/212903416',
         InteractWithPostsOfTheLast: 'son mesajlarla etkileşime gir',
         Days: 'gün',
-        ChooseUserList: 'Kullanıcı listesini seçin'
+        ChooseUserList: 'Kullanıcı listesini seçin',
+        UsernameOrPasswordIsIncorrect: 'Kullanıcı adı veya şifre yanlış',
+        TheUsernameYouEnteredBoesntBelongtoAnAccountPleaseCheckYourUsernameAndTryAgain: "Girdiğiniz kullanıcı adı bir hesaba ait değil. Lütfen kullanıcı adınızı kontrol edin ve tekrar deneyin.",
+        ForExampleHashtag: 'Örneğin:\naniyakala\nhayatinrenkleri\nhayat',
+
+
+        NumberOfLikes: 'Beğenme sayısı',
+        TotalLikes: 'Toplam Beğeni',
+        NumberOfLikesPerUser: 'Kullanıcı başına beğeni sayısı',
+        IWantToUse3DSecure: '3D Secure kullanmak istiyorum',
+        Continue: 'Devam Et'
     }
 }

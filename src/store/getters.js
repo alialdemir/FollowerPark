@@ -1,5 +1,5 @@
-import { getField } from 'vuex-map-fields';
 import { resource } from '@/middleware/enums';
+import { getField } from 'vuex-map-fields';
 const getters = {
     getField,
 
@@ -18,6 +18,8 @@ const getters = {
                             item => item.id === task.resource
                         )[0] || {}
                     ).text;
+                } else if (task.resource === 2) {
+                    return 'Hashtag';
                 } else {
                     return (
                         state.whereUserResources.filter(

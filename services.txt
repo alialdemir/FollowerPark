@@ -1,0 +1,21 @@
+üye ol
+giriş yap
+şifremi unuttum
+
+task ekle
+task detay
+task sil
+
+direkt mesaj listesi ekle
+direkt mesaj listesi güncelle
+direkt mesaj listesi sil
+
+kullanıcı listesi ekle
+kullanıcı listesi güncelle
+kullanıcı listesi sil
+
+Engelleme listesi ekle
+Engelleme listesi güncelle
+Engelleme listesi sil
+
+log listesi ekle

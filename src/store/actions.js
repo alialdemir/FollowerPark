@@ -1,41 +1,26 @@
-/*=========================================================================================
-  File Name: actions.js
-  Description: Vuex Store - actions
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-import currentUserAction from './actions/currentUserAction';
-import indexedDBAction from './actions/indexedDBAction';
-import logAction from './actions/logAction';
-import userListAction from './actions/userListAction';
+import accountAction from './actions/accountAction';
 import blockListAction from './actions/blockListAction';
-import taskDBAction from './actions/taskDBAction';
+import currentUserAction from './actions/currentUserAction';
 import directMessagesAction from './actions/directMessagesAction';
-import taskConfigurationAction from './actions/taskConfigurationAction';
-import taskDirectMessagesAction from './actions/taskDirectMessagesAction';
-import taskFollowAction from './actions/taskFollowAction';
 import georaphicalLocationsSearchActions from './actions/georaphicalLocationsSearchActions';
-import taskUnfollowAction from './actions/taskUnfollowAction';
+import logAction from './actions/logAction';
+import taskConfigurationAction from './actions/taskConfigurationAction';
+import userListAction from './actions/userListAction';
+import pricingAction from './actions/pricingAction';
 
 const actions = {
     ...currentUserAction,
-    ...indexedDBAction,
     ...logAction,
     ...userListAction,
     ...blockListAction,
-    ...taskDBAction,
     ...directMessagesAction,
     ...taskConfigurationAction,
-    ...taskDirectMessagesAction,
-    ...taskFollowAction,
-    ...taskUnfollowAction,
     ...georaphicalLocationsSearchActions,
+    ...accountAction,
+    ...pricingAction,
 
-
-    webpackInvalid({}) {}, // Console da error basıyordu onu engellemek için ekledim
-    webpackWarnings({}) {}, // Console da error basıyordu onu engellemek için ekledim
+    webpackInvalid({ }) { }, // Console da error basıyordu onu engellemek için ekledim
+    webpackWarnings({ }) { }, // Console da error basıyordu onu engellemek için ekledim
 
     // /////////////////////////////////////////////
     // COMPONENTS

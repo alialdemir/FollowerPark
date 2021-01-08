@@ -158,7 +158,8 @@
 
   .con-chips--remove-all {
     right: 9px;
-    > .vs-icon {
+
+    >.vs-icon {
       font-size: 1.3rem;
     }
   }
@@ -294,7 +295,7 @@
     padding: .7rem !important;
     font-size: 1rem !important;
 
-    ~ .vs-input--icon {
+    ~.vs-input--icon {
       &.feather {
         top: 9px;
       }
@@ -319,9 +320,9 @@
     padding: .4rem !important;
     font-size: .8rem !important;
 
-    ~ .vs-input--icon {
+    ~.vs-input--icon {
       &.feather {
-        top:7px !important;
+        top: 7px !important;
       }
     }
   }
@@ -540,6 +541,7 @@
 
 .vs-sidebar {
   height: calc(var(--vh, 1vh) * 100);
+
   .vs-sidebar--items {
     overflow: hidden;
     height: 100%;
@@ -703,8 +705,10 @@
 .vs-con-textarea {
   border: 1px solid rgba(0, 0, 0, .2) !important;
 
-  > h4 {
+  >h4 {
     color: inherit;
+
+    margin-bottom: 5px;
   }
 }
 

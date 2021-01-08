@@ -21,32 +21,33 @@
 </template>
 
 <script>
-import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue';
-import { mapFields } from 'vuex-map-fields';
-import { whereUserResourceType } from '@/middleware/enums';
+import StatisticsCardLine from "@/components/statistics-cards/StatisticsCardLine.vue";
+import { mapFields } from "vuex-map-fields";
+import { whereUserResourceType } from "@/middleware/enums";
 
 export default {
-  name: 'fp-choose-unfollow-option',
+  name: "fp-choose-unfollow-option",
   components: {
     StatisticsCardLine,
   },
   computed: {
     ...mapFields([
-      'taskConfigurations.unfollowOption',
-      'AppActiveUser',
-      'unfollowOptions',
+      "taskConfigurations.unfollowOption",
+      "AppActiveUser",
+      "unfollowOptions",
     ]),
   },
   methods: {
     chooseUnfollowOption(unfollowOption) {
       if (unfollowOption.disabled === true) {
-        this.$store.dispatch('setTaskConfigurations', {
-          userId: this.AppActiveUser.uid,
+        this.$store.dispatch("setTaskConfigurations", {
+          username: this.AppActiveUser.username,
+          //userId: this.AppActiveUser.uid,
           unfollowOption: unfollowOption.id,
           whereUserResource: whereUserResourceType.following,
         });
 
-        this.$emit('click');
+        this.$emit("click");
       }
     },
   },

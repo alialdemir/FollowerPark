@@ -13,23 +13,28 @@
     class="vx-card"
     ref="card"
     :class="[
-        {'overflow-hidden': tempHidden},
-        {'no-shadow': noShadow},
-        {'rounded-none': noRadius},
-        {'card-border': cardBorder},
-        cardClasses ]"
+      { 'overflow-hidden': tempHidden },
+      { 'no-shadow': noShadow },
+      { 'rounded-none': noRadius },
+      { 'card-border': cardBorder },
+      cardClasses,
+    ]"
     :style="cardStyles"
     v-on="$listeners"
   >
     <div class="vx-card__header" v-if="hasHeader">
       <!-- card title -->
       <div class="vx-card__title">
-        <h4 v-if="this.$props.title" :style="titleStyles" :class="titleClasses">{{ title }}</h4>
+        <h4 v-if="this.$props.title" :style="titleStyles" :class="titleClasses">
+          {{ title }}
+        </h4>
         <h6
           v-if="this.$props.subtitle"
           :style="subtitleStyles"
           :class="subtitleClasses"
-        >{{ subtitle }}</h6>
+        >
+          {{ subtitle }}
+        </h6>
       </div>
 
       <!-- card actions -->
@@ -37,7 +42,14 @@
         <slot name="actions">
           <div
             class="vx-card__action-buttons"
-            v-if="(actionButtons || collapseAction || refreshContentAction || removeCardAction) && !codeToggler"
+            v-if="
+              (actionButtons ||
+                collapseAction ||
+                addCardAction ||
+                refreshContentAction ||
+                removeCardAction) &&
+              !codeToggler
+            "
           >
             <!--
             <feather-icon
@@ -46,17 +58,21 @@
               class="ml-4 icon-success"
               v-if="actionButtons || addCardAction"
             />-->
+
             <vs-button
-              color="success"
-              @click="addCard"
-              type="filled"
+              class="order-1 ml-2"
+              radius
               v-if="actionButtons || addCardAction"
-            >{{$t(newButtonText)}}</vs-button>
+              color="success"
+              icon="add"
+              @click="addCard"
+              type="border"
+            ></vs-button>
 
             <feather-icon
               @click="toggleContent"
               icon="ChevronUpIcon"
-              :class="{rotate180: !isContentCollapsed}"
+              :class="{ rotate180: !isContentCollapsed }"
               class="ml-4"
               v-if="actionButtons || collapseAction"
             />
@@ -73,10 +89,15 @@
               v-if="actionButtons || removeCardAction"
             />
           </div>
-          <div class="vx-card__code-toggler sm:block hidden" v-if="codeToggler && !actionButtons">
+          <div
+            class="vx-card__code-toggler sm:block hidden"
+            v-if="codeToggler && !actionButtons"
+          >
             <feather-icon
               icon="CodeIcon"
-              :class="{'border border-solid border-primary border-t-0 border-r-0 border-l-0': showCode}"
+              :class="{
+                'border border-solid border-primary border-t-0 border-r-0 border-l-0': showCode,
+              }"
               @click="toggleCode"
             ></feather-icon>
           </div>
@@ -87,7 +108,10 @@
     <div
       class="vx-card__collapsible-content vs-con-loading__container"
       ref="content"
-      :class="[{collapsed: isContentCollapsed}, {'overflow-hidden': tempHidden}]"
+      :class="[
+        { collapsed: isContentCollapsed },
+        { 'overflow-hidden': tempHidden },
+      ]"
       :style="StyleItems"
     >
       <!-- content with no body(no padding) -->
@@ -111,7 +135,7 @@
       ref="codeContainer"
       v-show="this.$slots.codeContainer"
       :style="codeContainerStyles"
-      :class="{collapsed: !showCode}"
+      :class="{ collapsed: !showCode }"
     >
       <div class="code-content">
         <prism :language="codeLanguage" :key="$vs.rtl">
@@ -123,11 +147,11 @@
 </template>
 
 <script>
-import Prism from 'vue-prism-component';
-import _color from '@/assets/utils/color.js';
+import Prism from "vue-prism-component";
+import _color from "@/assets/utils/color.js";
 
 export default {
-  name: 'vx-card',
+  name: "vx-card",
   props: {
     title: String,
     subtitle: String,
@@ -137,11 +161,7 @@ export default {
     },
     actionButtonsColor: {
       type: String,
-      default: 'success',
-    },
-    newButtonText: {
-      type: String,
-      default: 'CreateTask',
+      default: "success",
     },
     codeToggler: {
       type: Boolean,
@@ -160,7 +180,7 @@ export default {
       type: Boolean,
     },
     codeLanguage: {
-      default: 'markup',
+      default: "markup",
       type: String,
     },
     collapseAction: {
@@ -180,7 +200,7 @@ export default {
       type: Boolean,
     },
     headerBackground: {
-      default: '',
+      default: "",
       type: String,
     },
     // bodyBackground: {
@@ -192,19 +212,19 @@ export default {
     //   type: String
     // },
     cardBackground: {
-      default: '',
+      default: "",
       type: String,
     },
     contentColor: {
-      default: '',
+      default: "",
       type: String,
     },
     titleColor: {
-      default: '',
+      default: "",
       type: String,
     },
     subtitleColor: {
-      default: '#b8c2cc',
+      default: "#b8c2cc",
       type: String,
     },
   },
@@ -214,7 +234,7 @@ export default {
       showCode: false,
       maxHeight: null,
       cardMaxHeight: null,
-      codeContainerMaxHeight: '0px',
+      codeContainerMaxHeight: "0px",
       tempHidden: false,
     };
   },
@@ -248,7 +268,7 @@ export default {
       return { maxHeight: this.codeContainerMaxHeight };
     },
     cardClasses() {
-      let str = '';
+      let str = "";
 
       // Add bg class
       if (_color.isColor(this.cardBackground)) {
@@ -268,7 +288,7 @@ export default {
       };
     },
     titleClasses() {
-      let str = '';
+      let str = "";
 
       // add content color
       if (_color.isColor(this.titleColor)) {
@@ -285,7 +305,7 @@ export default {
       return obj;
     },
     subtitleClasses() {
-      let str = '';
+      let str = "";
 
       // add content color
       if (_color.isColor(this.subtitleColor)) {
@@ -297,12 +317,12 @@ export default {
   },
   methods: {
     toggleContent() {
-      this.$refs.content.style.overflow = 'hidden';
+      this.$refs.content.style.overflow = "hidden";
       let scrollHeight = this.$refs.content.scrollHeight;
-      if (this.maxHeight == '1.5rem') {
+      if (this.maxHeight == "1.5rem") {
         this.maxHeight = `${scrollHeight}px`;
         setTimeout(() => {
-          this.maxHeight = 'none';
+          this.maxHeight = "none";
           this.$refs.content.style.overflow = null;
         }, 300);
       } else {
@@ -313,7 +333,7 @@ export default {
         }, 50);
       }
       this.isContentCollapsed = !this.isContentCollapsed;
-      this.$emit('toggleCollapse', this.isContentCollapsed);
+      this.$emit("toggleCollapse", this.isContentCollapsed);
     },
     refreshcard() {
       this.$vs.loading({
@@ -321,7 +341,7 @@ export default {
         scale: 0.5,
       });
       this.tempHidden = true;
-      this.$emit('refresh', this);
+      this.$emit("refresh", this);
     },
     removeRefreshAnimation(time = 100) {
       setTimeout(() => {
@@ -332,23 +352,23 @@ export default {
     removeCard() {
       let scrollHeight = this.$refs.card.scrollHeight;
       this.cardMaxHeight = `${scrollHeight}px`;
-      this.$el.style.overflow = 'hidden';
+      this.$el.style.overflow = "hidden";
       setTimeout(() => {
         this.cardMaxHeight = `0px`;
       }, 50);
-      this.$emit('remove');
+      this.$emit("remove");
     },
     addCard() {
-      this.$emit('add');
+      this.$emit("add");
     },
     toggleCode() {
       this.tempHidden = true;
       this.showCode = !this.showCode;
       let scrollHeight = this.$refs.codeContainer.scrollHeight;
-      if (this.codeContainerMaxHeight == '0px') {
+      if (this.codeContainerMaxHeight == "0px") {
         this.codeContainerMaxHeight = `${scrollHeight}px`;
         setTimeout(() => {
-          this.codeContainerMaxHeight = 'none';
+          this.codeContainerMaxHeight = "none";
           this.tempHidden = false;
         }, 300);
       } else {
@@ -367,5 +387,5 @@ export default {
 </script>
 
 <style lang="scss">
-@import '@/assets/scss/vuexy/components/vxCard.scss';
+@import "@/assets/scss/vuexy/components/vxCard.scss";
 </style>

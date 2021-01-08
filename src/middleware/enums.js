@@ -22,15 +22,17 @@ export const taskConfigurations = {
     username: '',
     userId: '',
     whereUserResource: 0,
-    status: 0,
-    intervalSpeed: 1000 * 60, // 60 sec
+    hashtags: [],
+    status: false,
+    intervalSpeed: 1,
     postsShortCode: [],
     unfollowOption: 0,
-    maximumNumberTransactions: 400,
+    maximumNumberTransactions: 60,
+    numberOfLikesPerUser: 3,
     numberTransactions: 0,
     directMessageSource: 0, // direct message source
     userList: [], // direct message user list
-    directMessage: [],
+    directMessageId: null,
     isSkipSentMessage: true, // Skip users who have already been sent a message
     isDeleteAfterSendingMessage: false, // Delete after sending the message.
     georaphicalLocations: [], // Geographical location

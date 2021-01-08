@@ -14,28 +14,36 @@ const taskConfigurationsMutations = {
     },
 
     TASK_START(state, taskInfo) {
-        const runningTaskIndex = state.tasks.map((item) => item.id).indexOf(taskInfo.id);
-        if (runningTaskIndex >= 0) {
-            state.tasks[runningTaskIndex] = Object.assign(state.tasks[runningTaskIndex], { status: 1 });
-
-            const runningTasksInterval = Object.assign([], state.runningTasksInterval);
-            runningTasksInterval.push(taskInfo);
-            state.runningTasksInterval = runningTasksInterval;
+        const taskIndex = state.tasks.map((item) => item.taskId).indexOf(taskInfo.taskId);
+        if (taskIndex >= 0) {
+            state.tasks[taskIndex] = Object.assign(state.tasks[taskIndex], { status: true });
         }
     },
 
-    TASK_STOP(state, id) {
-        const runningTaskIndex = state.tasks.map((item) => item.id).indexOf(id);
-        if (runningTaskIndex >= 0) {
-            state.tasks[runningTaskIndex] = Object.assign(state.tasks[runningTaskIndex], { status: 0 });
-
-            const taskInterval = state.runningTasksInterval.filter((item) => item.id === id)[0];
-            if (taskInterval) {
-                clearInterval(taskInterval.interval);
-                state.runningTasksInterval.splice(taskInterval, 1);
-            }
+    TASK_STOP(state, taskId) {
+        const taskIndex = state.tasks.findIndex((item) => item.taskId === taskId);
+        if (taskIndex >= 0) {
+            state.tasks[taskIndex] = Object.assign(state.tasks[taskIndex], { status: false });
         }
     },
+
+    SET_TASK(state, tasks) {
+        state.tasks = tasks;
+    },
+
+    DELETE_TASK(state, taskId) {
+        const task = state.tasks.filter((item) => item.taskId === taskId)[0];
+        if (task) {
+            state.tasks.splice(task, 1);
+        }
+    },
+
+    UPDATE_TASK(state, task) {
+        const taskIndex = state.tasks.findIndex((item) => item.taskId === task.taskId);
+        if (taskIndex >= 0) {
+            state.tasks[taskIndex] = Object.assign(state.tasks[taskIndex], { ...task });
+        }
+    }
 }
 
 export default taskConfigurationsMutations

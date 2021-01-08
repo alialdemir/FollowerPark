@@ -1,41 +1,32 @@
-import { getItems } from './indexedDBAction';
-import { Object } from 'core-js';
-
-const dbName = 'UserLists';
+import { deleteRequest, getRequest, postRequest, putRequest } from '@/axios.js';
 
 const userListAction = {
 
     async getUserList({ commit }) {
-        const myUserList = await getItems(dbName);
+        const { data } = await getRequest('/userlist?pageNumber=1&pageSize=9999');
 
-        commit('SET_MY_USER_LIST', myUserList);
+        commit('SET_MY_USER_LIST', data.items);
     },
 
-    addMyUserList({ dispatch }, myUserList) {
-        dispatch('addDb', {
-            dbName,
-            ...Object.assign({}, myUserList),
-        });
-
-        dispatch('getUserList');
+    async addMyUserList({ dispatch }, myUserList) {
+        const { status } = await postRequest('/userlist', myUserList);
+        if (status === 200) {
+            dispatch('getUserList');
+        }
     },
 
-    deleteMyUserList({ dispatch }, myUserList) {
-        dispatch('deleteDb', {
-            dbName,
-            id: myUserList.id
-        });
-
-        dispatch('getUserList');
+    async deleteMyUserList({ dispatch }, userListId) {
+        const { status } = await deleteRequest(`/userList/${userListId}`)
+        if (status === 200) {
+            dispatch('getUserList');
+        }
     },
 
-    updateMyUserList({ dispatch }, myUserList) {
-        dispatch('updateDb', {
-            dbName,
-            ...Object.assign({}, myUserList),
-        });
-
-        dispatch('getUserList');
+    async updateMyUserList({ dispatch }, myUserList) {
+        const { status } = await putRequest(`/userList/${myUserList.userListId}`, myUserList);
+        if (status === 200) {
+            dispatch('getUserList');
+        }
     },
 }
 

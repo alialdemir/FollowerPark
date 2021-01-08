@@ -1,41 +1,22 @@
-import { getItems } from './indexedDBAction';
-
-const dbName = 'Logs';
+import { deleteRequest, getRequest, postRequest, putRequest } from '@/axios.js';
 
 const logDBAction = {
 
-    addNewLog({ dispatch }, log) {
-        dispatch('addDb', {
-            dbName,
-            ...log,
-        });
+    addNewLog({ }, log) {
+        postRequest('/Log', log);
     },
 
-    async getLog({ commit }, id) {
-        const logs = await getItems(dbName);
-
-        commit('SET_LOGS', logs.filter(log => log.id === id).reverse());
+    async getLog({ commit }, taskId) {
+        const { data } = await getRequest(`/Log/Task/${taskId}?pageNumber=1&pageSize=9999`);
+        commit('SET_LOGS', data.items);
     },
 
-    updateLog({ dispatch }, log) {
-        dispatch('updateDb', {
-            dbName,
-            ...log,
-        });
+    updateLog({ }, log) {
+        putRequest(`/Log/${log.logId}`, log);
     },
 
-    deleteLog({}, id) {
-        var range = IDBKeyRange.bound(id, id + "\uffff");
-        var trans = window.db.transaction([dbName], "readwrite");
-        var store = trans.objectStore(dbName);
-
-        var index = store.index("taskId");
-        index.openCursor(range).onsuccess = function(e) {
-            var result = e.target.result;
-            if (result) {
-                store.delete(result.value.id);
-            }
-        };
+    deleteLog({ }, logId) {
+        deleteRequest(`/Log/${logId}`)
     }
 }
 

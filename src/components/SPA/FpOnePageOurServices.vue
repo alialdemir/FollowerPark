@@ -19,7 +19,7 @@
           data-aos="fade-up"
           :data-aos-duration="1000"
           src="@/assets/images/pages/socialmedia.svg"
-          alt="FollowerPark"
+          alt="FollowersPark"
           class="m-auto responsive"
         />
       </vs-col>

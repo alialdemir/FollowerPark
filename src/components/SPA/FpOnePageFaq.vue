@@ -29,7 +29,7 @@
             data-aos="fade-left"
             :data-aos-duration="1000"
             src="@/assets/images/pages/faqs.svg"
-            alt="FollowerPark"
+            alt="FollowersPark"
             class="m-auto responsive"
           />
         </vs-col>
@@ -44,7 +44,7 @@ export default {
   data: () => ({
     faqs: [
       {
-        question: 'FOLLOWERPARK İLE NELER YAPABİLİRSİNİZ?',
+        question: 'FOLLOWERSPARK İLE NELER YAPABİLİRSİNİZ?',
         answer:
           'Sizin belirlediğiniz hashtag ve popüler kullanıcıları hedef göstererek otomatik beğenme, otomatik takip, otomatik takipten çıkarma, oto direkt mesaj ve yorum yapma görevleri vererek zahmetsizce organik takipçi kazanabilirsiniz.',
       },
@@ -60,14 +60,14 @@ export default {
           "Hayır! Görev zamanlayıcı ve Akıllı mod özelliği sayesinde Instagram'ın sınırlarına takılmadan girdiğiniz görevler arasında otomatik geçiş yapar. Bu sayede sorunsuz bir şekilde hesabınız gelişir.",
       },
       {
-        question: 'FOLLOWERPARK BOT HESAPLAR İLE İLGİLİ BİR ÇÖZÜM SUNUYOR MU?',
+        question: 'FOLLOWERSPARK BOT HESAPLAR İLE İLGİLİ BİR ÇÖZÜM SUNUYOR MU?',
         answer:
-          'Merak etmeyin, FollowerPark algoritması sizin için bot hesapları bulup filtreler ve hesabınızın etkileşimi bu sayede artmış olur.',
+          'Merak etmeyin, FollowersPark algoritması sizin için bot hesapları bulup filtreler ve hesabınızın etkileşimi bu sayede artmış olur.',
       },
       {
         question: 'INSTAGRAM TAKİPÇİ SAYISINI NASIL ARTTIRIRIZ?',
         answer:
-          'FollowerPark geliştirmiş olduğu yapay zeka sayesinde sizin belirleriğiniz filtere göre instagram üzerinde kullanıcılar ile etkileşimde bulunur. Bu sayede kullanıcılar sizi görür ve takip veya beğeni yapmaya başlar.',
+          'FollowersPark geliştirmiş olduğu yapay zeka sayesinde sizin belirleriğiniz filtere göre instagram üzerinde kullanıcılar ile etkileşimde bulunur. Bu sayede kullanıcılar sizi görür ve takip veya beğeni yapmaya başlar.',
       },
     ],
   }),

@@ -17,147 +17,146 @@ const myStates = {
     },
     taskConfigurations: taskConfigurations,
     tasks: [],
-    runningTasksInterval: [],
     logs: [],
 
     taskActions: [{
-            id: 2,
-            text: 'Follow',
-            icon: 'UserPlusIcon',
-            description: 'FollowDescription',
-            disabled: true,
-            function: 'follow',
-            dispatchActionName: 'startFollowTaskWithInterval'
-        },
-        {
-            id: 3,
-            text: 'Unfollow',
-            icon: 'UserMinusIcon',
-            description: 'UnfollowDescription',
-            disabled: true,
-            function: 'unfollow',
-            dispatchActionName: 'startUnfollowTaskWithInterval'
-        },
-        {
-            id: 6,
-            text: 'Direct',
-            icon: 'SendIcon',
-            description: 'DirectDescription',
-            disabled: true,
-            isNewPulse: true
-        }, {
-            id: 1,
-            text: 'Like',
-            icon: 'ThumbsUpIcon',
-            description: 'LikeDescription',
-            disabled: false
-        },
-        {
-            id: 4,
-            text: 'Comment',
-            icon: 'MessageCircleIcon',
-            description: 'CommentDescription',
-            disabled: false
-        },
-        {
-            id: 5,
-            text: 'LikeFollow',
-            icon: 'HeartIcon',
-            description: 'LikeFollowDescription',
-            disabled: false
-        },
-        {
-            id: 7,
-            text: 'DataCollection',
-            icon: 'DatabaseIcon',
-            description: 'DataCollectionDescription',
-            disabled: false
-        },
-        {
-            id: 8,
-            text: 'StoryWatching',
-            icon: 'PlayCircleIcon',
-            description: 'StoryWatchingDescription',
-            disabled: false
-        }
+        id: 2,
+        text: 'Follow',
+        icon: 'UserPlusIcon',
+        description: 'FollowDescription',
+        disabled: true,
+        function: 'follow',
+        dispatchActionName: 'startFollowTaskWithInterval'
+    },
+    {
+        id: 3,
+        text: 'Unfollow',
+        icon: 'UserMinusIcon',
+        description: 'UnfollowDescription',
+        disabled: true,
+        function: 'unfollow',
+        dispatchActionName: 'startUnfollowTaskWithInterval'
+    },
+    {
+        id: 6,
+        text: 'Direct',
+        icon: 'SendIcon',
+        description: 'DirectDescription',
+        disabled: true,
+        isNewPulse: true
+    }, {
+        id: 1,
+        text: 'Like',
+        icon: 'ThumbsUpIcon',
+        description: 'LikeDescription',
+        disabled: true
+    },
+    {
+        id: 4,
+        text: 'Comment',
+        icon: 'MessageCircleIcon',
+        description: 'CommentDescription',
+        disabled: false
+    },
+    {
+        id: 5,
+        text: 'LikeFollow',
+        icon: 'HeartIcon',
+        description: 'LikeFollowDescription',
+        disabled: false
+    },
+    {
+        id: 7,
+        text: 'DataCollection',
+        icon: 'DatabaseIcon',
+        description: 'DataCollectionDescription',
+        disabled: false
+    },
+    {
+        id: 8,
+        text: 'StoryWatching',
+        icon: 'PlayCircleIcon',
+        description: 'StoryWatchingDescription',
+        disabled: false
+    }
     ],
     resources: [{
-            id: 1,
-            text: 'GeographicalLocation',
-            icon: 'MapPinIcon',
-            disabled: true,
-            description: 'GeographicalLocationDescription'
-        },
-        {
-            id: 2,
-            text: 'Hashtag',
-            icon: 'HashIcon',
-            disabled: false,
-            description: 'HashtagDescription'
-        },
-        {
-            id: 3,
-            text: 'User',
-            icon: 'UserIcon',
-            disabled: true,
-            description: 'UserDescription'
-        },
-        {
-            id: 4,
-            text: 'UserList',
-            icon: 'UsersIcon',
-            disabled: true,
-            description: 'UserListDescription'
-        }
+        id: 1,
+        text: 'GeographicalLocation',
+        icon: 'MapPinIcon',
+        disabled: true,
+        description: 'GeographicalLocationDescription'
+    },
+    {
+        id: 2,
+        text: 'Hashtag',
+        icon: 'HashIcon',
+        disabled: true,
+        description: 'HashtagDescription'
+    },
+    {
+        id: 3,
+        text: 'User',
+        icon: 'UserIcon',
+        disabled: true,
+        description: 'UserDescription'
+    },
+    {
+        id: 4,
+        text: 'UserList',
+        icon: 'UsersIcon',
+        disabled: true,
+        description: 'UserListDescription'
+    }
     ],
     whereUserResources: [{
-            id: 1,
-            text: 'Followers',
-            icon: 'UserPlusIcon',
-            disabled: true,
-            function: 'followers',
-            paremeter: 'userList',
-            result: {
-                object: 'user.edge_followed_by.edges.node.id',
-                map: ['id', 'username']
-            },
+        id: 1,
+        text: 'Followers',
+        icon: 'UserPlusIcon',
+        disabled: true,
+        function: 'followers',
+        paremeter: 'userList',
+        result: {
+            object: 'user.edge_followed_by.edges.node.id',
+            map: ['id', 'username']
         },
-        {
-            id: 2,
-            text: 'Following',
-            icon: 'UserCheckIcon',
-            disabled: true,
-            function: 'following',
-            paremeter: 'userList',
-            result: {
-                object: 'user.edge_follow.edges.node.id',
-                map: ['id', 'username']
-            }
-        },
-        {
-            id: 3,
-            text: 'Likes',
-            icon: 'HeartIcon',
-            disabled: true,
-            function: 'likes',
-            paremeter: 'userList',
-            result: {
-                object: 'shortcode_media.edge_liked_by.edges.node.id',
-                map: ['id', 'username']
-            }
-        },
-        {
-            id: 4,
-            text: 'Comment',
-            icon: 'MessageCircleIcon',
-            disabled: true,
-            function: 'comments',
-            paremeter: 'userList',
-            result: {
-                object: 'shortcode_media.edge_media_to_parent_comment.edges.node.owner',
-                map: ['owner']
-            }
+    },
+    {
+        id: 2,
+        text: 'Following',
+        icon: 'UserCheckIcon',
+        disabled: true,
+        function: 'following',
+        paremeter: 'username',
+        result: {
+            object: 'user.edge_follow.edges.node.id',
+            map: ['id', 'username']
         }
+    },
+    {
+        id: 3,
+        text: 'Likes',
+        icon: 'HeartIcon',
+        disabled: true,
+        function: 'likes',
+        paremeter: 'userList',
+        result: {
+            object: 'shortcode_media.edge_liked_by.edges.node.id',
+            map: ['id', 'username']
+        }
+    },
+    {
+        id: 4,
+        text: 'Comment',
+        icon: 'MessageCircleIcon',
+        disabled: true,
+        function: 'comments',
+        paremeter: 'userList',
+        result: {
+            object: 'shortcode_media.edge_media_to_parent_comment.edges.node.owner',
+            map: ['owner']
+        }
+    }
     ],
     unfollowOptions: [{
         id: 1,
@@ -183,37 +182,37 @@ const myStates = {
         icon: 'UsersIcon',
         description: 'ListOfBlocksDescription',
         disabled: true
-    }, ],
+    },],
 
     directMessageSources: [{
-            id: 1,
-            text: 'YourFollowers',
-            icon: 'UserPlusIcon',
-            description: 'Sends a message to your followers.',
-            disabled: true
-        },
-        {
-            id: 2,
-            text: 'UserList',
-            icon: 'ListIcon',
-            description: 'Sends a direct message to users in the user list I created.',
-            disabled: true
-        },
+        id: 1,
+        text: 'YourFollowers',
+        icon: 'UserPlusIcon',
+        description: 'Sends a message to your followers.',
+        disabled: true
+    },
+    {
+        id: 2,
+        text: 'UserList',
+        icon: 'ListIcon',
+        description: 'Sends a direct message to users in the user list I created.',
+        disabled: true
+    },
     ],
     speedTypes: [{
-        id: 60000, // One minite
+        id: 1, // One minite
         text: 'Slow',
         subText: 'VerySafe'
     }, {
-        id: 30000, // 30 second
+        id: 2, // 30 second
         text: 'Middle',
         subText: 'Safe'
     }, {
-        id: 20000, // 20 second
+        id: 3, // 20 second
         text: 'Fast',
         subText: 'Normal'
     }, {
-        id: 10000, // 10 second
+        id: 4, // 10 second
         text: 'ToFast',
         subText: 'SomeDangerous'
     }],
@@ -221,7 +220,8 @@ const myStates = {
     myUserLists: [],
     directMessages: [],
     blockList: [],
-    searchGeographicalLocation: []
+    searchGeographicalLocation: [],
+    pricings: []
 }
 
 // /////////////////////////////////////////////

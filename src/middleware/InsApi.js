@@ -1,5 +1,4 @@
-import { getUserIdByUsername, getPotsShortCodeByUsername } from '@/middleware/functions';
-import { whereUserResourceType } from '@/middleware/enums'
+import { whereUserResourceType } from '@/middleware/enums';
 const insUrl = 'https://www.instagram.com';
 
 export async function followers(username, after) {
@@ -69,7 +68,7 @@ export function unfollow(userId) {
 
 export function createGroupThread(userId) {
     return {
-        url: `${insUrl}/direct_v2/web/create_group_thread/`,
+        url: `${insUrl.replace('www.', 'i.')}/api/v1/direct_v2/create_group_thread/`,
         data: `recipient_users=%5B%22${userId}%22%5D`
     };
 }

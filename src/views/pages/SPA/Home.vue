@@ -9,7 +9,7 @@
 
     <fp-one-page-happy-customers />
 
-    <fp-one-page-pricing />
+    <fp-one-page-pricing-container />
 
     <fp-one-page-faq />
 
@@ -18,20 +18,20 @@
 </template>
 
 <script>
-import FpOnePageHeader from '@/components/SPA/FpOnePageHeader';
-import FpOnePageProductsPurchased from '@/components/SPA/FpOnePageProductsPurchased';
-import FpOnePageOurServices from '@/components/SPA/FpOnePageOurServices';
-import FpOnePageHappyCustomers from '@/components/SPA/FpOnePageHappyCustomers';
-import FpOnePagePricing from '@/components/SPA/FpOnePagePricing';
-import FpOnePageFaq from '@/components/SPA/FpOnePageFaq';
-import FpOnePageFooter from '@/components/SPA/FpOnePageFooter';
+import FpOnePageHeader from "@/components/SPA/FpOnePageHeader";
+import FpOnePageProductsPurchased from "@/components/SPA/FpOnePageProductsPurchased";
+import FpOnePageOurServices from "@/components/SPA/FpOnePageOurServices";
+import FpOnePageHappyCustomers from "@/components/SPA/FpOnePageHappyCustomers";
+import FpOnePagePricingContainer from "@/components/SPA/FpOnePagePricingContainer";
+import FpOnePageFaq from "@/components/SPA/FpOnePageFaq";
+import FpOnePageFooter from "@/components/SPA/FpOnePageFooter";
 
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default {
   created() {
-    AOS.init({ disable: 'phone' });
+    AOS.init({ disable: "phone" });
   },
 
   components: {
@@ -39,7 +39,7 @@ export default {
     FpOnePageProductsPurchased,
     FpOnePageOurServices,
     FpOnePageHappyCustomers,
-    FpOnePagePricing,
+    FpOnePagePricingContainer,
     FpOnePageFaq,
     FpOnePageFooter,
   },

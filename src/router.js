@@ -10,7 +10,6 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
-import auth from "@/middleware/authService";
 
 Vue.use(Router)
 
@@ -27,7 +26,7 @@ const router = new Router({
         {
             path: '',
             component: () =>
-                import ('@/layouts/full-page/FullPage.vue'),
+                import('@/layouts/full-page/FullPage.vue'),
             children: [
                 // =============================================================================
                 // PAGES
@@ -36,7 +35,7 @@ const router = new Router({
                     path: '/',
                     name: 'home',
                     component: () =>
-                        import ('@/views/pages/SPA/Home.vue'),
+                        import('@/views/pages/SPA/Home.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -45,7 +44,7 @@ const router = new Router({
                     path: '/login',
                     name: 'page-login',
                     component: () =>
-                        import ('@/views/pages/Login.vue'),
+                        import('@/views/pages/Login.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -54,7 +53,7 @@ const router = new Router({
                     path: '/register',
                     name: 'page-register',
                     component: () =>
-                        import ('@/views/pages/Register.vue'),
+                        import('@/views/pages/Register.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -63,7 +62,7 @@ const router = new Router({
                     path: '/forgot-password',
                     name: 'forgot-password',
                     component: () =>
-                        import ('@/views/pages/ForgotPassword.vue'),
+                        import('@/views/pages/ForgotPassword.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -72,7 +71,7 @@ const router = new Router({
                     path: '/reset-password',
                     name: 'reset-password',
                     component: () =>
-                        import ('@/views/pages/ResetPassword.vue'),
+                        import('@/views/pages/ResetPassword.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -81,7 +80,7 @@ const router = new Router({
                     path: '/offer',
                     name: 'offer',
                     component: () =>
-                        import ('@/views/pages/Offer.vue'),
+                        import('@/views/pages/Offer.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -90,7 +89,7 @@ const router = new Router({
                     path: '/policy',
                     name: 'policy',
                     component: () =>
-                        import ('@/views/pages/Policy.vue'),
+                        import('@/views/pages/Policy.vue'),
                     meta: {
                         rule: 'editor'
                     }
@@ -99,7 +98,7 @@ const router = new Router({
                     path: '/pages/error-404',
                     name: 'page-error-404',
                     component: () =>
-                        import ('@/views/pages/Error404.vue')
+                        import('@/views/pages/Error404.vue')
                 },
             ]
         },
@@ -109,7 +108,7 @@ const router = new Router({
             // =============================================================================
             path: '',
             component: () =>
-                import ('./layouts/main/Main.vue'),
+                import('./layouts/main/Main.vue'),
             children: [
                 // =============================================================================
                 // Theme Routes
@@ -118,37 +117,46 @@ const router = new Router({
                     path: '/tasks',
                     name: 'task',
                     component: () =>
-                        import ('./views/Task.vue')
+                        import('./views/Task.vue')
                 },
                 {
                     path: '/user-list',
                     name: 'UserList',
                     component: () =>
-                        import ('./views/UserLists.vue')
+                        import('./views/UserLists.vue')
                 },
                 {
                     path: '/direct-messages',
                     name: 'DirectMessages',
                     component: () =>
-                        import ('./views/DirectMessages.vue')
+                        import('./views/DirectMessages.vue')
                 },
                 {
                     path: '/block-list',
                     name: 'BlockList',
                     component: () =>
-                        import ('./views/BlockList.vue')
+                        import('./views/BlockList.vue')
                 },
                 {
                     path: '/index.html',
                     name: 'task',
                     component: () =>
-                        import ('./views/Task.vue')
+                        import('./views/Task.vue')
                 },
                 {
                     path: '/Task/New',
                     name: 'newtask',
                     component: () =>
-                        import ('./views/NewTask.vue')
+                        import('./views/NewTask.vue')
+                },
+                {
+                    path: '/checkout',
+                    name: 'checkout',
+                    component: () =>
+                        import('@/views/pages/Checkout.vue'),
+                    meta: {
+                        rule: 'editor'
+                    }
                 },
             ],
         },
@@ -185,7 +193,7 @@ router.beforeEach((to, from, next) => {
         return next();
     }
 
-    const isAuthenticated = auth.isAuthenticated();
+    const isAuthenticated = localStorage.getItem('userInfo') !== null;
     if (to.path === '/' && isAuthenticated) {
         router.push({ path: '/tasks' });
 
@@ -194,7 +202,7 @@ router.beforeEach((to, from, next) => {
 
     // If auth required, check login. If login fails redirect to login page
     if (to.path !== '/' && !isAuthenticated) {
-        router.push({ path: '/login', query: { to: to.path } })
+        router.push({ path: '/login', query: { to: to.fullPath } })
     }
 
     return next()

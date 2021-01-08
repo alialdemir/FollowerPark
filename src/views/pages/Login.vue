@@ -18,13 +18,18 @@
         <div slot="no-body" class="full-page-bg-color">
           <div class="vx-row no-gutter justify-center items-center">
             <div class="vx-col hidden lg:block lg:w-1/2">
-              <img src="@/assets/images/pages/login.png" alt="login" class="mx-auto" />
+              <img
+                style="width: 410px; height: 322px"
+                src="@/assets/images/pages/login.jpg"
+                alt="login"
+                class="mx-auto"
+              />
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
               <div class="p-8 login-tabs-container">
                 <div class="vx-card__title mb-4">
-                  <h4 class="mb-4">{{$t('SignIn')}}</h4>
+                  <h4 class="mb-4">{{ $t("SignIn") }}</h4>
                   <p>&nbsp;</p>
                 </div>
 
@@ -52,10 +57,16 @@
 
                   <div class="flex flex-wrap justify-end my-5">
                     <!-- <vs-checkbox v-model="checkbox_remember_me" class="mb-3">Beni Hatırla</vs-checkbox> -->
-                    <router-link to="forgot-password">{{$t('ForgotPassword')}}</router-link>
+                    <router-link to="forgot-password">{{
+                      $t("ForgotPassword")
+                    }}</router-link>
                   </div>
-                  <vs-button to="/register" type="border">{{$t('SignUp')}}</vs-button>
-                  <vs-button class="float-right" @click="login">{{$t('SignIn')}}</vs-button>
+                  <vs-button to="/register" type="border">{{
+                    $t("SignUp")
+                  }}</vs-button>
+                  <vs-button class="float-right" @click="login">{{
+                    $t("SignIn")
+                  }}</vs-button>
                 </div>
               </div>
             </div>
@@ -67,32 +78,21 @@
 </template>
 
 <script>
-import authService from '@/middleware/authService';
-
 export default {
   data() {
     return {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
       checkbox_remember_me: false,
     };
   },
+
   methods: {
     async login() {
-      const isAuthenticated = await authService.localLogin({
-        idToken: '12',
-        idTokenPayload: {
-          name: 'ali',
-          email: 'aa@ss.com',
-          picture: '#',
-          sub: '|',
-          exp: new Date().getTime(),
-        },
+      this.$store.dispatch("login", {
+        email: this.email,
+        password: this.password,
       });
-
-      if (isAuthenticated) {
-        this.$router.push({ path: '/tasks' });
-      }
     },
   },
 };

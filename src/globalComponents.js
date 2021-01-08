@@ -1,40 +1,37 @@
-/*=========================================================================================
-  File Name: globalComponents.js
-  Description: Here you can register components globally
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
 
 import Vue from 'vue'
-import VxTooltip from './layouts/components/vx-tooltip/VxTooltip.vue'
-import VxCard from './components/vx-card/VxCard.vue'
-import VxList from './components/vx-list/VxList.vue'
-import VxBreadcrumb from './layouts/components/VxBreadcrumb.vue'
+// v-select component
+import vSelect from 'vue-select'
 import FeatherIcon from './components/FeatherIcon.vue'
-import VxInputGroup from './components/vx-input-group/VxInputGroup.vue'
+import FpNewPulse from './components/fp-new-pulse/FpNewPulse'
+import FpCreateBlockList from './components/my-lists/FpCreateBlockList'
+import FpCreateDirectMessage from './components/my-lists/FpCreateDirectMessage'
+import FpCreateUserList from './components/my-lists/FpCreateUserList'
+import FpCreditCard from './components/payment/FpCreditCard'
+import FpOnePagePricing from './components/SPA/FpOnePagePricing'
+import FpTaskLogs from './components/task-detail/FpTaskLogs'
+import FpTaskTabs from './components/task-detail/FpTaskTabs'
 import FpChooseAction from './components/task-wizard-steps/FpChooseAction'
+import FpChooseBlockList from './components/task-wizard-steps/FpChooseBlockList'
+import FpChooseFollowUserCount from './components/task-wizard-steps/FpChooseFollowUserCount'
+import FpChooseLikePostCount from './components/task-wizard-steps/FpChooseLikePostCount'
 import FpChooseResource from './components/task-wizard-steps/FpChooseResource'
-import FpChooseUserResource from './components/task-wizard-steps/FpChooseUserResource'
-import FpChooseWhereUserResource from './components/task-wizard-steps/FpChooseWhereUserResource'
 import FpChooseSpeedAction from './components/task-wizard-steps/FpChooseSpeedAction'
 import FpChooseUnfollowOption from './components/task-wizard-steps/FpChooseUnfollowOption'
 import FpChooseUnfollowUserCount from './components/task-wizard-steps/FpChooseUnfollowUserCount'
-import FpTaskTabs from './components/task-detail/FpTaskTabs'
-import FpTaskLogs from './components/task-detail/FpTaskLogs'
-import FpCreateUserList from './components/my-lists/FpCreateUserList'
-import FpCreateBlockList from './components/my-lists/FpCreateBlockList'
-import FpCreateDirectMessage from './components/my-lists/FpCreateDirectMessage'
-import FpDirectMessageSource from './components/task-wizard-steps/FpDirectMessageSource'
-import FpUserList from './components/task-wizard-steps/FpUserList'
-import FpDirectMessageNumberOfActions from './components/task-wizard-steps/FpDirectMessageNumberOfActions'
-import FpNewPulse from './components/fp-new-pulse/FpNewPulse'
+import FpChooseUserResource from './components/task-wizard-steps/FpChooseUserResource'
+import FpChooseWhereUserResource from './components/task-wizard-steps/FpChooseWhereUserResource'
 import FpDirectMessageList from './components/task-wizard-steps/FpDirectMessageList'
+import FpDirectMessageNumberOfActions from './components/task-wizard-steps/FpDirectMessageNumberOfActions'
+import FpDirectMessageSource from './components/task-wizard-steps/FpDirectMessageSource'
 import FpGeographicalLocation from './components/task-wizard-steps/FpGeographicalLocation'
-import FpChooseBlockList from './components/task-wizard-steps/FpChooseBlockList'
-import FpChooseFollowUserCount from './components/task-wizard-steps/FpChooseFollowUserCount'
+import FpHashtag from './components/task-wizard-steps/FpHashtag'
+import FpUserList from './components/task-wizard-steps/FpUserList'
+import VxCard from './components/vx-card/VxCard.vue'
+import VxInputGroup from './components/vx-input-group/VxInputGroup.vue'
+import VxList from './components/vx-list/VxList.vue'
+import VxTooltip from './layouts/components/vx-tooltip/VxTooltip.vue'
+import VxBreadcrumb from './layouts/components/VxBreadcrumb.vue'
 
 Vue.component(VxTooltip.name, VxTooltip)
 Vue.component(VxCard.name, VxCard)
@@ -62,10 +59,12 @@ Vue.component(FpDirectMessageNumberOfActions.name, FpDirectMessageNumberOfAction
 Vue.component(FpGeographicalLocation.name, FpGeographicalLocation)
 Vue.component(FpChooseFollowUserCount.name, FpChooseFollowUserCount)
 Vue.component(FpChooseBlockList.name, FpChooseBlockList)
+Vue.component(FpHashtag.name, FpHashtag)
+Vue.component(FpChooseLikePostCount.name, FpChooseLikePostCount)
+Vue.component(FpOnePagePricing.name, FpOnePagePricing)
 
+Vue.component(FpCreditCard.name, FpCreditCard)
 
-// v-select component
-import vSelect from 'vue-select'
 
 // Set the components prop default to return our fresh components
 vSelect.props.components.default = () => ({

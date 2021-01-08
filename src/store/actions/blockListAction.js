@@ -1,40 +1,30 @@
-import { getItems } from './indexedDBAction';
-
-const dbName = 'BlockList';
+import { deleteRequest, getRequest, postRequest, putRequest } from '@/axios.js';
 
 const blockListAction = {
-
     async getBlockList({ commit }) {
-        const myUserList = await getItems(dbName);
-
-        commit('SET_BLOCK_LIST', myUserList);
+        const { data } = await getRequest('/blockList?pageNumber=1&pageSize=9999');
+        commit('SET_BLOCK_LIST', data.items);
     },
 
-    addBlockList({ dispatch }, myUserList) {
-        dispatch('addDb', {
-            dbName,
-            ...Object.assign({}, myUserList),
-        });
-
-        dispatch('getBlockList');
+    async addBlockList({ dispatch }, blockList) {
+        const { status } = await postRequest('/blockList', blockList);
+        if (status === 200) {
+            dispatch('getBlockList');
+        }
     },
 
-    deleteBlockList({ dispatch }, myUserList) {
-        dispatch('deleteDb', {
-            dbName,
-            id: myUserList.id
-        });
-
-        dispatch('getBlockList');
+    async deleteBlockList({ dispatch }, blockListId) {
+        const { status } = await deleteRequest(`/blockList/${blockListId}`)
+        if (status === 200) {
+            dispatch('getBlockList');
+        }
     },
 
-    updateBlockList({ dispatch }, myUserList) {
-        dispatch('updateDb', {
-            dbName,
-            ...Object.assign({}, myUserList),
-        });
-
-        dispatch('getBlockList');
+    async updateBlockList({ dispatch }, blockList) {
+        const { status } = await putRequest(`/blockList/${blockList.blockListId}`, blockList);
+        if (status === 200) {
+            dispatch('getBlockList');
+        }
     },
 }
 
