@@ -2,6 +2,7 @@
 import Vue from 'vue'
 // v-select component
 import vSelect from 'vue-select'
+import FpExtensionInstalled from './components/extensionInstalled/FpExtensionInstalled'
 import FeatherIcon from './components/FeatherIcon.vue'
 import FpNewPulse from './components/fp-new-pulse/FpNewPulse'
 import FpCreateBlockList from './components/my-lists/FpCreateBlockList'
@@ -62,8 +63,8 @@ Vue.component(FpChooseBlockList.name, FpChooseBlockList)
 Vue.component(FpHashtag.name, FpHashtag)
 Vue.component(FpChooseLikePostCount.name, FpChooseLikePostCount)
 Vue.component(FpOnePagePricing.name, FpOnePagePricing)
-
 Vue.component(FpCreditCard.name, FpCreditCard)
+Vue.component(FpExtensionInstalled.name, FpExtensionInstalled)
 
 
 // Set the components prop default to return our fresh components

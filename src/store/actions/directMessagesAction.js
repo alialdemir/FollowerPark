@@ -8,22 +8,22 @@ const directMessagesAction = {
     },
 
     async addDirectMessage({ dispatch }, directMessage) {
-        const { status } = await postRequest('/DirectMessage', directMessage);
-        if (status === 200) {
+        const { isSuccess } = await postRequest('/DirectMessage', directMessage);
+        if (isSuccess) {
             dispatch('getDirectMessages');
         }
     },
 
     async deleteDirectMessage({ dispatch }, directMessageId) {
-        const { status } = await deleteRequest(`/DirectMessage/${directMessageId}`)
-        if (status === 200) {
+        const { isSuccess } = await deleteRequest(`/DirectMessage/${directMessageId}`)
+        if (isSuccess) {
             dispatch('getDirectMessages');
         }
     },
 
     async updateDirectMessage({ dispatch }, directMessage) {
-        const { status } = await putRequest(`/DirectMessage/${directMessage.directMessageId}`, directMessage);
-        if (status === 200) {
+        const { isSuccess } = await putRequest(`/DirectMessage/${directMessage.directMessageId}`, directMessage);
+        if (isSuccess) {
             dispatch('getDirectMessages');
         }
     },

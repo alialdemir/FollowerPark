@@ -9,22 +9,22 @@ const userListAction = {
     },
 
     async addMyUserList({ dispatch }, myUserList) {
-        const { status } = await postRequest('/userlist', myUserList);
-        if (status === 200) {
+        const { isSuccess } = await postRequest('/userlist', myUserList);
+        if (isSuccess) {
             dispatch('getUserList');
         }
     },
 
     async deleteMyUserList({ dispatch }, userListId) {
-        const { status } = await deleteRequest(`/userList/${userListId}`)
-        if (status === 200) {
+        const { isSuccess } = await deleteRequest(`/userList/${userListId}`)
+        if (isSuccess) {
             dispatch('getUserList');
         }
     },
 
     async updateMyUserList({ dispatch }, myUserList) {
-        const { status } = await putRequest(`/userList/${myUserList.userListId}`, myUserList);
-        if (status === 200) {
+        const { isSuccess } = await putRequest(`/userList/${myUserList.userListId}`, myUserList);
+        if (isSuccess) {
             dispatch('getUserList');
         }
     },

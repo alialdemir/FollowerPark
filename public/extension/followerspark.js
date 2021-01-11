@@ -79,17 +79,11 @@ class apiRequest {
         return this.request(url, null, 'delete')
     }
 
-    getCookie(name) {
-        const parts = ('; ' + document.cookie).split('; ' + name + '=');
-        if (parts.length === 2)
-            return parts.pop().split(';').shift();
-    }
-
     async request(url, data, method, contentType) {
         try {
             const response = await fetch(url, {
                 headers: {
-                    'x-csrftoken': this.getCookie('csrftoken'),
+                    'x-csrftoken': (((window || {})._sharedData || {}).config || {}).csrf_token || '',
                     'content-type': contentType || 'application/json',
                     'x-ig-app-id': '936619743392459',
                 },
@@ -739,44 +733,8 @@ class taskDirectMessage extends insApi {
         return ((directMessages[Math.floor((Math.random() * directMessages.length))] || {}).text || '').trim();
     }
 }
-/*
-new taskBuilder({
-    taskId: 1,
-    action: actionType.direct,
-    resource: resourceType.geographicalLocation,
-    whereUserResource: whereUserResourceType.comment,
-    intervalSpeed: 1000,// timer hızı
-    maximumNumberTransactions: 3,// kaç kere çalışacak
-    numberTransactions: 0,// işlem kaç kere gerçekleşti
-    userList: ['contestpark'],
-    georaphicalLocations: ['212903416'],
-    unfollowOption: unfollowOptions.listofBlocks,
-    username: 'sda234li',
-    directMessageSource: directMessageSourceType.userList,
-    isSkipSentMessage: true, // mesaj daha önce gönderilmişse atla
-    isDeleteAfterSendingMessage: false, // mesajı gönderdikten sonra silsin mi
-    directMessages: [
-        {
-            id: 'abc1',
-            text: 'Hi! 1 https://www.instagram.com/direct/inbox/'
-        },
-        {
-            id: 'abc2',
-            text: 'Hi! https://www.instagram.com/direct/inbox/ 2'
-        },
-        {
-            id: 'abc3',
-            text: 'Hi! https://www.instagram.com/direct/inbox/ 3'
-        }
-    ]
-});
-*/
 
 const taskBuild = new taskBuilder();
-postMessage({
-    type: 'scu',
-    data: ((window || {})._sharedData || {}).config || {},
-});
 
 window.addEventListener('message', async (event) => {
     const data = (event || {}).data || {};
@@ -788,3 +746,20 @@ window.addEventListener('message', async (event) => {
         taskInterval.stop(task.taskId);
     }
 });
+
+const setUser = async () => {
+    const currentUser = ((window || {})._sharedData || {}).config || {};
+    const instagramApi = new insApi();
+
+    const { graphql } = await instagramApi.getProfileByUsername(currentUser.viewer.username);
+
+    postMessage({
+        type: 'scu',
+        data: {
+            ...currentUser,
+            ...graphql.user
+        },
+    });
+}
+
+setUser();

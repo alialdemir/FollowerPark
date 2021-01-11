@@ -1,11 +1,12 @@
 import { updateField } from 'vuex-map-fields';
 import blockListMutations from './mutations/blockListMutations';
+import currentUserMutation from './mutations/currentUserMutation';
 import directMessagesMutations from './mutations/directMessagesMutations';
 import georaphicalLocationsSearchMutations from './mutations/georaphicalLocationsSearchMutations';
 import logMutations from './mutations/logMutations';
+import pricingMutation from './mutations/pricingMutation';
 import taskConfigurationsMutations from './mutations/taskConfigurationsMutations';
 import userListsMutations from './mutations/userListsMutations';
-import pricingMutation from './mutations/pricingMutation';
 
 const mutations = {
     updateField,
@@ -16,6 +17,7 @@ const mutations = {
     ...blockListMutations,
     ...georaphicalLocationsSearchMutations,
     ...pricingMutation,
+    ...currentUserMutation,
 
     // /////////////////////////////////////////////
     // COMPONENTS

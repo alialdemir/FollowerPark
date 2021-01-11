@@ -16,8 +16,6 @@ const myStates = {
         }
     },
     taskConfigurations: taskConfigurations,
-    tasks: [],
-    logs: [],
 
     taskActions: [{
         id: 2,
@@ -49,7 +47,7 @@ const myStates = {
         text: 'Like',
         icon: 'ThumbsUpIcon',
         description: 'LikeDescription',
-        disabled: true
+        disabled: false
     },
     {
         id: 4,
@@ -216,12 +214,16 @@ const myStates = {
         text: 'ToFast',
         subText: 'SomeDangerous'
     }],
+
+    isExtensionInstalled: true,
     // Lists
     myUserLists: [],
     directMessages: [],
     blockList: [],
     searchGeographicalLocation: [],
-    pricings: []
+    pricings: [],
+    tasks: [],
+    logs: [],
 }
 
 // /////////////////////////////////////////////

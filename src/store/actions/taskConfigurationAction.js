@@ -8,6 +8,16 @@ const taskConfigurationAction = {
             return;
         }
 
+        if (main.$store.state.isExtensionInstalled === false) {
+            main.$vs.notify({
+                title: main.$i18n.t('YouMustInstallTheChromeExtensionToStartTheTask'),
+                color: "danger",
+                position: "top-center",
+            });
+
+            return;
+        }
+
         const interval = setInterval(async () => {
             if (main.$store.state.AppActiveUser.uid === 0) {
                 console.log('Instagram bağlantısı kurulamadı');
@@ -17,8 +27,8 @@ const taskConfigurationAction = {
 
             clearInterval(interval);
 
-            const { status } = await putRequest(`/task/${task.taskId}/Start`);
-            if (status === 200) {
+            const { isSuccess } = await putRequest(`/task/${task.taskId}/Start`);
+            if (isSuccess) {
                 dispatch('postMessage', {
                     type: 'startTask',
                     task
@@ -31,8 +41,8 @@ const taskConfigurationAction = {
     },
 
     async taskStop({ commit, dispatch }, task) {
-        const { status } = await putRequest(`/task/${task.taskId}/Stop`);
-        if (status === 200) {
+        const { isSuccess } = await putRequest(`/task/${task.taskId}/Stop`);
+        if (isSuccess) {
             dispatch('postMessage', {
                 type: 'stopTask',
                 task: { taskId: task.taskId }
@@ -44,29 +54,31 @@ const taskConfigurationAction = {
     },
 
     async addNewTask({ dispatch }, task) {
-        const { status } = await postRequest('/Task', task);
+        const { isSuccess } = await postRequest('/Task', task);
 
-        if (status === 200) {
+        if (isSuccess) {
             dispatch('getTask');
         }
     },
 
     async getTask({ commit, dispatch }) {
-        const { data } = await getRequest('/task?pageNumber=1&pageSize=9999');
-        commit('SET_TASK', data.items);
+        const { data, isSuccess } = await getRequest('/task?pageNumber=1&pageSize=9999');
+        if (isSuccess) {
+            commit('SET_TASK', data.items);
 
 
-        const activeTasks = ((data || {}).items || []).filter((item) => item.status === true);
-        for (let i = 0; i < activeTasks.length; i++) {
-            const task = activeTasks[i];
+            const activeTasks = ((data || {}).items || []).filter((item) => item.status === true);
+            for (let i = 0; i < activeTasks.length; i++) {
+                const task = activeTasks[i];
 
-            dispatch('taskStart', task);
+                dispatch('taskStart', task);
+            }
         }
     },
 
     async deleteTask({ commit }, taskId) {
-        const { status } = await deleteRequest(`/task/${taskId}`)
-        if (status === 200) {
+        const { isSuccess } = await deleteRequest(`/task/${taskId}`)
+        if (isSuccess) {
             commit('DELETE_TASK', taskId);
         }
     },
@@ -76,8 +88,8 @@ const taskConfigurationAction = {
     },
 
     async updateTask({ commit }, { taskId, numberTransactions }) {
-        const { data, status } = await putRequest(`/task/${taskId}`, { numberTransactions });
-        if (status === 200) {
+        const { data, isSuccess } = await putRequest(`/task/${taskId}`, { numberTransactions });
+        if (isSuccess) {
             //  dispatc('getTask')
             commit('UPDATE_TASK', data);
         }

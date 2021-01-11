@@ -1,11 +1,13 @@
 let followersParkIframe = document.createElement('iframe');
+import main from '@/main.js';
 
 const currentUserActions = {
 
     getCurrentUser({ }) {
+        window.testali = followersParkIframe
         followersParkIframe.setAttribute('id', 'FollowersParkIframe');
         followersParkIframe.style.display = 'none';
-        followersParkIframe.src = 'https://www.instagram.com?followpark=1';
+        followersParkIframe.src = `https://www.instagram.com?followpark=${location.origin}`;
 
         const appendChild = () => {
             const childiren = document.querySelector('#content-area').children;
@@ -22,22 +24,45 @@ const currentUserActions = {
         appendChild();
     },
 
-    messageListener({ dispatch }) {
+    messageListener({ dispatch, commit }) {
+        const extensionTimeout = setTimeout(() => {
+            commit('EXTENSION_INSTALLED', false);
+        }, 5000);
+
         window.addEventListener('message', event => {
             const data = (event || {}).data || {};
             const { type } = data;
+
             if (type === 'scu') {
-                const viewer = data.data;
-                if (typeof viewer.viewerId === 'string') {
+                const { viewer, viewerId, csrf_token, edge_followed_by, edge_follow, username, full_name, is_verified } = data.data;
+                if (typeof viewerId === 'string') {
                     dispatch('updateUserInfo', {
-                        uid: viewer.viewerId,
-                        displayName: viewer.viewer.full_name,
-                        username: viewer.viewer.username,
-                        photoURL: viewer.viewer.profile_pic_url,
-                        about: viewer.viewer.biography
+                        uid: viewerId,
+                        username: viewer.username,
+                        displayName: viewer.full_name,
+                        photoURL: viewer.profile_pic_url,
+                        about: viewer.biography
                     });
+
+                    dispatch('addInstagram', {
+                        instagramId: viewerId,
+                        username: username,
+                        fullname: full_name,
+                        followersCount: edge_followed_by.count,
+                        followingCount: edge_follow.count,
+                        isVerified: is_verified,
+                        csrfToken: csrf_token
+                    });
+
+                    clearTimeout(extensionTimeout);
+                    commit('EXTENSION_INSTALLED', true);
+
                 } else {
-                    alert('Sign in instagram side.')
+                    main.$vs.notify({
+                        title: main.$i18n.t('Sign in instagram side.'),
+                        color: "danger",
+                        position: "top-center",
+                    });
                 }
             } else if (type) {
                 dispatch(type, data.data);

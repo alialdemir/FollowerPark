@@ -7,22 +7,22 @@ const blockListAction = {
     },
 
     async addBlockList({ dispatch }, blockList) {
-        const { status } = await postRequest('/blockList', blockList);
-        if (status === 200) {
+        const { isSuccess } = await postRequest('/blockList', blockList);
+        if (isSuccess) {
             dispatch('getBlockList');
         }
     },
 
     async deleteBlockList({ dispatch }, blockListId) {
-        const { status } = await deleteRequest(`/blockList/${blockListId}`)
-        if (status === 200) {
+        const { isSuccess } = await deleteRequest(`/blockList/${blockListId}`)
+        if (isSuccess) {
             dispatch('getBlockList');
         }
     },
 
     async updateBlockList({ dispatch }, blockList) {
-        const { status } = await putRequest(`/blockList/${blockList.blockListId}`, blockList);
-        if (status === 200) {
+        const { isSuccess } = await putRequest(`/blockList/${blockList.blockListId}`, blockList);
+        if (isSuccess) {
             dispatch('getBlockList');
         }
     },

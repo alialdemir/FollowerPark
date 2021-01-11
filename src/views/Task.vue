@@ -1,103 +1,114 @@
 
 <template>
-  <vx-card
-    :title="$t('Tasks')"
-    :addCardAction="true"
-    @add="$router.push('/task/new')"
-    class="overflow-hidden"
+  <div>
+    <fp-extension-installed />
+    <vx-card
+      :title="$t('Tasks')"
+      :addCardAction="true"
+      @add="$router.push('/task/new')"
+      class="overflow-hidden"
     >
-    <vs-table stripe :data="tasks">
-      <template slot="thead">
-        <vs-th>{{ $t("Status") }}</vs-th>
-        <vs-th>{{ $t("Action") }}</vs-th>
-        <vs-th>{{ $t("Resource") }}</vs-th>
-        <vs-th>{{ $t("Total") }}</vs-th>
-        <vs-th style="width: 50px"></vs-th>
-      </template>
+      <vs-table stripe :data="tasks">
+        <template slot="thead">
+          <vs-th>{{ $t("Status") }}</vs-th>
+          <vs-th>{{ $t("Action") }}</vs-th>
+          <vs-th>{{ $t("Resource") }}</vs-th>
+          <vs-th>{{ $t("Total") }}</vs-th>
+          <vs-th style="width: 50px"></vs-th>
+        </template>
 
-      <template slot-scope="{ data }">
-        <vs-tr :key="indextr" v-for="(item, indextr) in data">
-          <vs-td>
-            <vs-button
-              disabled
-              :color="item.status === true ? 'success' : 'danger'"
-              type="flat"
-              >{{ $t(item.status === true ? "Running" : "Stopped") }}</vs-button
-            >
-          </vs-td>
-          <vs-td>{{ taskActions(item.action) }}</vs-td>
-          <vs-td>{{ resources(item) }}</vs-td>
-          <vs-td>{{
-            `${item.numberTransactions || 0}/${
-              item.maximumNumberTransactions || 0
-            }`
-          }}</vs-td>
-          <vs-td>
-            <vs-dropdown class="cursor-pointer" vs-trigger-click>
+        <template slot-scope="{ data }">
+          <vs-tr :key="indextr" v-for="(item, indextr) in data">
+            <vs-td>
               <vs-button
-                size="small"
-                radius
-                color="dark"
-                type="border"
-                icon="more_vert"
-              ></vs-button>
+                disabled
+                :color="item.status === true ? 'success' : 'danger'"
+                type="flat"
+                >{{
+                  $t(item.status === true ? "Running" : "Stopped")
+                }}</vs-button
+              >
+            </vs-td>
+            <vs-td>{{ taskActions(item.action) }}</vs-td>
+            <vs-td>{{ resources(item) }}</vs-td>
+            <vs-td>{{
+              `${item.numberTransactions || 0}/${
+                item.maximumNumberTransactions || 0
+              }`
+            }}</vs-td>
+            <vs-td>
+              <vs-dropdown class="cursor-pointer" vs-trigger-click>
+                <vs-button
+                  size="small"
+                  radius
+                  color="dark"
+                  type="border"
+                  icon="more_vert"
+                ></vs-button>
 
-              <vs-dropdown-menu>
-                <vs-dropdown-item>
-                  <vs-button
-                    :disabled="
-                      item.numberTransactions === item.maximumNumberTransactions
-                    "
-                    size="small"
-                    :color="item.status === true ? 'danger' : 'success'"
-                    type="flat"
-                    @click="changeTaskStatus(item)"
-                    >{{
-                      $t(item.status === true ? "Stop" : "Start")
-                    }}</vs-button
-                  >
-                </vs-dropdown-item>
-                <vs-dropdown-item>
-                  <vs-button
-                    size="small"
-                    color="dark"
-                    type="flat"
-                    @click="
-                      popupActivo4 = true;
-                      selectedTask = item;
-                    "
-                    >{{ $t("Detail") }}</vs-button
-                  >
-                </vs-dropdown-item>
-                <vs-dropdown-item divider>
-                  <vs-button
-                    size="small"
-                    color="danger"
-                    :disabled="
-                      item.status !== false &&
-                      item.numberTransactions !== item.maximumNumberTransactions
-                    "
-                    type="flat"
-                    class="w-full"
-                    @click="deleteTask(item)"
-                    >{{ $t("Delete") }}</vs-button
-                  >
-                </vs-dropdown-item>
-              </vs-dropdown-menu>
-            </vs-dropdown>
-          </vs-td>
-        </vs-tr>
-      </template>
-    </vs-table>
+                <vs-dropdown-menu>
+                  <vs-dropdown-item>
+                    <vs-button
+                      :disabled="
+                        item.numberTransactions ===
+                        item.maximumNumberTransactions
+                      "
+                      size="small"
+                      :color="item.status === true ? 'danger' : 'success'"
+                      type="flat"
+                      @click="changeTaskStatus(item)"
+                      >{{
+                        $t(item.status === true ? "Stop" : "Start")
+                      }}</vs-button
+                    >
+                  </vs-dropdown-item>
+                  <vs-dropdown-item>
+                    <vs-button
+                      size="small"
+                      color="dark"
+                      type="flat"
+                      @click="
+                        popupActivo4 = true;
+                        selectedTask = item;
+                      "
+                      >{{ $t("Detail") }}</vs-button
+                    >
+                  </vs-dropdown-item>
+                  <vs-dropdown-item divider>
+                    <vs-button
+                      size="small"
+                      color="danger"
+                      :disabled="
+                        item.status !== false &&
+                        item.numberTransactions !==
+                          item.maximumNumberTransactions
+                      "
+                      type="flat"
+                      class="w-full"
+                      @click="deleteTask(item)"
+                      >{{ $t("Delete") }}</vs-button
+                    >
+                  </vs-dropdown-item>
+                </vs-dropdown-menu>
+              </vs-dropdown>
+            </vs-td>
+          </vs-tr>
+        </template>
+      </vs-table>
 
-    <vs-popup fullscreen :title="$t('TaskDetail')" :active.sync="popupActivo4">
-      <fp-task-tabs
-        :task="selectedTask"
-        :logs="$store.state.logs"
-        @getLog="$store.dispatch('getLog', selectedTask.taskId)"
-      />
-    </vs-popup>
-  </vx-card>
+      <vs-popup
+        fullscreen
+        :title="$t('TaskDetail')"
+        :active.sync="popupActivo4"
+      >
+        <fp-task-tabs
+          :task="selectedTask"
+          :logs="$store.state.logs"
+          @getLog="$store.dispatch('getLog', selectedTask.taskId)"
+        />
+      </vs-popup>
+    </vx-card>
+  </div>
 </template>
 
 <script>
@@ -112,7 +123,7 @@ export default {
       selectedTask: {},
     };
   },
-  
+
   computed: {
     ...mapFields(["tasks"]),
     ...mapGetters(["taskActions", "resources"]),

@@ -5,8 +5,8 @@ const tokenExpiryKey = 'userInfo';
 const accountAction = {
 
     async register({ dispatch }, userInfo) {
-        const { status } = await postRequest('/account', userInfo);
-        if (status) {
+        const { isSuccess } = await postRequest('/account', userInfo);
+        if (isSuccess) {
             dispatch('login', {
                 email: userInfo.email,
                 password: userInfo.password,
@@ -14,20 +14,18 @@ const accountAction = {
         }
     },
 
-    async login({ }, userInfo) {
-        const { status, data } = await postRequest('/account/token', userInfo);
+    addInstagram({ }, userInfo) {
+        postRequest('/account/instagram', userInfo);
+    },
 
-        if (status === 200) {
+    async login({ }, userInfo) {
+        const { isSuccess, data } = await postRequest('/account/token', userInfo);
+
+        if (isSuccess) {
             localStorage.setItem(tokenExpiryKey, JSON.stringify(data));
             const { to } = main.$route.query;
 
             main.$router.push(to || '/Tasks');
-        } else {
-            main.$vs.notify({
-                title: main.$i18n.t(data),
-                color: "danger",
-                position: "top-center",
-            });
         }
     },
 
