@@ -12,6 +12,6 @@ const pricingAction = {
         await postRequest('/Pricing', order);
 
     },
-}
+}//
 
 export default pricingAction

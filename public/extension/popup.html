@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            border-radius: 8px;
+        }
+
+        .fp-container {
+            width: 308px;
+            height: 550px;
+            background-color: #262B48;
+            background-image: url('images/header-bg.svg');
+            background-size: contain;
+        }
+
+        .fp-header {
+            height: 62px;
+            background: rgb(16, 22, 58);
+        }
+
+        .fp-header__logo {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            color: #FF9F43;
+            font-family: "Montserrat", Helvetica, Arial, sans-serif;
+        }
+
+        .fp-header__logo h3 {
+            margin-left: 8px;
+        }
+
+        .fp-container_bg {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+        }
+
+        .fp-content__button {
+            display: flex;
+            z-index: 4;
+            justify-content: center;
+            align-items: center;
+            min-width: 115px;
+            min-height: 115px;
+            max-width: 250px;
+            max-height: 250px;
+            position: absolute;
+            cursor: pointer;
+        }
+
+        .fp-content__circle {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 350px;
+        }
+
+        .connection_btn_holder {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            font-family: "Gotham-700", sans-serif;
+            font-size: 26px;
+            text-decoration: none;
+            border-radius: 50%;
+            z-index: 10;
+            transition: all .2s linear;
+            cursor: pointer;
+            box-shadow: 0 5px 5px rgba(54, 130, 170, 0.3), inset 0 2px 3px #fff;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0.45, 0.45);
+                opacity: .5;
+            }
+
+            to {
+                transform: scale(2, 2);
+                opacity: 0;
+            }
+        }
+
+        @keyframes roll {
+            from {
+                transform: rotate(0deg);
+                opacity: .5;
+            }
+
+            to {
+                transform: rotate(360deg);
+                opacity: 5;
+            }
+        }
+
+        .circle {
+            border-radius: 50%;
+            min-width: 115px;
+            min-height: 115px;
+            max-width: 250px;
+            max-height: 250px;
+            position: absolute;
+            opacity: 0;
+            z-index: 2;
+            animation: scaleIn 3s infinite linear;
+            background-color: rgb(16, 22, 58);
+        }
+
+        .table {
+            display: table;
+            border-collapse: separate;
+            box-sizing: border-box;
+            text-indent: initial;
+            border-spacing: 2px;
+            border-color: grey;
+            margin-top: 126px;
+            position: fixed;
+            width: 300px;
+            margin-left: 4px;
+        }
+
+        .table thead th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .table td,
+        .table th {
+            vertical-align: top;
+        }
+
+        .table td {
+            color: #fff;
+            text-align: center;
+        }
+
+        .fp-content__button-click {
+            color: #FF9F43
+        }
+    </style>
+</head>
+
+<body>
+    <div class="fp-container">
+        <div class="fp-header">
+            <div class="fp-header__logo">
+                <svg style="height:50px" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 139 150"
+                    preserveAspectRatio="xMidYMid meet" class="w-10 mr-4 fill-current text-primary">
+                    <g transform="translate(0.000000,139.000000) scale(0.100000,-0.100000)" fill="#ffbf00"
+                        stroke="none">
+                        <path d="M552 1345 c-82 -18 -213 -82 -279 -137 -160 -133 -246 -316 -246
+        -523 0 -264 141 -490 379 -606 383 -187 839 25 950 441 23 86 23 244 0 330
+        -52 195 -182 353 -362 441 -136 66 -295 86 -442 54z m474 -349 l34 -34 0 -286
+        c0 -235 -3 -292 -15 -316 -31 -60 -32 -60 -353 -60 l-294 0 -34 34 -34 34 0
+        302 0 302 31 29 31 29 300 0 300 0 34 -34z"></path>
+                        <path d="M893 979 c-27 -10 -39 -49 -23 -78 14 -27 61 -28 85 -1 36 39 -10 98
+        -62 79z"></path>
+                        <path d="M840 835 c0 -3 12 -24 28 -47 22 -34 27 -53 27 -104 0 -53 -4 -69
+        -30 -106 -84 -119 -246 -119 -330 0 -26 38 -30 52 -29 108 l0 64 -43 0 -43 0
+        0 -150 c0 -147 1 -152 25 -175 l24 -25 220 0 c121 0 227 3 236 6 38 15 45 56
+        45 249 l0 185 -65 0 c-36 0 -65 -2 -65 -5z"></path>
+                        <path d="M633 756 c-23 -20 -28 -32 -28 -71 0 -60 35 -95 95 -95 60 0 95 35
+        95 95 0 60 -35 95 -95 95 -27 0 -48 -8 -67 -24z"></path>
+                    </g>
+                </svg>
+                <h3>FollowersPark</h3>
+            </div>
+
+        </div>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Action</th>
+                    <th>Resource</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4">No running tasks
+                        <a class="fp-content__button-click" href="https://followerspark.com">Please login.</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="fp-content__circle d-flex justify-center align-end">
+            <div class="fp-content__button fp-content__button-click">
+                <svg style="height:50px" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 139 150"
+                    preserveAspectRatio="xMidYMid meet" class="w-10 mr-4 fill-current text-primary">
+                    <g transform="translate(0.000000,139.000000) scale(0.100000,-0.100000)" fill="#ffbf00"
+                        stroke="none">
+                        <path d="M552 1345 c-82 -18 -213 -82 -279 -137 -160 -133 -246 -316 -246
+                        -523 0 -264 141 -490 379 -606 383 -187 839 25 950 441 23 86 23 244 0 330
+                        -52 195 -182 353 -362 441 -136 66 -295 86 -442 54z m474 -349 l34 -34 0 -286
+                        c0 -235 -3 -292 -15 -316 -31 -60 -32 -60 -353 -60 l-294 0 -34 34 -34 34 0
+                        302 0 302 31 29 31 29 300 0 300 0 34 -34z"></path>
+                        <path d="M893 979 c-27 -10 -39 -49 -23 -78 14 -27 61 -28 85 -1 36 39 -10 98
+                        -62 79z"></path>
+                        <path d="M840 835 c0 -3 12 -24 28 -47 22 -34 27 -53 27 -104 0 -53 -4 -69
+                        -30 -106 -84 -119 -246 -119 -330 0 -26 38 -30 52 -29 108 l0 64 -43 0 -43 0
+                        0 -150 c0 -147 1 -152 25 -175 l24 -25 220 0 c121 0 227 3 236 6 38 15 45 56
+                        45 249 l0 185 -65 0 c-36 0 -65 -2 -65 -5z"></path>
+                        <path d="M633 756 c-23 -20 -28 -32 -28 -71 0 -60 35 -95 95 -95 60 0 95 35
+                        95 95 0 60 -35 95 -95 95 -27 0 -48 -8 -67 -24z"></path>
+                    </g>
+                </svg>
+            </div>
+            <div class="circle" style="animation-delay: -1s"></div>
+            <div class="circle" style="animation-delay: -1.5s"></div>
+            <div class="circle" style="animation-delay: -2s"></div>
+            <div class="circle" style="animation-delay: -2.5s"></div>
+            <div class="circle" style="animation-delay: -3s"></div>
+            <div class="circle" style="animation-delay: -3.5s"></div>
+            <div class="circle" style="animation-delay: -4s"></div>
+            <div class="circle" style="animation-delay: -4.5s"></div>
+        </div>
+
+
+    </div>
+
+    <script src="main.js"></script>
+
+</body>
+
+</html>

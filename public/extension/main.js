@@ -60,7 +60,11 @@ if ((location.search || '').indexOf('followpark=') !== -1) {
     };
     appendChild();
 } else if (chrome && chrome.browserAction && chrome.browserAction.onClicked) {
-    chrome.browserAction.onClicked.addListener(function () {
-        chrome.tabs.create({ url: 'http://followerspark.com' });
-    });
+    var buttons = document.getElementsByClassName("fp-content__button-click") || [];
+
+    for (let index = 0; index < buttons.length; index++) {
+        buttons[index].addEventListener('click', function () {
+            chrome.tabs.create({ url: 'https://followerspark.com' });
+        });
+    }
 }
